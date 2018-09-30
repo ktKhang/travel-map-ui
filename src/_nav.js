@@ -5,11 +5,6 @@ export default {
     },
     {
       title: true,
-      name: 'TRAVEL MAP',
-      icon: 'icon-home',
-    },
-    {
-      title: true,
       name: '',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
@@ -22,42 +17,21 @@ export default {
     },
     {
       name: 'MAP',
-      url: '/',
+      url: '/base/breadcrumbs',
       icon: 'icon-map',
     },
     {
-      divider: true,
-    },
-    {
       title: true,
-      name: 'Extras',
+      name: '',
+      wrapper: {
+        element: '',
+        attributes: {},
+      },
     },
     {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
+      name: 'DIRECT',
+      url: '/theme/typography',
+      icon: 'icon-pencil',
     },
   ],
 };

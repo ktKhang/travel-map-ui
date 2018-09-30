@@ -69,7 +69,7 @@ body {
   line-height: 1.5;
   color: #23282c;
   text-align: left;
-  background-color: #e4e5e6; }
+  background-color: #ffffff; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -8045,8 +8045,8 @@ canvas {
   display: flex;
   flex-direction: column;
   padding: 0;
-  color: #fff;
-  background: #2f353a; }
+  color: rgb(0, 0, 0);
+  background: #a7a7a7; }
   .sidebar .sidebar-close {
     position: absolute;
     right: 0;
@@ -8107,7 +8107,7 @@ canvas {
   .sidebar .nav-link {
     display: block;
     padding: 0.75rem 1rem;
-    color: #fff;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     background: transparent; }
     .sidebar .nav-link .nav-icon {
@@ -8115,21 +8115,23 @@ canvas {
       width: 1.09375rem;
       margin: 0 0.5rem 0 0;
       font-size: 0.875rem;
-      color: #73818f;
+      color: #000000;
       text-align: center; }
     .sidebar .nav-link .badge {
       float: right;
       margin-top: 2px; }
     .sidebar .nav-link.active {
       color: #fff;
-      background: #3a4248; }
+      background: #363636;
+      margin-left: 20px;
+       }
       .sidebar .nav-link.active .nav-icon {
-        color: #20a8d8; }
+        color: #ffffff; }
     .sidebar .nav-link:hover {
-      color: #fff;
-      background: #20a8d8; }
+      color: #000;
+      background: #8d8d8e; }
       .sidebar .nav-link:hover .nav-icon {
-        color: #fff; }
+        color: rgb(0, 0, 0); }
       .sidebar .nav-link:hover.nav-dropdown-toggle::before {
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%23fff' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E"); }
     .sidebar .nav-link.nav-link-primary {
@@ -8246,7 +8248,7 @@ canvas {
   .sidebar .sidebar-minimizer {
     position: relative;
     flex: 0 0 50px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0);
     border: 0; }
     .sidebar .sidebar-minimizer::before {
       position: absolute;
@@ -8263,7 +8265,7 @@ canvas {
     .sidebar .sidebar-minimizer:focus, .sidebar .sidebar-minimizer.focus {
       outline: 0; }
     .sidebar .sidebar-minimizer:hover {
-      background-color: rgba(0, 0, 0, 0.3); }
+      background-color: rgba(0, 0, 0, 0); }
       .sidebar .sidebar-minimizer:hover::before {
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%23fff' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E"); }
 

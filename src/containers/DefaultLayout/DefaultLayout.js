@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
-
+import logo from '../../assets/img/brand/logo.svg'
+import sygnet from '../../assets/img/brand/sygnet.svg'
 import {
   AppAside,
   AppBreadcrumb,
@@ -14,6 +15,8 @@ import {
   AppSidebarMinimizer,
   AppSidebarNav,
 } from '@coreui/react';
+
+import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
 // routes config
@@ -23,6 +26,14 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends Component {
+  Logo(props) {
+    return(
+      <div className="logo">
+        <img src={props.logo} width="100" height="50" />
+    </div>
+    )
+  }
+
   render() {
     return (
       <div className="app">
@@ -34,6 +45,11 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <AppSidebarMinimizer />
+            {/* <this.Logo/> */}
+            <AppNavbarBrand
+              full={{ src:'', width: '100%', height: 30, alt: 'TRAVEL MAP' }}
+            />
+
             <AppSidebarNav navConfig={navigation} {...this.props} />
             <AppSidebarFooter />
           </AppSidebar>
