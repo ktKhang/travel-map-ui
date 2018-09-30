@@ -8776,20 +8776,24 @@ html[dir="rtl"] .sidebar {
 html[dir="rtl"] .aside-menu {
   margin-left: -250px; }
 
+/* @media (min-width: 992px) {
+  .app-header {
+
+  }
+} */
 @media (min-width: 992px) {
   .header-fixed .app-header {
-    position: fixed;
-    z-index: 1020;
-    width: 100%; }
+    position: unset;
+    display: none; }
   .header-fixed .app-body {
-    margin-top: 55px; }
+    margin-top: 0px; }
   .sidebar-fixed .sidebar {
     position: fixed;
     z-index: 1019;
     width: 200px;
     height: 100vh; }
   .sidebar-fixed .app-header + .app-body .sidebar {
-    height: calc(100vh - 55px); }
+    height: 100% }
   .sidebar-compact .sidebar {
     flex: 0 0 150px; }
   .sidebar-compact.sidebar-fixed .sidebar {
