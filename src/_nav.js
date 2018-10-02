@@ -17,7 +17,7 @@ export default {
     },
     {
       name: 'MAP',
-      url: '/base/breadcrumbs',
+      url: '/map',
       icon: 'icon-map',
     },
     {
@@ -30,7 +30,7 @@ export default {
     },
     {
       name: 'DIRECT',
-      url: '/theme/typography',
+      url: '/base/cards',
       icon: 'icon-pencil',
     },
   ],
