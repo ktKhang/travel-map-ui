@@ -287,7 +287,7 @@ class Map extends Component {
         
     }
 
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         this.drawWorldLow();
         console.log(AmCharts.maps.worldLow);
     }
