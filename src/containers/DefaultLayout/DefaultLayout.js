@@ -47,7 +47,7 @@ class DefaultLayout extends Component {
             <AppSidebarMinimizer />
             {/* <this.Logo/> */}
             <AppNavbarBrand
-              full={{ src:'', width: '100%', height: 30, alt: 'TRAVEL MAP' }}
+              full={{ src:'', width: '100%', height: 30, alt: 'LOGO' }}
             />
 
             <AppSidebarNav navConfig={navigation} {...this.props} />
@@ -55,7 +55,6 @@ class DefaultLayout extends Component {
           </AppSidebar>
           <main className="main">
             {/* <AppBreadcrumb appRoutes={routes}/> */}
-            <Container fluid>
               <Switch>
                 {routes.map((route, idx) => {
                     return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
@@ -66,15 +65,14 @@ class DefaultLayout extends Component {
                 )}
                 <Redirect from="/" to="/map" />
               </Switch>
-            </Container>
           </main>
           <AppAside fixed hidden>
             <DefaultAside />
           </AppAside>
         </div>
-        <AppFooter>
+        {/* <AppFooter>
           <DefaultFooter />
-        </AppFooter>
+        </AppFooter> */}
       </div>
     );
   }

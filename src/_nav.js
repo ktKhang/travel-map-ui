@@ -16,7 +16,7 @@ export default {
       divider: true,
     },
     {
-      name: 'MAP',
+      name: 'HOME',
       url: '/map',
       icon: 'icon-map',
     },
@@ -29,7 +29,7 @@ export default {
       },
     },
     {
-      name: 'DIRECT',
+      name: 'MY PLACE',
       url: '/base/cards',
       icon: 'icon-pencil',
     },

@@ -1,16 +1,130 @@
 import React, { Component } from 'react';
 import AmCharts from "@amcharts/amcharts3-react";
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 
+  
 class Map extends Component {
     constructor(props) {
         super(props);
          this.state = {
             worldLow: {},
-            timer: null
+            // timer: null,
+            // isMarkerShown: false,
+            // center: { lat: 16.02051202858597, lng: 109.9109849230421 },
+            // zoom: 5.8
         };
     }
+
+    UNSAFE_componentWillMount(){
+        this.drawWorldLow();
+        console.log(AmCharts.maps.worldLow);
+    }
+
     
+    // MyGoogleMap = withScriptjs(withGoogleMap((props) =>
+    //     <GoogleMap
+    //         defaultZoom={this.state.zoom}
+    //         defaultCenter={this.state.center}
+    //     >
+    //     </GoogleMap>
+    // ))
+
+    render() {
+       
+        const config = {
+            "type": "map",
+            "theme": "light",
+            "dataProvider": {
+                "map": "worldLow",
+                "getAreasFromMap": true
+            },
+            "areasSettings": {
+                "autoZoom": true,
+                "selectedColor": "#AADAFF",
+                "selectable": true
+            },
+            "smallMap": {},
+            "listeners": [{
+                "event": "clickMapObject",
+                "method": function(e) {
+                    console.log(e);
+      
+                  // Ignore any click not on area
+                  if (e.mapObject.objectType !== "MapArea")
+                    return;
+      
+                  var area = e.mapObject;
+            
+                    area.showAsSelected = !area.showAsSelected;
+                   
+      
+                  // Update the list
+                  if(area.showAsSelected === true){
+                    console.log(area);
+                    console.log(area.id);
+                    console.log(area.enTitle);
+                    e.chart.returnInitialColor(area);
+                    area.showAsSelected = false;
+                  }
+                }
+            },],
+            "export": {
+                "enabled": true,
+                "position": "bottom-right",
+                "beforeCapture": function() {
+                  var map = this.setup.chart;
+                  /**
+                   * Log current zoom settings so we can restore after export
+                   */
+                  map.currentZoom = {
+                    "zoomLevel": map.zoomLevel(),
+                    "zoomLongitude": map.zoomLongitude(),
+                    "zoomLatitude": map.zoomLatitude()
+                  };
+                  
+                  /**
+                   * Zoom to initial position
+                   */
+                  map.zoomToLongLat(
+                    map.initialZoom.zoomLevel,
+                    map.initialZoom.zoomLongitude,
+                    map.initialZoom.zoomLatitude,
+                    true
+                  );
+                },
+                "afterCapture": function() {
+                  var map = this.setup.chart;
+                  setTimeout(function() {
+                    /**
+                     * Restore current zoom
+                     */
+                    map.zoomToLongLat(
+                      map.currentZoom.zoomLevel,
+                      map.currentZoom.zoomLongitude,
+                      map.currentZoom.zoomLatitude,
+                      true
+                    );
+                  }, 10);
+                }
+              }
+        };
+        console.log(config);
+
+        return (
+            <div id="maps">
+                {/* <this.MyGoogleMap 
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHvJsTg4ij3Nl7ral9QcYSxy4UeJxSrzw&callback=initMap"
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ height: `620px` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+                /> */}
+                <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible'}} options={config} />
+            </div>
+        );
+    }
+
     drawWorldLow(){
         AmCharts.maps.worldLow = {
             "svg": {
@@ -285,98 +399,6 @@ class Map extends Component {
             }
         };
         
-    }
-
-    UNSAFE_componentWillMount(){
-        this.drawWorldLow();
-        console.log(AmCharts.maps.worldLow);
-    }
-
-    render() {
-       
-        const config = {
-            "type": "map",
-            "theme": "light",
-            "dataProvider": {
-                "map": "worldLow",
-                "getAreasFromMap": true
-            },
-            "areasSettings": {
-                "autoZoom": true,
-                "selectedColor": "#66b6dc",
-                "selectable": true
-            },
-            "smallMap": {},
-            "listeners": [{
-                "event": "clickMapObject",
-                "method": function(e) {
-                    console.log(e);
-      
-                  // Ignore any click not on area
-                  if (e.mapObject.objectType !== "MapArea")
-                    return;
-      
-                  var area = e.mapObject;
-            
-                  // Toggle showAsSelected
-                  area.showAsSelected = !area.showAsSelected;
-                  e.chart.returnInitialColor(area);
-      
-                  // Update the list
-                  if(area.showAsSelected === true){
-                    console.log(area);
-                    console.log(area.id);
-                    console.log(area.enTitle);
-                  }
-                }
-            }],
-            "export": {
-                "enabled": true,
-                "position": "bottom-right",
-                "beforeCapture": function() {
-                  var map = this.setup.chart;
-                  /**
-                   * Log current zoom settings so we can restore after export
-                   */
-                  map.currentZoom = {
-                    "zoomLevel": map.zoomLevel(),
-                    "zoomLongitude": map.zoomLongitude(),
-                    "zoomLatitude": map.zoomLatitude()
-                  };
-                  
-                  /**
-                   * Zoom to initial position
-                   */
-                  map.zoomToLongLat(
-                    map.initialZoom.zoomLevel,
-                    map.initialZoom.zoomLongitude,
-                    map.initialZoom.zoomLatitude,
-                    true
-                  );
-                },
-                "afterCapture": function() {
-                  var map = this.setup.chart;
-                  setTimeout(function() {
-                    /**
-                     * Restore current zoom
-                     */
-                    map.zoomToLongLat(
-                      map.currentZoom.zoomLevel,
-                      map.currentZoom.zoomLongitude,
-                      map.currentZoom.zoomLatitude,
-                      true
-                    );
-                  }, 10);
-                }
-              }
-        };
-        console.log(config);
-
-        return (
-            <div className="App">
-                <AmCharts.React style={{ width: "100%", height: "500px" }} options={config} />
-            </div>
-        );
     }
 }
 
