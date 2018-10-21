@@ -32,12 +32,12 @@ class Map extends Component {
                             ],
                             "color": "#723C1A",
                             "passZoomValuesToTarget": true,
-                            "listeners": [{
-                                "event": "clickGraphItem",
-                                "method": function (e) {
-                                    console.log('Khang');
-                                }
-                            }]
+                            // "listeners": [{
+                            //     "event": "clickArea",
+                            //     "method": function (e) {
+                            //         console.log('Khang');
+                            //     }
+                            // }]
 
                         }, {
                             "id": "VN-29",
