@@ -25,6 +25,7 @@ import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 import { Container, Row, Col } from 'react-grid-system';
+import FacebookProfile from './FacebookProfile';
 
 class DefaultLayout extends Component {
   Logo(props) {
@@ -35,58 +36,34 @@ class DefaultLayout extends Component {
     )
   }
 
-  Profile(){
-    return(
-      <div className="profile-login">
-        {/* <Nav className="ml-custom" navbar>
-          <AppHeaderDropdown direction="down">
-            <DropdownToggle nav>
-              <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-            </DropdownToggle>
-            <DropdownMenu right style={{ right: 'auto' }}>
-              <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
-              <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
-            </DropdownMenu>
-            <NavItem className="d-md-down-none">
-              <NavLink href="#">Khang Le</NavLink>
-            </NavItem>
-            <NavItem className="d-md-down-none">
-              <NavLink href="#">Logout</NavLink>
-            </NavItem>
-          </AppHeaderDropdown>
-        </Nav> */}
+  // Profile(){
+  //   let profileContent = '';
 
-        <Container>
-          <Row>
-            <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-          </Row>
-          <Row>
-            <div className="profile-name">
-              <button className="btn btn-block btn-light btn-profile">Khang Le</button>
-            </div>
-            {/* <div>
-            <Nav className="ml-custom" navbar>
-                <NavItem className="d-md-down-none">
-                  <NavLink href="#">Khang Le</NavLink>
-                </NavItem>
-                <NavItem className="d-md-down-none">
-                  <NavLink href="#">Logout</NavLink>
-                </NavItem>
-            </Nav>
-            </div> */}
-            
-          </Row>
-          {/* <Row>
-          <div>
-              <button>
-                  Logout
-              </button>
-            </div>
-          </Row> */}
-        </Container>
-      </div>
-    )
-  }
+  //   if(this.state.isLoggedIn){
+  //     profileContent = null;
+  //   }else{
+  //     profileContent = (<FacebookLogin
+  //       appId="284174652429987"
+  //       autoLoad={true}
+  //       fields="name,email,picture"
+  //       onClick={this.componentClicked}
+  //       callback={this.responseFacebook} />)
+  //   }
+  //   return(
+  //     <div className="profile-login">
+  //       <Container>
+  //         <Row>
+  //           <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+  //         </Row>
+  //         <Row>
+  //           <div className="profile-name">
+  //             <button className="btn btn-block btn-light btn-profile">Khang Le</button>
+  //           </div>
+  //         </Row>
+  //       </Container>
+  //     </div>
+  //   )
+  // }
 
   render() {
     return (
@@ -106,7 +83,7 @@ class DefaultLayout extends Component {
 
             <AppSidebarNav navConfig={navigation} {...this.props} />
             {/* <AppSidebarFooter /> */}
-            <this.Profile/>
+            <FacebookProfile/>
           </AppSidebar>
           <main className="main">
             {/* <AppBreadcrumb appRoutes={routes}/> */}
