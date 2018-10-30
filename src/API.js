@@ -1,2 +1,2 @@
-const API_URL = 'http://115.79.29.63:8101/edc/rest';
+const API_URL = 'http://localhost:8080';
 export default API_URL;
