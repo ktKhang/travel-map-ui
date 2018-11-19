@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import logo from '../../assets/img/brand/logo.svg'
+import logo from '../../assets/img/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import {
   AppAside,
@@ -25,14 +25,15 @@ import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 import { Container, Row, Col } from 'react-grid-system';
-import FacebookProfile from './FacebookProfile';
+import LoginProfile from './LoginProfile';
+import SearchBox from '../../views/FeatureComponents/Search'
 
 class DefaultLayout extends Component {
-  Logo(props) {
-    return(
-      <div className="logo">
-        <img src={props.logo} width="100" height="50" />
-    </div>
+  Logo = () => {
+    return (
+      <div>
+        <img className="logo" src={logo} width="100" height="50" alt="gogo.vn" />
+      </div>
     )
   }
 
@@ -76,31 +77,25 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             {/* <AppSidebarMinimizer /> */}
-            {/* <this.Logo/> */}
-            <AppNavbarBrand
-              full={{ src:'', width: '100%', height: 30, alt: 'LOGO' }}
-            />
-
+            <this.Logo />
+            <SearchBox />
             <AppSidebarNav navConfig={navigation} {...this.props} />
             {/* <AppSidebarFooter /> */}
-            <FacebookProfile/>
+            <LoginProfile />
           </AppSidebar>
           <main className="main">
             {/* <AppBreadcrumb appRoutes={routes}/> */}
-              <Switch>
-                {routes.map((route, idx) => {
-                    return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
-                        <route.component {...props} />
-                      )} />)
-                      : (null);
-                  },
-                )}
-                <Redirect from="/" to="/map" />
-              </Switch>
+            <Switch>
+              {routes.map((route, idx) => {
+                return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
+                  <route.component {...props} />
+                )} />)
+                  : (null);
+              },
+              )}
+              <Redirect from="/" to="/about" />
+            </Switch>
           </main>
-          <AppAside fixed hidden>
-            <DefaultAside />
-          </AppAside>
         </div>
         {/* <AppFooter>
           <DefaultFooter />

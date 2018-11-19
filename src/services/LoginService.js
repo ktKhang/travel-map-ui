@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import fetch from 'cross-fetch';
-import API_URL from '../API';
+import { API_CONST } from '../API';
 
-function login(user) {
+const login = user => {
     var postObject = {
         method: 'POST',
         headers: {
@@ -10,14 +10,14 @@ function login(user) {
         },
         body: JSON.stringify(user)
     };
+    let url = API_CONST.LOGIN_URL
 
-
-    return fetch(API_URL + '/auth/login', postObject)
+    return fetch(url, postObject)
         .then(responseData => {
             if (responseData.status >= 400) {
                 throw new Error(responseData.statusText);
             }
-            return responseData.json(); // This is a MUST, do not remove.
+            return responseData.json();
         })
         .then(data => {
             return data;

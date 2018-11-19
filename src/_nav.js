@@ -16,22 +16,18 @@ export default {
       divider: true,
     },
     {
-      name: 'HOME',
-      url: '/map',
-      icon: 'icon-map',
+      name: 'EXPLORE',
+      url: '/explore',
+      icon: 'icon-tralvelmap-custom icon-travelmap-home',
     },
     {
-      title: true,
-      name: '',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
-    {
-      name: 'MY PLACE',
-      url: '/base/cards',
-      icon: 'icon-pencil',
+      name: 'YOUR ADVENTURE',
+      url: '/adventure',
+      icon: 'icon-tralvelmap-custom icon-travelmap-adventure',
+    }, {
+      name: 'ABOUT US',
+      url: '/about',
+      icon: 'icon-tralvelmap-custom icon-travelmap-aboutus',
     },
   ],
 };

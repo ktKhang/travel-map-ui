@@ -22,8 +22,18 @@ const Dashboard = Loadable({
   loading: Loading,
 });
 
-const MapCustom = Loadable({
-  loader: () => import('./views/Map/Map'),
+const AboutUs = Loadable({
+  loader: () => import('./views/AboutUs/AboutUs'),
+  loading: Loading,
+});
+
+const YourAdventure = Loadable({
+  loader: () => import('./views/YourAdventure/YourAdventure'),
+  loading: Loading,
+});
+
+const Explore = Loadable({
+  loader: () => import('./views/Explore/Explore'),
   loading: Loading,
 });
 
@@ -33,7 +43,9 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
-  { path: '/map', name: 'Map', component: MapCustom },
+  { path: '/explore', name: 'Explore', component: Explore },
+  { path: '/about', name: 'AboutUs', component: AboutUs },
+  { path: '/adventure', name: 'YourAdventure', component: YourAdventure },
 ];
 
 export default routes;
