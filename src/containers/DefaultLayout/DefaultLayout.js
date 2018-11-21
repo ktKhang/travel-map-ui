@@ -37,35 +37,6 @@ class DefaultLayout extends Component {
     )
   }
 
-  // Profile(){
-  //   let profileContent = '';
-
-  //   if(this.state.isLoggedIn){
-  //     profileContent = null;
-  //   }else{
-  //     profileContent = (<FacebookLogin
-  //       appId="284174652429987"
-  //       autoLoad={true}
-  //       fields="name,email,picture"
-  //       onClick={this.componentClicked}
-  //       callback={this.responseFacebook} />)
-  //   }
-  //   return(
-  //     <div className="profile-login">
-  //       <Container>
-  //         <Row>
-  //           <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-  //         </Row>
-  //         <Row>
-  //           <div className="profile-name">
-  //             <button className="btn btn-block btn-light btn-profile">Khang Le</button>
-  //           </div>
-  //         </Row>
-  //       </Container>
-  //     </div>
-  //   )
-  // }
-
   render() {
     return (
       <div className="app">
@@ -76,15 +47,12 @@ class DefaultLayout extends Component {
           <AppSidebar fixed display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
-            {/* <AppSidebarMinimizer /> */}
             <this.Logo />
             <SearchBox />
             <AppSidebarNav navConfig={navigation} {...this.props} />
-            {/* <AppSidebarFooter /> */}
             <LoginProfile />
           </AppSidebar>
           <main className="main">
-            {/* <AppBreadcrumb appRoutes={routes}/> */}
             <Switch>
               {routes.map((route, idx) => {
                 return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (

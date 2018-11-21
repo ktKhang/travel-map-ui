@@ -55,7 +55,7 @@ class LoginProfile extends Component {
         window.location.reload();
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         console.log('did  mount')
         const token = localStorage.mapToken;
         if (token !== undefined && token !== null) {
@@ -93,22 +93,14 @@ class LoginProfile extends Component {
         if (localStorage.mapToken) {
             console.log(this.state.userDetail);
             profileContent = (
-                <Container>
-                    <Row>
-                        <img src={this.state.userDetail.avatar} className="img-avatar" alt={this.state.userDetail.email} />
-                    </Row>
-                    <Row>
-                        <div className="profile-name">
-                            <button className="btn btn-block btn-light btn-profile">{this.state.userDetail.userName}</button>
-                        </div>
-                    </Row>
-                    <Row>
-                        <div className="profile-name">
-                            <button className="btn btn-block btn-dark btn-profile"
-                                onClick={this.logout}>Logout</button>
-                        </div>
-                    </Row>
-                </Container>
+                <div className="profile-name-logged-in">
+                    <div className="profile-info">
+                        <img src={this.state.userDetail.avatar} className="profile-avatar" alt={this.state.userDetail.email} />
+
+                        <label className="profile-label">{this.state.userDetail.userName}</label>
+                    </div>
+                    <button className="btn-logout-fb" onClick={this.logout}>Logout</button>
+                </div>
             )
         } else {
             profileContent = (

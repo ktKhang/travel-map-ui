@@ -37,6 +37,11 @@ const Explore = Loadable({
   loading: Loading,
 });
 
+const DashboardAdmin = Loadable({
+  loader: () => import('./views/Admin/Dashboard'),
+  loading: Loading,
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
@@ -46,6 +51,7 @@ const routes = [
   { path: '/explore', name: 'Explore', component: Explore },
   { path: '/about', name: 'AboutUs', component: AboutUs },
   { path: '/adventure', name: 'YourAdventure', component: YourAdventure },
+  { path: '/admin/dashboard', name: 'Dashboard', component: DashboardAdmin },
 ];
 
 export default routes;

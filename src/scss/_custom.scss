@@ -587,7 +587,8 @@ body {
   display: inline-block;
   float: left;
 }
-//
+
+// styles for sidebar
 .profile-login{
   padding-top: 10px;
   padding-bottom: 10px;
@@ -615,6 +616,39 @@ body {
     margin-right: auto;
   padding-top: 17px;
   padding-bottom: 17px;
+}
+.profile-name-logged-in{
+  margin-left: auto;
+    width: fit-content;
+    margin-right: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+    display: inline-flex;
+}
+.profile-info{
+  padding-left: 30px;
+}
+.profile-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.profile-label{
+  padding-left: 10px;
+}
+.btn-logout-fb{
+  border: 1px solid white;
+  background: #00000000;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  right: 30px;
 }
 .logo{
   padding-top: 5px;

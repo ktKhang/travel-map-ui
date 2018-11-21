@@ -14,7 +14,7 @@ import 'simple-line-icons/css/simple-line-icons.css';
 import './scss/style.css'
 
 // Containers
-import { DefaultLayout } from './containers';
+import { DefaultLayout, AdminLayout } from './containers';
 // Pages
 import { Login, Page404, Page500 } from './views/Pages';
 
@@ -28,6 +28,8 @@ class App extends Component {
           <Route exact path="/login" name="Login Page" component={Login} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
+
+          <Route path="/admin" name="Admin" component={AdminLayout} />
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>
       </HashRouter>
