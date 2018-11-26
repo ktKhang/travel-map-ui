@@ -1,6 +1,6 @@
 import { constant } from "./Constant";
 
-function updateOrCreateHeader(header) {
+const updateOrCreateHeader = header => {
     if (header === null || header === undefined) {
         header = {
             method: 'GET',
@@ -20,11 +20,12 @@ function updateOrCreateHeader(header) {
     return header;
 }
 
-function checkAuthorizedStatus(responseData) {
+const checkAuthorizedStatus = responseData => {
     if (responseData && responseData.status === 401) {
         window.location = '#login';
     }
 }
+
 export const tokenUtil = {
     updateOrCreateHeader,
     checkAuthorizedStatus

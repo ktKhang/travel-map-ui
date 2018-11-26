@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Map from '../FeatureComponents/Map';
-import { Container } from 'react-grid-system';
 
-class Explore extends Component {
+class Save extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -26,4 +25,4 @@ class Explore extends Component {
    }
 }
 
-export default Explore;
+export default Save;

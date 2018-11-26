@@ -9987,7 +9987,7 @@ html:not([dir="rtl"]) .sidebar {
 
 .sidebar .sidebar-nav {
   position: absolute;
-  bottom: 96px;
+  bottom: 95px;
   flex: none;
   height: fit-content;
   overflow-x: hidden;
@@ -10447,6 +10447,34 @@ body {
   /* Microsoft Edge */
   color: #BEBED0; }
 
+/* Style for scrollbar*/
+::-webkit-scrollbar {
+  width: 20px; }
+
+::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 20px; }
+
+::-webkit-scrollbar-thumb {
+  background-color: #13223B;
+  border-radius: 30px;
+  background-clip: padding-box;
+  border: 8px solid rgba(0, 0, 0, 0); }
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.68);
+  border-radius: 30px;
+  background-clip: padding-box;
+  border: 8px solid rgba(0, 0, 0, 0); }
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none; }
+
+::-webkit-scrollbar-corner {
+  background-color: transparent; }
+
 /* Khang add new icons */
 .icon-tralvelmap-custom {
   background-position: center center;
@@ -10473,13 +10501,16 @@ body {
 .nav-link .icon-travelmap-aboutus {
   background-image: url("../assets/icons/aboutus-icon.svg"); }
 
+.nav-link .icon-travelmap-save {
+  background-image: url("../assets/icons/ic-heart.svg"); }
+
 .icon-facebook {
   background-image: url("../assets/icons/icon-facebook.svg"); }
 
 /* Khang custom map*/
 #maps {
   /* float: left; */
-  width: 40%;
+  width: 35%;
   height: 100%;
   border: 0px solid #eee;
   /* margin: 0px auto; */
@@ -10508,7 +10539,7 @@ body {
 
 .app-content {
   position: relative;
-  width: 60%;
+  width: 65%;
   height: 100%;
   background: #1E344D;
   display: inline-block;
@@ -10519,7 +10550,8 @@ body {
   padding-bottom: 10px;
   position: absolute;
   width: 100%;
-  bottom: 0px; }
+  bottom: 0px;
+  border-top: 1px solid rgba(255, 255, 255, 0.36); }
 
 .btn-profile {
   width: 160px; }
@@ -10540,7 +10572,51 @@ body {
   width: fit-content;
   margin-right: auto;
   padding-top: 17px;
-  padding-bottom: 17px; }
+  padding-bottom: 17px;
+  font-family: 'SVN-Poppins-Light';
+  font-size: 14px;
+  display: flex; }
+
+.profile-name-logged-in {
+  margin-left: auto;
+  width: fit-content;
+  margin-right: auto;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  width: 100%;
+  display: inline-flex; }
+
+.profile-info {
+  padding-left: 30px; }
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+
+.profile-label {
+  padding-left: 10px; }
+
+.profile-label2 {
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto; }
+
+.login-profile-fb-label {
+  color: #00CE7D; }
+
+.btn-logout-fb {
+  border: 1px solid white;
+  background: #00000000;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  right: 30px; }
 
 .logo {
   padding-top: 5px;
@@ -10556,7 +10632,7 @@ body {
   width: 100%;
   height: 45px;
   border: 2px;
-  border-radius: 4px;
+  border-radius: 50px;
   font-size: 13px;
   line-height: 17px;
   color: #ffffff;
@@ -10565,6 +10641,49 @@ body {
   background-position: 14.5px 13px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 45px; }
+
+/* styles for tab */
+.travel-tab {
+  margin-top: 66px;
+  margin-left: 35px;
+  margin-right: 35px;
+  color: #FFFFFF; }
+
+.travel-tab-nav {
+  font-size: 18px;
+  height: 50px;
+  background: none;
+  font-family: 'Merriweather';
+  border-bottom: none; }
+
+.travel-tab-nav-item-active {
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  height: 40px;
+  text-align: center;
+  border-bottom: 4px solid #00CE7D;
+  color: #FFFFFF; }
+
+.travel-tab-nav-item {
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  height: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5); }
+
+.travel-tab-nav .nav-link.active {
+  color: #ffffff;
+  background: none;
+  border-color: transparent;
+  border-bottom-color: transparent; }
+
+.travel-tab-nav .nav-link:hover {
+  border-color: transparent; }
+
+.travel-tab-content {
+  background: #1E344D;
+  border: none;
+  margin-top: 30px; }
 
 @font-face {
   font-family: 'SVN-Poppins';
@@ -10576,5 +10695,76 @@ body {
   font-style: normal;
   src: local("SVN-Poppins-SemiBold"), local("SVN-Poppins-SemiBold"), url("../assets/fonts/SVN-Poppins/TTF/SVN-Poppins SemiBold.ttf") format("truetype"); }
 
+@font-face {
+  font-family: 'SVN-Poppins-Light';
+  font-style: normal;
+  src: local("SVN-Poppins-Light"), local("SVN-Poppins-Light"), url("../assets/fonts/SVN-Poppins/TTF/SVN-Poppins Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'SVN-Poppins-Medium';
+  font-style: normal;
+  src: local("SVN-Poppins-Medium"), local("SVN-Poppins-Medium"), url("../assets/fonts/SVN-Poppins/TTF/SVN-Poppins Medium.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  src: local("Merriweather"), local("Merriweather"), url("../assets/fonts/Merriweather/Merriweather-Regular.ttf") format("truetype"); }
+
+/*For AboutUs pages only*/
+.intro-content {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: 'SVN-Poppins-Light';
+  margin-top: 20px; }
+
+.intro-title {
+  font-family: 'SVN-Poppins-Medium';
+  font-size: 26px;
+  padding-top: 15px; }
+
+.intro-text {
+  display: inline-grid;
+  margin-left: -15px; }
+
+.intro-img {
+  width: 150px;
+  height: 130px;
+  margin-left: 25px; }
+
+.intro-row {
+  margin-bottom: 100px; }
+
+/*For YourAdventure pages only*/
+.adventure-img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 160px;
+  width: 120px; }
+
+.adventure-content {
+  margin: 0;
+  position: absolute;
+  display: inline-grid;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.adventure-text {
+  text-align: center;
+  font-size: 18px;
+  width: 300px;
+  line-height: 27px;
+  padding-top: 25px;
+  color: white;
+  font-family: 'SVN-Poppins-Light'; }
+
+.adventure-fb-login {
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto; }
+
+/*For Explore pages only*/
+/*For Save pages only*/
 html body .app.flex-row.align-items-center {
   height: 100vh; }

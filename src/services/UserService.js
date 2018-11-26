@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import fetch from 'cross-fetch';
 import { API_CONST } from '../API';
 import { tokenUtil } from '../utils/token';
@@ -12,8 +11,6 @@ const fetchUserDetail = userUid => {
    };
    let url = API_CONST.USER_DETAIL_URL(userUid);
    tokenUtil.updateOrCreateHeader(getObject);
-   console.log(url)
-
    return fetch(url, getObject)
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
@@ -26,7 +23,7 @@ const fetchUserDetail = userUid => {
          return data;
       })
       .catch(err => {
-         throw new Error(err);
+         return err;
       });
 }
 export const userService = {

@@ -109,7 +109,7 @@ html:not([dir="rtl"]) .sidebar {
       color: rgba(255, 255, 255, 0.7); }
   .sidebar .sidebar-nav {
     position: absolute;
-    bottom: 96px;
+    bottom: 95px;
     flex: none;
     height: fit-content;
     overflow-x: hidden;
@@ -512,7 +512,37 @@ body {
   color: #BEBED0;
 }
 
+/* Style for scrollbar*/
+::-webkit-scrollbar {
+  width: 20px;
+}
 
+::-webkit-scrollbar-track {
+  box-shadow: none; 
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #13223B; 
+  border-radius: 30px;
+  background-clip: padding-box;
+  border: 8px solid rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, .68); 
+  border-radius: 30px;
+  background-clip: padding-box;
+  border: 8px solid rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
 /* Khang add new icons */
 
 .icon-tralvelmap-custom{
@@ -541,6 +571,9 @@ body {
 .nav-link .icon-travelmap-aboutus {
   background-image: url('../assets/icons/aboutus-icon.svg');
 }
+.nav-link .icon-travelmap-save {
+  background-image: url('../assets/icons/ic-heart.svg');
+}
 .icon-facebook {
   background-image: url('../assets/icons/icon-facebook.svg');
 }
@@ -550,7 +583,7 @@ body {
 
 #maps {
   /* float: left; */
-  width: 40%;
+  width: 35%;
   height: 100%;
   border: 0px solid #eee;
   /* margin: 0px auto; */
@@ -581,7 +614,7 @@ body {
 }
 .app-content {
   position: relative;
-  width: 60%;
+  width: 65%;
   height: 100%;
   background: #1E344D;
   display: inline-block;
@@ -595,6 +628,7 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0px;
+  border-top: 1px solid rgba(255, 255, 255, .36);
 }
 .btn-profile{
   width: 160px;
@@ -616,13 +650,16 @@ body {
     margin-right: auto;
   padding-top: 17px;
   padding-bottom: 17px;
+  font-family: 'SVN-Poppins-Light';
+  font-size: 14px;
+  display: flex;
 }
 .profile-name-logged-in{
   margin-left: auto;
     width: fit-content;
     margin-right: auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 17px;
+  padding-bottom: 17px;
   width: 100%;
     display: inline-flex;
 }
@@ -636,6 +673,14 @@ body {
 }
 .profile-label{
   padding-left: 10px;
+}
+.profile-label2{
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.login-profile-fb-label{
+  color: #00CE7D;
 }
 .btn-logout-fb{
   border: 1px solid white;
@@ -664,7 +709,7 @@ body {
 	width: 100%;
 	height: 45px;
 	border: 2px;
-	border-radius: 4px;
+	border-radius: 50px;
 	font-size: 13px;
 	line-height: 17px;
 	color: #ffffff;
@@ -673,6 +718,49 @@ body {
 	background-position: 14.5px 13px; 
 	background-repeat: no-repeat;
 	padding: 12px 20px 12px 45px;
+}
+/* styles for tab */
+.travel-tab{
+  margin-top: 66px;
+  margin-left: 35px;
+  margin-right: 35px;
+  color: #FFFFFF;
+}
+.travel-tab-nav{
+  font-size: 18px;
+  height: 50px;
+  background: none;
+  font-family: 'Merriweather';
+  border-bottom: none;
+}
+.travel-tab-nav-item-active{
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  height: 40px;
+  text-align: center;
+  border-bottom: 4px solid #00CE7D;
+  color: #FFFFFF;
+}
+.travel-tab-nav-item{
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  height: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+}
+.travel-tab-nav .nav-link.active{
+  color: #ffffff;
+  background: none;
+  border-color: transparent;
+  border-bottom-color: transparent;
+}
+.travel-tab-nav .nav-link:hover{
+  border-color: transparent;
+}
+.travel-tab-content{
+  background: #1E344D;
+  border: none;
+  margin-top: 30px;
 }
 
 
@@ -688,4 +776,22 @@ body {
   font-style: normal;
   src: local('SVN-Poppins-SemiBold'), local('SVN-Poppins-SemiBold'),
        url('../assets/fonts/SVN-Poppins/TTF/SVN-Poppins SemiBold.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'SVN-Poppins-Light';
+  font-style: normal;
+  src: local('SVN-Poppins-Light'), local('SVN-Poppins-Light'),
+       url('../assets/fonts/SVN-Poppins/TTF/SVN-Poppins Light.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'SVN-Poppins-Medium';
+  font-style: normal;
+  src: local('SVN-Poppins-Medium'), local('SVN-Poppins-Medium'),
+       url('../assets/fonts/SVN-Poppins/TTF/SVN-Poppins Medium.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  src: local('Merriweather'), local('Merriweather'),
+       url('../assets/fonts/Merriweather/Merriweather-Regular.ttf') format('truetype')
 }
