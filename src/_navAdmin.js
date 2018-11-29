@@ -23,7 +23,7 @@ export default {
       },
       {
          name: 'USERS',
-         url: '#',
+         url: '/admin/users',
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
       }, {
          name: 'ROLES',

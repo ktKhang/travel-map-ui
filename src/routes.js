@@ -32,6 +32,16 @@ const DashboardAdmin = Loadable({
   loading: Loading,
 });
 
+const Users = Loadable({
+  loader: () => import('./views/Admin/Users'),
+  loading: Loading
+});
+
+const User = Loadable({
+  loader: () => import('./views/Admin/User'),
+  loading: Loading
+})
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
@@ -40,6 +50,8 @@ const routes = [
   { path: '/about', name: 'AboutUs', component: AboutUs },
   { path: '/adventure', name: 'YourAdventure', component: YourAdventure },
   { path: '/admin/dashboard', name: 'Dashboard', component: DashboardAdmin },
+  { path: '/admin/users', name: 'Users', component: Users},
+  { path: '/admin/userss/:uid', name: 'User Detail', component: User},
 ];
 
 export default routes;
