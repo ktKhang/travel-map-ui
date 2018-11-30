@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import CommonModal from '../views/CustomModals/CommonModal'
 import ReactDOM from 'react-dom';
 
@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom';
  * 
  * @param {*this is message content} msg 
  */
-function  showSuccessMsg(msg){
-   closeModal();
+function showSuccessMsg(msg){
+    closeModal();
     ReactDOM.render(<CommonModal modal={false}
                 isOpen={true}
                 modalType="info"

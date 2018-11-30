@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import CommonModal from '../CustomModals/CommonModal'
-import {userService, showModal} from '../../services';
+import CommonModal from '../../CustomModals/CommonModal'
+import {regionService, showModal} from '../../../services';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
 const { SearchBar } = Search;
 
-class Users extends Component {
+class Regions extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            userList: [],
+            regionList: [],
             errorMsg: null,
             modal: false,
             isOpen: false,
@@ -25,17 +25,13 @@ class Users extends Component {
                 sort: false,
                 formatter: this.sortableIndex
                 }, {
-                dataField: 'userName',
-                text: 'Username',
+                dataField: 'name',
+                text: 'Region',
                 sort: true,
-                formatter: this.userDetailFormatter
+                formatter: this.regionDetailFormatter
                 }, {
-                dataField: 'email',
-                text: 'Email',
-                sort: true
-                }, {
-                dataField: 'userStatus',
-                text: 'Status',
+                dataField: 'title',
+                text: 'Title',
                 sort: true
                 }, {
                 dataField: 'createdDate',
@@ -44,13 +40,13 @@ class Users extends Component {
                 }, {
                 dataField: 'uid',
                 text: 'Action',
-                formatter: props => <this.Delete deleteFunc = {this.deleteUser.bind(this, props)}></this.Delete>,
+                formatter: props => <this.Delete deleteFunc = {this.deleteRegion.bind(this, props)}></this.Delete>,
                 csvExport: false
             }]
         };
     }
 
-	deleteUser(userUid) {
+	deleteRegion(regionUid) {
 		const isOpen = true;
 
 		ReactDOM.render(<CommonModal modal={this.state.modal}
@@ -60,7 +56,7 @@ class Users extends Component {
 			modalHeader="Confirmation"
 			yesLabel="Yes"
 			noLabel="No"
-			yesFunc={this.clickYes.bind(this, userUid)}
+			yesFunc={this.clickYes.bind(this, regionUid)}
 			noFunc={this.clickNo}
 		/>
 			, document.getElementById('modalDiv'));
@@ -84,15 +80,15 @@ class Users extends Component {
         return(<p>{rowIndex}</p>)
     }
 
-    userDetailFormatter = (cell, row) => {
-        const userLink = `#/admin/user/${row.uid}`;
+    regionDetailFormatter = (cell, row) => {
+        const regionLink = `#/admin/region/${row.uid}`;
         return (
-          <p><a href={userLink}>{cell}</a></p>
+          <p><a href={regionLink}>{cell}</a></p>
         );
     }
 
-    loadUserList(){
-        userService.loadUserList().then(data => {
+    loadRegionsList(){
+        regionService.loadRegionList().then(data => {
             if(data.errorMsg){
                 showModal.showErrorMsg(data.errorMsg);
             }else{
@@ -100,7 +96,7 @@ class Users extends Component {
                     element.createdDate = new Date(element.createdDate).toLocaleDateString();
                 });
                 !this.isCancelled && this.setState({
-                    userList: data,
+                    regionList: data,
                     errorMsg: null,
                 })
             }
@@ -112,39 +108,30 @@ class Users extends Component {
     }
 
     componentDidMount() {
-        this.loadUserList();
+        this.loadRegionsList();
     }
 
     componentWillUnmount() {
         this.isCancelled = true;
     }
-
     
     render() {
         return (
             <div className = "animated fadeIn" >
             <ToolkitProvider 
                 keyField="id"
-                data={this.state.userList}
+                data={this.state.regionList}
                 columns={this.state.columns}
                 search>
                 {
                     props => (
                         <div>
                             <Container fluid >
-                                <Row>
-                                    <Col md={1}>
-                                            <Button color="primary" onClick={() => this.clickNewUser()} >
-                                            <i className="fa fa-plus"></i>&nbsp;New
-                                            </Button>
-                                    </Col>
-                                </Row>
-                                <br/>
                                 <Card>
                                     <CardHeader>
                                         <Row>
                                         <Col md={4}>
-                                            <i className="fa fa-align-justify"></i> User <small className="text-muted">List</small>
+                                            <i className="fa fa-align-justify"></i> Region <small className="text-muted">List</small>
                                         </Col>
                                         <br />
                                         <Col md={4} offset={{ md: 4 }}>
@@ -172,4 +159,4 @@ class Users extends Component {
     )}
 }
 
-export default Users;
+export default Regions;
