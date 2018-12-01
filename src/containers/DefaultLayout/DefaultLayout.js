@@ -27,6 +27,8 @@ import DefaultHeader from './DefaultHeader';
 import { Container, Row, Col } from 'react-grid-system';
 import LoginProfile from './LoginProfile';
 import SearchBox from '../../views/FeatureComponents/Search'
+import Map from '../../views/FeatureComponents/Map';
+
 
 class DefaultLayout extends Component {
   Logo = () => {
@@ -53,6 +55,7 @@ class DefaultLayout extends Component {
             <LoginProfile />
           </AppSidebar>
           <main className="main">
+            {/* <div className="main-content"> */}
             <Switch>
               {routes.map((route, idx) => {
                 return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
@@ -63,6 +66,8 @@ class DefaultLayout extends Component {
               )}
               <Redirect from="/" to="/about" />
             </Switch>
+            {/* </div> */}
+            <Map />
           </main>
         </div>
         {/* <AppFooter>

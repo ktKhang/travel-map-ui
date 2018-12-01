@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Map from '../FeatureComponents/Map';
 // custom GGTab component
 import GGTab from '../../utils/GGTab';
 // childrent component
@@ -31,7 +30,6 @@ class AboutUs extends Component {
                   <Feedback />
                </GGTab>
             </div>
-            <Map />
          </div>
       );
    }

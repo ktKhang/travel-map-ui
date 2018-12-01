@@ -82,12 +82,12 @@ class LoginProfile extends Component {
             console.log(this.state.userDetail);
             profileContent = (
                 <div className="profile-name-logged-in">
+                    <button className="btn-logout-fb" onClick={this.logout}></button>
                     <div className="profile-info">
-                        <img src={this.state.userDetail.avatar} className="profile-avatar" alt={this.state.userDetail.email} />
-
-                        <label className="profile-label">{this.state.userDetail.userName}</label>
+                        <span className="profile-label">{this.state.userDetail.userName}</span>
+                        <span className="profile-des">1.200 follow</span>
                     </div>
-                    <button className="btn-logout-fb" onClick={this.logout}>Logout</button>
+                    <img src={this.state.userDetail.avatar} className="profile-avatar" alt={this.state.userDetail.email} />
                 </div>
             )
         } else {

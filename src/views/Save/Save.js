@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Map from '../FeatureComponents/Map';
+import loading from '../../assets/icons/icon-loading.gif'
 
 class Save extends Component {
    constructor(props) {
@@ -17,9 +17,10 @@ class Save extends Component {
       return (
          <div className="map-content">
             <div className="app-content" style={this.state.appStyle}>
-
+               <div style={{ textAlign: 'center' }}>
+                  <img src={loading} alt="loading..." />
+               </div>
             </div>
-            <Map />
          </div>
       );
    }

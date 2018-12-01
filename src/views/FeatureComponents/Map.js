@@ -3,173 +3,209 @@ import AmCharts from "@amcharts/amcharts3-react";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { Container, Row, Col } from 'react-grid-system';
+import { regionService, showModal } from '../../services'
+import MapAction from './MapAction';
+import { withContext } from "../../Context/context";
 
 const pathPlace = 'M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z';
 
+const starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
 class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            worldLow: {},
+            load: false,
             config: {
                 "type": "map",
-                "theme": "light",
+                "theme": "am4themes_animated",
+                "fontFamily": "SVN-Poppins",
                 "addClassNames": true,
                 "dataProvider": {
                     "map": "vietnamLow",
                     "getAreasFromMap": true,
                     "areas": [
-                        {
-                            "id": "VN-59",
-                            "images": [
-                                {
-                                    svgPath: pathPlace,
-                                    scale: 0.5, title: "Hanoi",
-                                    latitude: 77.7038,
-                                    longitude: -83.9151,
-                                    color: "#723C1A"
-                                }
-                            ],
-                            "color": "#723C1A",
-                            "passZoomValuesToTarget": true,
-                        }, {
-                            "id": "VN-29",
-                            "color": "#C8AB67",
-                            "passZoomValuesToTarget": true
-                        }, {
-                            "id": "VN-34",
-                            "color": "#93644A",
-                            "passZoomValuesToTarget": true
-                        }, {
-                            "id": "VN-60",
-                            "images": [
-                                {
-                                    svgPath: pathPlace,
-                                    scale: 0.5, title: "Hanoi",
-                                    latitude: 10.0341,
-                                    longitude: 105.8372
-                                }
-                            ],
-                            "color": "#AA805A",
-                            "passZoomValuesToTarget": true
-                        }],
-
+                        // {
+                        //     "id": "VN-22",
+                        //     "images": [
+                        //         {
+                        //             svgPath: pathPlace,
+                        //             scale: 0.5, title: "Hanoi",
+                        //             latitude: -49.5403,
+                        //             longitude: 26.994,
+                        //             color: "#723C1A"
+                        //         }
+                        //     ],
+                        //     // "color": "#723C1A",
+                        //     "passZoomValuesToTarget": true
+                        // }, {
+                        //     "id": "VN-20",
+                        //     "images": [
+                        //         {
+                        //             svgPath: pathPlace,
+                        //             scale: 0.5, title: "asdf",
+                        //             latitude: -33.2444,
+                        //             longitude: 24.5349,
+                        //             color: "#723C1A"
+                        //         }
+                        //     ],
+                        //     // "color": "#C8AB67",
+                        //     "passZoomValuesToTarget": true
+                        // }, {
+                        //     "id": "VN-34",
+                        //     // "color": "#93644A",
+                        //     "passZoomValuesToTarget": true
+                        // }, {
+                        //     "id": "VN-60",
+                        //     "images": [
+                        //         {
+                        //             svgPath: pathPlace,
+                        //             scale: 0.5, title: "Hanoi",
+                        //             latitude: 10.0341,
+                        //             longitude: 105.8372
+                        //         }
+                        //     ],
+                        //     // "color": "#AA805A",
+                        //     "passZoomValuesToTarget": true
+                        // }
+                    ],
+                    "zoomLevel": 1.2,
+                    "zoomLongitude": 35,
+                    "zoomLatitude": 25,
                 },
                 "showImagesInList": true,
                 "imagesSettings": {
                     rollOverColor: "#CC0000",
                     rollOverScale: 3,
                     selectedScale: 3,
-                    selectedColor: "#CC0000"
+                    selectedColor: "#CC0000",
+                    adjustAnimationSpeed: true,
+                    borderAlpha: 50
                 },
                 "areasSettings": {
                     "autoZoom": true,
-                    "selectedColor": "#AADAFF",
+                    "selectedColor": "#5FA79E",
                     "selectable": true,
-                    "outlineThickness": 0.1
+                    "outlineThickness": 0.5,
+                    "color": "#B0C6D8"
+
                     // "rollOverBrightness":10,
-                    // "selectedBrightness":20
+                    // "selectedBrightness": 20
                 },
-                "smallMap": {},
+                // "smallMap": {},
                 "developerMode": true,
+                "zoomControl": {
+                    "bottom": 10,
+                    "left": 10,
+                    "buttonFillColor": "#bac0c887"
+                },
                 "listeners": [{
                     "event": "clickMapObject",
-                    "method": function (e) {
-                        console.log(e);
-
-                        // Ignore any click not on area
-                        if (e.mapObject.objectType !== "MapArea")
-                            return;
-
-                        var area = e.mapObject;
-
-                        area.showAsSelected = !area.showAsSelected;
-
-
-                        // Update the list
-                        if (area.showAsSelected === true) {
-                            console.log(area);
-                            console.log(area.id);
-                            console.log(area.enTitle);
-                            e.chart.returnInitialColor(area);
-                            area.showAsSelected = false;
-                        }
-                    }
+                    "method": (e) => this.clickMapObj(e)
                 }, {
                     "event": "writeDevInfo",
                     "method": function (e) {
                         console.log(e);
                         alert(e.str);
                     }
-                }],
-                "export": {
-                    "enabled": true,
-                    "position": "bottom-right",
-                    "beforeCapture": function () {
-                        var map = this.setup.chart;
-                        /**
-                         * Log current zoom settings so we can restore after export
-                         */
-                        map.currentZoom = {
-                            "zoomLevel": map.zoomLevel(),
-                            "zoomLongitude": map.zoomLongitude(),
-                            "zoomLatitude": map.zoomLatitude()
-                        };
-
-                        /**
-                         * Zoom to initial position
-                         */
-                        map.zoomToLongLat(
-                            map.initialZoom.zoomLevel,
-                            map.initialZoom.zoomLongitude,
-                            map.initialZoom.zoomLatitude,
-                            true
-                        );
-                    },
-                    "afterCapture": function () {
-                        var map = this.setup.chart;
-                        setTimeout(function () {
-                            /**
-                             * Restore current zoom
-                             */
-                            map.zoomToLongLat(
-                                map.currentZoom.zoomLevel,
-                                map.currentZoom.zoomLongitude,
-                                map.currentZoom.zoomLatitude,
-                                true
-                            );
-                        }, 10);
+                }, {
+                    "event": "mouseDownMapObject",
+                    "method": (e) => this.mouseDownMapObj(e)
+                },
+                {
+                    "event": "click",
+                    "method": function (e) {
+                        console.log(e);
                     }
                 }
+                ],
+                "mouseWheelZoomEnabled": true
             }
         };
+        this.clickMapObj = this.clickMapObj.bind(this)
     }
 
-    UNSAFE_componentWillMount() {
-        this.drawWorldLow();
+    clickMapObj = e => {
+        console.log(e.mapObject.images);
+        // Ignore any click not on area
+        if (e.mapObject.objectType !== "MapArea")
+            return;
+        var area = e.mapObject;
+
+        area.showAsSelected = !area.showAsSelected;
+        // Update the list
+        if (area.showAsSelected === true) {
+            console.log(area);
+            console.log(area.id);
+            console.log(area.enTitle);
+            e.chart.returnInitialColor(area);
+            area.showAsSelected = false;
+        }
+    }
+
+    mouseDownMapObj = e => {
+        console.log(e);
+    }
+
+    loadData = () => {
+        regionService.getRegionList().then(data => {
+            if (data.errorCode !== 0) {
+                showModal.showErrorMsg("Get data fail!")
+            } else {
+                let regionList = data.data
+                let areas = []
+                regionList.forEach(region => {
+                    let places = []
+                    region.placeList.forEach(place => {
+                        place.scale = 0.5
+                        place.color = "#723C1A"
+                        places.push(place)
+                    });
+                    region.images = places
+                    region.passZoomValuesToTarget = true
+                    areas.push(region)
+                });
+                let currentConfig = this.state.config
+                currentConfig.dataProvider.areas = areas
+                this.setState({
+                    config: currentConfig,
+                    load: true
+                })
+            }
+        })
+    }
+
+    componentDidMount() {
+        this.drawMap();
+        this.loadData();
     }
 
     render() {
+        let mapComponent = <div></div>
+        if (this.state.load) {
+            mapComponent = (
+                <div id="maps">
+                    <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={this.state.config} />
+                    <MapAction />
+                </div>
+            )
+        }
         return (
-            // <div>
-            <div id="maps">
-                <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={this.state.config} />
-            </div>
-            // </div>
-
+            mapComponent
         );
     }
 
-    drawWorldLow() {
+    drawMap() {
         AmCharts.maps.vietnamLow = {
             "svg": {
                 "defs": {
                     "amcharts:ammap": {
                         "projection": "mercator",
-                        "leftLongitude": "-169.6",
-                        "topLatitude": "83.68",
-                        "rightLongitude": "190.25",
-                        "bottomLatitude": "-55.55"
+                        // "leftLongitude": "-169.6",
+                        "leftLongitude": "100",
+                        "topLatitude": "300.68",
+                        // "rightLongitude": "190.25",
+                        "rightLongitude": "-100.25",
+                        "bottomLatitude": "-115.55"
                     }
                 },
                 "g": {
@@ -441,4 +477,4 @@ class Map extends Component {
     }
 }
 
-export default Map;
+export default withContext(Map);

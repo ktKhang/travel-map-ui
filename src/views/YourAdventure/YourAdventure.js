@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Map from '../FeatureComponents/Map';
 import adventureImg from '../../assets/img/adventure.svg'
 import FBLogin from '../FeatureComponents/FBLogin';
 import { constant } from '../../utils/Constant';
@@ -63,7 +62,6 @@ class YourAdventure extends Component {
             <div className="app-content" style={this.state.appStyle}>
                {adventureContent}
             </div>
-            <Map />
          </div>
       );
    }

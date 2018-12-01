@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Map from '../FeatureComponents/Map';
 import { Container } from 'react-grid-system';
 
 class Explore extends Component {
@@ -20,7 +19,6 @@ class Explore extends Component {
             <div className="app-content" style={this.state.appStyle}>
 
             </div>
-            <Map />
          </div>
       );
    }
