@@ -814,6 +814,17 @@ body {
   border: none;
   margin-top: 30px;
 }
+.img-loading-content{
+  text-align: center;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+.img-loading{
+  height: 100px;
+}
 
 
 // Khang add fonts

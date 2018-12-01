@@ -17,8 +17,8 @@ class Save extends Component {
       return (
          <div className="map-content">
             <div className="app-content" style={this.state.appStyle}>
-               <div style={{ textAlign: 'center' }}>
-                  <img src={loading} alt="loading..." />
+               <div className="img-loading-content">
+                  <img src={loading} alt="loading..." className="img-loading" />
                </div>
             </div>
          </div>
