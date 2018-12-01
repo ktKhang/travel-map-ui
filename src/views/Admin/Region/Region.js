@@ -1,26 +1,26 @@
 import React, { Component } from "react";
-import { userService, showModal } from "../../services";
+import {regionService, showModal} from '../../../services';
 import { Container, Row, Col } from 'react-grid-system';
 import { Button, Card, CardBody, Table } from 'reactstrap';
 
-class User extends Component{
+class Region extends Component{
     constructor(props){
         super(props);
         this.state = {
-            user: {},
+            region: {},
             errorMsg: null,
             isUpdate: false,
         }
     }
 
-    invokeUserDetailService(uid){
-        userService.fetchUserDetailTest(uid).then(data => {
+    invokeRegionDetailService(uid){
+        regionService.fetchRegionDetail(uid).then(data => {
             if(data.errorMsg){
                 showModal.showErrorMsg(data.errorMsg);
             }
             else{
                 this.setState({
-                    user: data, 
+                    region: data, 
                     errorMsg: null
                 });
             }
@@ -33,7 +33,7 @@ class User extends Component{
     }
 
     componentDidMount(){
-        this.invokeUserDetailService(this.props.match.params.uid);
+        this.invokeRegionDetailService(this.props.match.params.uid);
     }
 
     componentWillUnmount(){
@@ -44,13 +44,11 @@ class User extends Component{
         return(
             <div className="animated fadeIn">
                 <Container fluid>
+                <br/>
                 <Row>
                     <Col lg={3}>
-                    <Button color="primary" onClick={() => this.editUser()}>
-                        <i className="fa fa-edit" />
-                        &nbsp;Edit User
-                    </Button>
-                    </Col>
+						<a href={'#/admin/region/' + this.props.match.params.uid + '/places'}> Place List </a>
+					</Col>
                 </Row>
                 <br />
                 <Row>
@@ -58,7 +56,7 @@ class User extends Component{
                     <Card>
                         <CardBody>
                         <Table responsive striped hover>
-                            <tbody>{this.renderUserDetails()}</tbody>
+                            <tbody>{this.renderRegionDetails()}</tbody>
                         </Table>
                         </CardBody>
                     </Card>
@@ -69,32 +67,24 @@ class User extends Component{
         );
     }
 
-    renderUserDetails = () => [
+    renderRegionDetails = () => [
         <tr key="0">
-            <td>User name</td>
-            <td>{this.state.user.userName}</td>
+            <td>ID</td>
+            <td>{this.state.region.id}</td>
         </tr>,
         <tr key="1">
-            <td>Email</td>
-            <td>{this.state.user.email}</td>
+            <td>Region</td>
+            <td>{this.state.region.name}</td>
         </tr>,
         <tr key="2">
-            <td>Region Visited</td>
-            <td>{this.state.user.regionVisited}</td>
+            <td>Title</td>
+            <td>{this.state.region.title}</td>
         </tr>,
         <tr key="3">
-            <td>Place Visited</td>
-            <td>{this.state.user.placeVisited}</td>
-        </tr>,
-        <tr key="4">
-            <td>Status</td>
-            <td>{this.state.user.userStatus}</td>
-        </tr>,
-        <tr key="5">
-            <td>User ID</td>
-            <td>{this.state.user.userID}</td>
+            <td>Created Date</td>
+            <td>{new Date(this.state.region.createdDate).toLocaleDateString()}</td>
         </tr>,
     ]
     
 }
-export default User;
+export default Region;

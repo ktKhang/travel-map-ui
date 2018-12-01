@@ -31,8 +31,8 @@ export default {
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
       },
       {
-         name: '...',
-         url: '#',
+         name: 'REGIONS',
+         url: '/admin/regions',
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
       },
    ],
