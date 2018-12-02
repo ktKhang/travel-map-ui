@@ -109,7 +109,6 @@ class Places extends Component {
         .catch(err => {
             this.setState({errorMsg: err.message});
         });
-        
     }
 
     componentDidMount() {
@@ -121,7 +120,7 @@ class Places extends Component {
     }
 
     clickNewPlace(){
-
+            
     }
     
     render() {

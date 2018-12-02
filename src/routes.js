@@ -81,7 +81,7 @@ const routes = [
   { path: '/admin/region/:uid', exact: true, name: 'Region Detail', component: Region},
   { path: '/admin/region/:regionid/places', exact: true, name: 'Places', component: Places},
   { path: '/admin/region/:regionid/place/:uid', exact: true, name: 'Place', component: Place},
-  { path: '/admin/region/:regionid/createNewPlace', exact: true, name: 'Places', component: NewPlace}
+  { path: '/admin/addPlace', exact: true, name: 'New Place', component: NewPlace}
 ];
 
 export default routes;

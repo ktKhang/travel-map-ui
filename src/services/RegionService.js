@@ -36,7 +36,7 @@ const loadRegionList = () => {
    };
    // tokenUtil.updateOrCreateHeader(getObject);
 
-   return fetch(API_CONST.API_URL + '/regions/all', getObject)
+   return fetch(API_CONST.REGION_LIST_URL, getObject)
       .then(responseData => {
          // tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
@@ -62,7 +62,7 @@ const fetchRegionDetail = uid => {
       }
    }
 
-   return fetch(API_CONST.API_URL + '/regions/findByUid/' + uid, getObject)
+   return fetch(API_CONST.REGION_DETAIL_URL(uid), getObject)
       .then(responseData => {
          if (responseData.status >= 400) {
             throw new Error('Bad response from server');

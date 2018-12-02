@@ -38,7 +38,7 @@ function loadUserList(){
    };
    // tokenUtil.updateOrCreateHeader(getObject);
 
-   return fetch(API_CONST.API_URL + '/users/all', getObject)
+   return fetch(API_CONST.USER_LIST_URL, getObject)
       .then(responseData => {
          // tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
@@ -65,7 +65,7 @@ function fetchUserDetailTest(uid){
       }
    }
 
-   return fetch(API_CONST.API_URL + '/users/show/' + uid, getObject)
+   return fetch(API_CONST.USER_DETAIL_URL(uid), getObject)
       .then(responseData => {
          if(responseData.status >= 400){
             throw new Error('Bad response from server');
