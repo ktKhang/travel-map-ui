@@ -5,16 +5,15 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import { Container, Row, Col } from 'react-grid-system';
 import { regionService, showModal } from '../../services'
 import MapAction from './MapAction';
-import { withContext } from "../../Context/context";
+import loading from '../../assets/icons/icon-loading.gif'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
-const pathPlace = 'M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z';
-
-const starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
 class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            load: false,
+            redirect: false,
             config: {
                 "type": "map",
                 "theme": "am4themes_animated",
@@ -100,7 +99,7 @@ class Map extends Component {
                 },
                 "listeners": [{
                     "event": "clickMapObject",
-                    "method": (e) => this.clickMapObj(e)
+                    "method": (e) => this.clickMapObj.bind(this)(e)
                 }, {
                     "event": "writeDevInfo",
                     "method": function (e) {
@@ -121,7 +120,7 @@ class Map extends Component {
                 "mouseWheelZoomEnabled": true
             }
         };
-        this.clickMapObj = this.clickMapObj.bind(this)
+        // this.clickMapObj = this.clickMapObj.bind(this)
     }
 
     clickMapObj = e => {
@@ -139,6 +138,13 @@ class Map extends Component {
             console.log(area.enTitle);
             e.chart.returnInitialColor(area);
             area.showAsSelected = false;
+
+            setTimeout(() => {
+                this.setState({
+                    redirect: true
+                })
+            }, 500)
+
         }
     }
 
@@ -167,8 +173,7 @@ class Map extends Component {
                 let currentConfig = this.state.config
                 currentConfig.dataProvider.areas = areas
                 this.setState({
-                    config: currentConfig,
-                    load: true
+                    config: currentConfig
                 })
             }
         })
@@ -179,16 +184,34 @@ class Map extends Component {
         this.loadData();
     }
 
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            this.setState({
+                redirect: false
+            })
+            return (<Redirect to='/explore' />)
+        }
+
+    }
+
     render() {
-        let mapComponent = <div></div>
-        if (this.state.load) {
+        console.log(this.state.config.dataProvider.areas.length);
+        let mapComponent = (
+            <div id="maps" style={this.props.style}>
+                <img src={loading} alt="loading..." className="img-loading" style={{ height: '100px', position: 'absolute', top: '50%', left: '50%', margin: '-15% 0 0 -10%' }} />
+            </div>
+        )
+        if (this.state.config.dataProvider.areas.length !== 0) {
             mapComponent = (
-                <div id="maps">
+                <div id="maps" style={this.props.style}>
                     <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={this.state.config} />
                     <MapAction />
+                    {this.renderRedirect()}
+
                 </div>
             )
         }
+
         return (
             mapComponent
         );
@@ -476,5 +499,10 @@ class Map extends Component {
 
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        regionReducer: state.regionReducer
+    }
+}
 
-export default withContext(Map);
+export default connect(mapStateToProps)(Map);
