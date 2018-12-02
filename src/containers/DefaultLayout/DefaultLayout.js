@@ -28,7 +28,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import LoginProfile from './LoginProfile';
 import SearchBox from '../../views/FeatureComponents/Search'
 import Map from '../../views/FeatureComponents/Map';
-
+import { connect } from 'react-redux';
 
 class DefaultLayout extends Component {
   Logo = () => {
@@ -54,7 +54,7 @@ class DefaultLayout extends Component {
             <AppSidebarNav navConfig={navigation} {...this.props} />
             <LoginProfile />
           </AppSidebar>
-          <main className="main">
+          <main className="main" style={this.props.regionReducer.clickRegion === true ? { flexDirection: 'row-reverse' } : { flexDirection: 'initial' }}>
             {/* <div className="main-content"> */}
             <Switch>
               {routes.map((route, idx) => {
@@ -67,7 +67,8 @@ class DefaultLayout extends Component {
               <Redirect from="/" to="/about" />
             </Switch>
             {/* </div> */}
-            <Map />
+            <Map style={this.props.regionReducer.clickRegion === true ? { width: '65%', maxWidth: 'unset' } : { width: '35%' }} />
+
           </main>
         </div>
         {/* <AppFooter>
@@ -78,4 +79,10 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    regionReducer: state.regionReducer
+  }
+}
+
+export default connect(mapStateToProps)(DefaultLayout);
