@@ -26,14 +26,13 @@ export default {
          url: '/admin/users',
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
       }, {
-         name: 'ROLES',
-         url: '#',
-         icon: 'icon-tralvelmap-custom icon-travelmap-home',
-      },
-      {
          name: 'REGIONS',
          url: '/admin/regions',
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
-      },
+      }, {
+         name: 'ADD PLACE',
+         url: '/admin/addPlace',
+         icon: 'icon-tralvelmap-custom icon-travelmap-home',
+      }
    ],
 };

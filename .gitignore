@@ -22,3 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 src/scss/style.css
+src/scss/style.css
+src/scss/vendors/chart.js/chart.css

@@ -75,13 +75,13 @@ const routes = [
   { path: '/about', exact: true, name: 'AboutUs', component: AboutUs },
   { path: '/adventure', exact: true, name: 'YourAdventure', component: YourAdventure },
   { path: '/admin/dashboard', exact: true, name: 'Dashboard', component: DashboardAdmin },
-  { path: '/admin/users', exact: true, name: 'Users', component: Users },
-  { path: '/admin/user/:uid', exact: true, name: 'User Detail', component: User },
-  { path: '/admin/regions', exact: true, name: 'Regions', component: Regions },
-  { path: '/admin/region/:uid', exact: true, name: 'Region Detail', component: Region },
-  { path: '/admin/region/:regionid/places', exact: true, name: 'Places', component: Places },
-  { path: '/admin/region/:regionid/place/:uid', exact: true, name: 'Place', component: Place },
-  { path: '/admin/region/:regionid/createNewPlace', exact: true, name: 'Places', component: NewPlace }
+  { path: '/admin/users', exact: true, name: 'Users', component: Users},
+  { path: '/admin/user/:uid', exact: true, name: 'User Detail', component: User},
+  { path: '/admin/regions', exact: true, name: 'Regions', component: Regions},
+  { path: '/admin/region/:uid', exact: true, name: 'Region Detail', component: Region},
+  { path: '/admin/region/:regionid/places', exact: true, name: 'Places', component: Places},
+  { path: '/admin/region/:regionid/place/:uid', exact: true, name: 'Place', component: Place},
+  { path: '/admin/addPlace', exact: true, name: 'New Place', component: NewPlace}
 ];
 
 export default routes;

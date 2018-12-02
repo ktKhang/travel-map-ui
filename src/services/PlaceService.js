@@ -12,7 +12,7 @@ function loadPlaceList(){
     };
     // tokenUtil.updateOrCreateHeader(getObject);
  
-    return fetch(API_CONST.API_URL + '/places/all', getObject)
+    return fetch(API_CONST.PLACE_LIST_URL, getObject)
        .then(responseData => {
           // tokenUtil.checkAuthorizedStatus(responseData);
           if (responseData.status >= 400) {
@@ -38,7 +38,7 @@ function fetchPlaceDetail(uid){
       }
    }
 
-   return fetch(API_CONST.API_URL + '/places/findByUid/' + uid, getObject)
+   return fetch(API_CONST.PLACE_DETAIL_URL(uid), getObject)
       .then(responseData => {
          if(responseData.status >= 400){
             throw new Error('Bad response from server');
@@ -63,7 +63,7 @@ function findPlaceByRegion(regionUid){
       }
    }
 
-   return fetch(API_CONST.API_URL + '/places/findByRegionUid/' + regionUid, getObject)
+   return fetch(API_CONST.PLACE_FIND_BY_REGION_URL(regionUid), getObject)
       .then(responseData => {
          if(responseData.status >= 400){
             throw new Error('Bad response from server');
@@ -92,7 +92,7 @@ function updatePlace(place){
 
    // tokenUtil.updateOrCreateHeader(putObject);
      
-   return fetch(API_CONST.API_URL + '/places/update/', putObject)
+   return fetch(API_CONST.PLACE_UPDATE_URL, putObject)
    .then(responseData => {
       //  tokenUtil.checkAuthorizedStatus(responseData);
       if (responseData.status >= 400) {
