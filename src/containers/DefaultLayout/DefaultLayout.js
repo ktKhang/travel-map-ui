@@ -29,7 +29,6 @@ import LoginProfile from './LoginProfile';
 import SearchBox from '../../views/FeatureComponents/Search'
 import Map from '../../views/FeatureComponents/Map';
 import { connect } from 'react-redux';
-
 class DefaultLayout extends Component {
   Logo = () => {
     return (
@@ -54,7 +53,7 @@ class DefaultLayout extends Component {
             <AppSidebarNav navConfig={navigation} {...this.props} />
             <LoginProfile />
           </AppSidebar>
-          <main className="main" style={this.props.regionReducer.clickRegion === true ? { flexDirection: 'row-reverse' } : { flexDirection: 'initial' }}>
+          <main className="main" style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { flexDirection: 'row-reverse' } : { flexDirection: 'initial' }}>
             {/* <div className="main-content"> */}
             <Switch>
               {routes.map((route, idx) => {
@@ -67,7 +66,7 @@ class DefaultLayout extends Component {
               <Redirect from="/" to="/about" />
             </Switch>
             {/* </div> */}
-            <Map style={this.props.regionReducer.clickRegion === true ? { width: '65%', maxWidth: 'unset' } : { width: '35%' }} />
+            <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available', webkitAnimationName: 'example' } : { width: '35%' }} />
 
           </main>
         </div>
@@ -81,7 +80,8 @@ class DefaultLayout extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    regionReducer: state.regionReducer
+    regionReducer: state.regionReducer,
+    pageReducer: state.pageReducer
   }
 }
 

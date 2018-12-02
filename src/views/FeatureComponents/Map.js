@@ -120,7 +120,6 @@ class Map extends Component {
                 "mouseWheelZoomEnabled": true
             }
         };
-        // this.clickMapObj = this.clickMapObj.bind(this)
     }
 
     clickMapObj = e => {
@@ -140,6 +139,8 @@ class Map extends Component {
             area.showAsSelected = false;
 
             setTimeout(() => {
+                let { dispatch } = this.props
+                dispatch({ type: 'CLICK_REGION' })
                 this.setState({
                     redirect: true
                 })

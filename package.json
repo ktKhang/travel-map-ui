@@ -40,6 +40,7 @@
     "moment-timezone": "^0.5.21",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-table-next": "^1.2.0",
     "react-bootstrap-table2-paginator": "^1.0.2",

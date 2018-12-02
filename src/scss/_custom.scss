@@ -637,6 +637,15 @@ body {
   width: fit-content;
   margin-left: auto;
     margin-right: auto;
+    border-radius: 2px;
+}
+.map-action-content-hover{
+  background: #1E344D;
+  opacity: 0.86;
+  width: fit-content;
+  margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
 }
 .map-action-container{
   padding: 4px;
@@ -657,6 +666,27 @@ body {
   border: none;
   font-size: 14px;
   color: rgba(255, 255, 255, .5);
+  font-family: 'SVN-Poppins';
+  height: 35px;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+.map-action-item-hover{
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #00CE7D;
+  font-family: 'SVN-Poppins';
+  height: 35px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-right: 1px solid rgba(255, 255, 255, .5);
+}
+.map-action-item-end-hover{
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #00CE7D;
   font-family: 'SVN-Poppins';
   height: 35px;
   padding-left: 17px;
@@ -826,7 +856,6 @@ body {
 .img-loading{
   height: 100px;
 }
-
 
 // Khang add fonts
 @font-face {
