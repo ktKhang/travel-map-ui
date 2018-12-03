@@ -5,7 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import { Container, Row, Col } from 'react-grid-system';
 import { regionService, showModal } from '../../services'
 import MapAction from './MapAction';
-import loading from '../../assets/icons/icon-loading.gif'
+import loading from '../../assets/icons/ic-loading.gif'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 
@@ -72,6 +72,7 @@ class Map extends Component {
                     "zoomLatitude": 25,
                 },
                 "showImagesInList": true,
+                "showObjectsAfterZoom": true,
                 "imagesSettings": {
                     rollOverColor: "#CC0000",
                     rollOverScale: 3,
@@ -115,6 +116,10 @@ class Map extends Component {
                     "method": function (e) {
                         console.log(e);
                     }
+                },
+                {
+                    "event": "homeButtonClicked",
+                    "method": (e) => this.clickHomeBtn.bind(this)(e)
                 }
                 ],
                 "mouseWheelZoomEnabled": true
@@ -122,6 +127,12 @@ class Map extends Component {
         };
     }
 
+    clickHomeBtn = e => {
+        let { dispatch } = this.props
+        if (this.props.regionReducer.clickRegion) {
+            dispatch({ type: 'CLICK_REGION' })
+        }
+    }
     clickMapObj = e => {
         console.log(e.mapObject.images);
         // Ignore any click not on area

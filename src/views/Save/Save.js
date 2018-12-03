@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import loading from '../../assets/icons/icon-loading.gif'
+import loading from '../../assets/icons/ic-loading.gif'
 
 class Save extends Component {
    constructor(props) {
