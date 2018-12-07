@@ -1,0 +1,54 @@
+/* Khang custom map*/
+
+#maps {
+    /* float: left; */
+    // width: 35%;
+    max-width: 600px;
+    height: 100%;
+    border: 0px solid #eee;
+    /* margin: 0px auto; */
+    position: relative;
+    display: inline-block;
+    background: white;
+    font-family: 'SVN-Poppins'
+  }
+  #map-content {
+    float: right;
+    width: 100%;
+    height: 600px;
+    background: #004cd6;
+    position: relative;
+  }
+  
+  .map-content {
+    position: relative;
+    width: 65%;
+    height: 100%;
+  }
+  .maps {
+    width: 100%;
+    height: 100%;
+    border: 0px solid #eee;
+    margin: 0px auto;
+    float: right;
+    /* position: relative; */
+  }
+  .app-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #1E344D;
+    display: inline-block;
+    float: left;
+  }
+
+.map-place {
+    width: 100%;
+    overflow: hidden;
+  }
+
+.form-data {
+  margin-left: 60%;
+  margin-right: 0%;
+}
+  

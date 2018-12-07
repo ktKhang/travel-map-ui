@@ -21,7 +21,7 @@ class Places extends Component {
             isOpen: false,
             columns : [{
                 dataField: '',
-                text: '#',
+                text: 'No',
                 sort: false,
                 formatter: this.sortableIndex
                 }, {

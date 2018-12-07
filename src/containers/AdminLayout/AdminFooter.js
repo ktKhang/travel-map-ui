@@ -5,7 +5,7 @@ const propTypes = {
    children: PropTypes.node,
 };
 
-const linkPage = "/#";
+const linkPage = "/#/about";
 
 const defaultProps = {};
 
@@ -18,7 +18,7 @@ class AdminFooter extends Component {
 
       return (
          <React.Fragment>
-            <span><a href="#">TravelMap</a> &copy; 2018</span>
+            <span><a href={linkPage}>TravelMap</a> &copy; 2018</span>
             <span className="ml-auto">Created by <a href="https://coreui.io/react">Khang</a> and <a href="https://coreui.io/react">Huy</a></span>
          </React.Fragment>
       );

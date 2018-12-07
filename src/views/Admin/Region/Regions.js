@@ -21,7 +21,7 @@ class Regions extends Component {
             isOpen: false,
             columns : [{
                 dataField: '',
-                text: '#',
+                text: 'No',
                 sort: false,
                 formatter: this.sortableIndex
                 }, {
@@ -127,6 +127,7 @@ class Regions extends Component {
                     props => (
                         <div>
                             <Container fluid >
+                            <br/>
                                 <Card>
                                     <CardHeader>
                                         <Row>
