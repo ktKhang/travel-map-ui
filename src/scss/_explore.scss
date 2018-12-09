@@ -1,1 +1,40 @@
 /*For Explore pages only*/
+.explore-region-label{
+   color: #FFFFFF;
+   margin-top: 24px;
+   font-size: 20px;
+   margin-left: 22px;
+   margin-bottom: 24px;
+   font-family: 'SVN-Poppins-SemiBold';
+}
+.explore-place-label{
+   margin-bottom: 10px;
+   max-width: 245px;
+    margin-left: 16px;
+    color: #FFFFFF;
+    font-size: 16px;
+    height: fit-content;
+    margin-top: 3px;
+}
+.explore-place-label-mini{
+   display: flex;
+   margin-left: 16px;
+   font-size: 12px;
+   line-height: 15px;
+   color: white;
+   margin-bottom: -0.5rem;
+   height: fit-content;
+   margin-top: 8px;
+   font-family: 'SVN-Poppins-Light';
+}
+.explore-container-places{
+   margin-left: 22px;
+   display: flex;
+   margin-bottom: 24px;
+   cursor: pointer;
+}
+.explore-content{
+   height: 100%;
+   overflow: auto;
+   margin-bottom: 70px;
+}
