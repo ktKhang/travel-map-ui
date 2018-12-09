@@ -21,7 +21,7 @@ class Users extends Component {
             isOpen: false,
             columns : [{
                 dataField: '',
-                text: '#',
+                text: 'No',
                 sort: false,
                 formatter: this.sortableIndex
                 }, {
@@ -132,13 +132,7 @@ class Users extends Component {
                     props => (
                         <div>
                             <Container fluid >
-                                <Row>
-                                    <Col md={1}>
-                                            <Button color="primary" onClick={() => this.clickNewUser()} >
-                                            <i className="fa fa-plus"></i>&nbsp;New
-                                            </Button>
-                                    </Col>
-                                </Row>
+
                                 <br/>
                                 <Card>
                                     <CardHeader>

@@ -7,19 +7,17 @@ import navigation from '../../_navAdmin';
 import routes from '../../routes';
 import AdminFooter from './AdminFooter';
 import AdminHeader from './AdminHeader';
-
+import { connect } from 'react-redux';
 import {
-   AppAside,
    AppFooter,
    AppHeader,
    AppSidebar,
    AppSidebarFooter,
    AppSidebarForm,
    AppSidebarHeader,
-   AppSidebarMinimizer,
    AppSidebarNav,
 } from '@coreui/react';
-
+import Map from '../../views/Admin/Map';
 class AdminLayout extends Component {
    render() {
       return (
@@ -28,7 +26,7 @@ class AdminLayout extends Component {
                <AdminHeader />
             </AppHeader>
             <div className="app-body">
-               <AppSidebar fixed display="lg" >
+               <AppSidebar fixed display="lg">
                   <AppSidebarHeader />
                   <AppSidebarForm />
                   <div style={{ position: 'relative', display: 'initial', height: '500px', marginTop: '-110px' }}>
@@ -36,27 +34,34 @@ class AdminLayout extends Component {
                   </div>
                   <AppSidebarFooter />
                </AppSidebar>
-               <main className="main" style={{ paddingTop: '57px' }}>
-                  <Container fluid>
+               <main className="main" style={{ paddingTop: '55px', paddingBottom: '2%'}}>
+                  <div className="map-place">
                      <Switch>
                         {routes.map((route, idx) => {
                            return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
                               <route.component {...props} />
-                           )} />)
-                              : (null);
-                        },
+                              )} />) : (null);
+                           },
                         )}
-                        <Redirect from="/admin" to="/admin/dashboard" />
+                     <Redirect from="/admin" to="/admin/dashboard" />
                      </Switch>
-
-                  </Container>
+                  </div>
                </main>
-
+             
             </div>
-
+            <AppFooter style={{marginTop: '-3.8%' , marginLeft: '21.3%'}}>
+               <AdminFooter/>
+            </AppFooter>         
          </div>
       );
    }
 }
 
-export default AdminLayout;
+const mapStateToProps = (state, ownProps) => {
+   return {
+     regionReducer: state.regionReducer,
+     pageReducer: state.pageReducer
+   }
+}
+
+export default  connect(mapStateToProps)(AdminLayout);
