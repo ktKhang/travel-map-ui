@@ -79,8 +79,34 @@ const fetchRegionDetail = uid => {
       });
 }
 
+const fetchRegionById = id => {
+   let getObject = {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+
+   return fetch(API_CONST.REGION_DETAIL_ID_URL(id), getObject)
+      .then(responseData => {
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         if (data.errorCode === 0) {
+            return data;
+         }
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
 export const regionService = {
    loadRegionList,
    fetchRegionDetail,
-   getRegionList
+   getRegionList,
+   fetchRegionById
 }

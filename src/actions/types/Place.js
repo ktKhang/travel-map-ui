@@ -1,0 +1,6 @@
+const ADD_PLACE = 'ADD_PLACE';
+const FETCH_COORDINATE = 'FETCH_COORDINATE';
+export const Types = {
+    ADD_PLACE,
+    FETCH_COORDINATE
+}

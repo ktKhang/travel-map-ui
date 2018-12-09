@@ -108,9 +108,37 @@ function updatePlace(place){
    });
 }
 
+const addNewPlace = place => {
+   let postObject = {
+      method: 'POST',
+      headers:{
+         'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(place)
+   };
+
+   // tokenUtil.updateOrCreateHeader(putObject);
+     
+   return fetch(API_CONST.ADD_PLACE_URL, postObject)
+   .then(responseData => {
+      //  tokenUtil.checkAuthorizedStatus(responseData);
+      if (responseData.status >= 400) {
+         throw new Error(responseData.statusText);
+      }
+      return responseData.json();
+   })
+   .then(data => {
+       return data;
+   })
+   .catch(err => {
+       throw new Error(err);
+   });
+}
+
 export const placeService = {
     loadPlaceList,
     fetchPlaceDetail,
     findPlaceByRegion,
-    updatePlace
+    updatePlace,
+    addNewPlace
 }

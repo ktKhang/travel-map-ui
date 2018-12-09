@@ -18,7 +18,10 @@ const REGION_DETAIL_URL = uid => {
    return API_URL + '/regions/findByUid/' + uid;
 }
 const USER_LIST_URL = API_URL + '/users/all';
-
+const REGION_DETAIL_ID_URL = id => {
+   return API_URL + '/regions/findById/' + id;
+}
+const ADD_PLACE_URL = API_URL + '/places/create';
 
 export const API_CONST = {
    API_URL, 
@@ -31,4 +34,6 @@ export const API_CONST = {
    PLACE_UPDATE_URL,
    REGION_DETAIL_URL,
    USER_LIST_URL,
+   REGION_DETAIL_ID_URL,
+   ADD_PLACE_URL
 };

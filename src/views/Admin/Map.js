@@ -7,7 +7,8 @@ import { regionService, showModal } from '../../services'
 import loading from '../../assets/icons/ic-loading.gif'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-
+import { Types } from "../../actions/types/Place";
+import { addPlace, fetchCoordinate } from "../../actions/PlaceAction";
 class Map extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +23,20 @@ class Map extends Component {
                     "map": "vietnamLow",
                     "getAreasFromMap": true,
                     "areas": [
+                        {
+                                "id": "VN-22",
+                                "images": [
+                                    {
+                                        svgPath: 'M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z',
+                                        scale: 0.5, title: "Huy",
+                                        latitude: -49.5403,
+                                        longitude: 26.994,
+                                        color: "#723C1A"
+                                    }
+                                ],
+                                // "color": "#723C1A",
+                                "passZoomValuesToTarget": true
+                            }
                     ],
                     "zoomLevel": 1.1,
                     "zoomLongitude": 35,
@@ -59,12 +74,7 @@ class Map extends Component {
                     "method": (e) => this.clickMapObj.bind(this)(e)
                 }, {
                     "event": "writeDevInfo",
-                    "method": function (e) {
-                        console.log('Huy add new Place: ');
-                        console.log(e.str);
-                        console.log(e);
-                        alert(e.str);
-                    }
+                    "method": (e) => this.fetchCoordinate.bind(this)(e)
                 }, {
                     "event": "mouseDownMapObject",
                     "method": (e) => this.mouseDownMapObj(e)
@@ -85,6 +95,14 @@ class Map extends Component {
         };
     }
 
+    fetchCoordinate = e => {
+        console.log('Huy add New Place');
+        console.log(e.str);
+        let { dispatch } = this.props;
+        dispatch(fetchCoordinate(e));
+
+    }
+
     clickHomeBtn = e => {
         let { dispatch } = this.props
         if (this.props.regionReducer.clickRegion) {
@@ -92,26 +110,25 @@ class Map extends Component {
         }
     }
     clickMapObj = e => {
-        console.log(e.mapObject.images);
+        // console.log(e.mapObject.images);
         // Ignore any click not on area
         if (e.mapObject.objectType !== "MapArea")
             return;
         var area = e.mapObject;
-
         area.showAsSelected = !area.showAsSelected;
         // Update the list
         if (area.showAsSelected === true) {
-            console.log(area);
-            console.log(area.id);
-            console.log(area.enTitle);
+            // console.log('Region');
+            // console.log(area.enTitle);
             e.chart.returnInitialColor(area);
             area.showAsSelected = false;
 
             setTimeout(() => {
-                let { dispatch } = this.props
+                let { dispatch } = this.props;
+                dispatch(addPlace(area));
                 dispatch({ type: 'CLICK_REGION' })
                 this.setState({
-                    redirect: true
+                    redirect: true,
                 })
             }, 500)
 
@@ -119,7 +136,8 @@ class Map extends Component {
     }
 
     mouseDownMapObj = e => {
-        console.log(e);
+        // console.log('Mouse Down');
+        // console.log(e);
     }
 
     loadData = () => {
@@ -459,7 +477,9 @@ class Map extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        regionReducer: state.regionReducer
+        regionReducer: state.regionReducer,
+        placeReducer: state.placeReducer,
+        addPlace: state.addPlace,
     }
 }
 

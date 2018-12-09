@@ -49,7 +49,7 @@ class AdminLayout extends Component {
                </main>
              
             </div>
-            <AppFooter style={{marginTop: '-3.8%' , marginLeft: '21.3%'}}>
+            <AppFooter style={{marginTop: '-3.8%'}}>
                <AdminFooter/>
             </AppFooter>         
          </div>
