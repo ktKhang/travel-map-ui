@@ -11,7 +11,7 @@
   margin-top: -74px;
 }
 html:not([dir="rtl"]) .sidebar {
-  margin-left: -250px; }
+  margin-left: -286px; }
 @media (min-width: 992px) {
   .header-fixed .app-header {
     position: unset;
@@ -75,7 +75,7 @@ html:not([dir="rtl"]) .sidebar {
   order: -1; }
 .sidebar {
   width: 21.25%;
-  min-width: 250px;
+  min-width: 286px;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -357,7 +357,7 @@ html:not([dir="rtl"]) .sidebar {
       width: 50px;
       overflow: hidden; }
       .sidebar-minimized .sidebar .nav-item:hover {
-        width: 250px;
+        width: 286px;
         overflow: visible; }
         .sidebar-minimized .sidebar .nav-item:hover > .nav-link {
           background: #20a8d8; }
@@ -379,7 +379,7 @@ html:not([dir="rtl"]) .sidebar {
         right: 15px;
         display: none; }
       .sidebar-minimized .sidebar .nav-link:hover {
-        width: 250px;
+        width: 286px;
         background: #20a8d8; }
         .sidebar-minimized .sidebar .nav-link:hover .badge {
           display: inline; }
@@ -564,6 +564,14 @@ body {
   width: 14px;
   transition: .3s;
 }
+.icon-check-custom{
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  transition: .3s;
+}
 
 .nav-link .icon-travelmap-home {
   background-image: url('../assets/icons/home-icon.svg');
@@ -579,6 +587,12 @@ body {
 }
 .icon-facebook {
   background-image: url('../assets/icons/icon-facebook.svg');
+}
+.icon-check-point-active {
+  background-image: url('../assets/icons/ic_check_point.svg');
+}
+.icon-check-point {
+  background-image: url('../assets/icons/ic_check_point2.svg');
 }
 
 

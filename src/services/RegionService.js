@@ -3,7 +3,7 @@ import { API_CONST } from '../API';
 import { tokenUtil } from '../utils/token';
 
 const getRegionList = () => {
-   var getObject = {
+   const getObject = {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const fetchRegionDetail = uid => {
          return responseData.json();
       })
       .then(data => {
-         if (data.errorCode == 0) {
+         if (data.errorCode === 0) {
             return data.data;
          }
       })
@@ -101,6 +101,39 @@ const fetchRegionById = id => {
       })
       .catch(err => {
          throw new Error(err);
+      })
+      .catch(err => {
+         return err;
+      });
+};
+
+const loadRegionsWithUserLoggedIn = userUid => {
+   const getObject = {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json'
+      }
+   };
+   let url = API_CONST.USER_REGION_LIST_URL(userUid);
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(url, getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error(responseData.statusText);
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         if (data.errorCode === 0) {
+            return data;
+         }
+      })
+      .catch(err => {
+         throw new Error(err);
+      })
+      .catch(err => {
+         return err;
       });
 }
 
@@ -108,5 +141,6 @@ export const regionService = {
    loadRegionList,
    fetchRegionDetail,
    getRegionList,
-   fetchRegionById
+   fetchRegionById,
+   loadRegionsWithUserLoggedIn
 }

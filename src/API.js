@@ -9,7 +9,7 @@ const REGION_LIST_URL = API_URL + '/regions/all';
 const PLACE_LIST_URL = API_URL + '/place/all';
 const PLACE_DETAIL_URL = uid => {
    return API_URL + '/places/findByUid/' + uid;
-} 
+}
 const PLACE_FIND_BY_REGION_URL = regionUid => {
    return API_URL + '/places/findByRegionUid/' + regionUid
 }
@@ -23,10 +23,14 @@ const REGION_DETAIL_ID_URL = id => {
 }
 const ADD_PLACE_URL = API_URL + '/places/create';
 
+const USER_REGION_LIST_URL = userUid => {
+   return API_URL + '/regions/findAllByUser/' + userUid
+}
+
 export const API_CONST = {
-   API_URL, 
-   LOGIN_URL, 
-   USER_DETAIL_URL, 
+   API_URL,
+   LOGIN_URL,
+   USER_DETAIL_URL,
    REGION_LIST_URL,
    PLACE_LIST_URL,
    PLACE_DETAIL_URL,
@@ -35,5 +39,6 @@ export const API_CONST = {
    REGION_DETAIL_URL,
    USER_LIST_URL,
    REGION_DETAIL_ID_URL,
-   ADD_PLACE_URL
+   ADD_PLACE_URL,
+   USER_REGION_LIST_URL
 };

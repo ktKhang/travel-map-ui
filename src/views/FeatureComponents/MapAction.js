@@ -39,7 +39,7 @@ class MapAction extends Component {
          </div>
       )
       if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
-         if (this.props.regionReducer.clickRegion) {
+         if (this.props.regionReducer.clickRegion && this.props.placeReducer.selectedPlace === null) {
             actionBtnGroup = (
                <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
                   <div className="map-action-container">
@@ -49,14 +49,13 @@ class MapAction extends Component {
                   </div>
                </div>
             )
-         }
-         if (this.props.placeReducer.clickPlace) {
+         } else if (this.props.placeReducer.selectedPlace !== null) {
             actionBtnGroup = (
                <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
                   <div className="map-action-container">
                      <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Write a Post</button>
                      <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Add Album</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-end-hover' : 'map-action-end-item'}>Mark Place</button>
+                     <button className={this.state.hover.divHover ? 'map-action-item-end-hover' : 'map-action-item-end'}>Mark Place</button>
                   </div>
                </div>
             )

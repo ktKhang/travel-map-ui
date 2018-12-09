@@ -66,7 +66,7 @@ class DefaultLayout extends Component {
               <Redirect from="/" to="/about" />
             </Switch>
             {/* </div> */}
-            <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available', webkitAnimationName: 'example' } : { width: '35%' }} />
+            <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available' } : { width: '35%' }} reload={this.props.regionReducer.reloadMap} />
 
           </main>
         </div>
