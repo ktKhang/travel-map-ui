@@ -136,14 +136,6 @@ class Places extends Component {
                         <div>
                             <Container fluid >
                                 <br/>
-                                <Row>
-                                    <Col md={1}>
-                                        <Button color="primary" onClick={() => this.clickNewPlace()} >
-                                        <i className="fa fa-plus"></i>&nbsp;New
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <br/>
                                 <Card>
                                     <CardHeader>
                                         <Row>

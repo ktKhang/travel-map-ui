@@ -106,11 +106,11 @@ class NewPlace extends Component {
                             return;
                         }else if(data && data.errorCode === 0){
                             showModal.showSuccessMsg('Success');
-                            setTimeout(() => {
+                            // setTimeout(() => {
                                 setSubmitting(false);
                                 this.closeModal();
                                 this.props.history.push(`#`);
-                            }, 1000);
+                            // });
                         }
                     })
                 }

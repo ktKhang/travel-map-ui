@@ -27,18 +27,17 @@ const getRegionList = () => {
       });
 }
 const loadRegionList = () => {
-   console.log("API load user");
    let getObject = {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',
       }
    };
-   // tokenUtil.updateOrCreateHeader(getObject);
+   tokenUtil.updateOrCreateHeader(getObject);
 
    return fetch(API_CONST.REGION_LIST_URL, getObject)
       .then(responseData => {
-         // tokenUtil.checkAuthorizedStatus(responseData);
+         tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
             throw new Error("Bad response from server");
          }

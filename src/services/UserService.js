@@ -33,14 +33,13 @@ function loadUserList(){
       method: 'GET',
       headers:{
          'Content-Type': 'application/json',
-         'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZUlBNGJtMDYyUlgiLCJpYXQiOjE1NDM5ODk1NzUsImV4cCI6MTU0NDU5NDM3NSwicm9sZSI6IlVTRVIifQ.nWgCdwznQu2akfkxH1A7R_KLD5Dd0Hlm7ez1mJvt6dUg94APGKLonw6GnzJjzQAwjc_MYP6ttYzXPiPKqZBOxQ',
       }
    };
-   // tokenUtil.updateOrCreateHeader(getObject);
+   tokenUtil.updateOrCreateHeader(getObject);
 
    return fetch(API_CONST.USER_LIST_URL, getObject)
       .then(responseData => {
-         // tokenUtil.checkAuthorizedStatus(responseData);
+         tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
                throw new Error("Bad response from server");
          }
@@ -61,19 +60,19 @@ function fetchUserDetailTest(uid){
       method: 'GET',
       headers:{
          'Content-Type': 'application/json',
-         'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1MGloN1lCa3ZwcmkiLCJpYXQiOjE1NDM1MDQwNjgsImV4cCI6MTU0NDEwODg2OCwicm9sZSI6IlVTRVIifQ.9y6zcONJB_tMDY8bSg3DIZxzuJwNLL22r4HOoIYrU1nnrYB9s7bNHl__jGB6wQEYUF_IC1bMn18OtvSY19zEEg',
       }
    }
-
+   tokenUtil.updateOrCreateHeader(getObject);
    return fetch(API_CONST.USER_DETAIL_URL(uid), getObject)
       .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
          if(responseData.status >= 400){
             throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if(data.errorCode == 0){
+         if(data.errorCode === 0){
             return data.data;
          }
       })
