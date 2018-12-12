@@ -7,7 +7,6 @@ class MapAction extends Component {
       this.state = {
          hover: {
             divHover: false,
-
          }
 
       }
@@ -28,6 +27,22 @@ class MapAction extends Component {
       })
    }
 
+   addPost = () => {
+      const { dispatch } = this.props
+      dispatch({
+         type: 'ADD_POST',
+         value: true
+      })
+   }
+
+   addAlbum = () => {
+      const { dispatch } = this.props
+      dispatch({
+         type: 'ADD_ALBUM',
+         value: true
+      })
+   }
+
    render() {
       let actionBtnGroup = (
          <div className="map-action-content">
@@ -43,8 +58,8 @@ class MapAction extends Component {
             actionBtnGroup = (
                <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
                   <div className="map-action-container">
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Write a Post</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Add Album</button>
+                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addPost}>Write a Post</button>
+                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addAlbum}>Add Album</button>
                      <button className="map-action-item-end" disabled>Mark Place</button>
                   </div>
                </div>
@@ -53,8 +68,8 @@ class MapAction extends Component {
             actionBtnGroup = (
                <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
                   <div className="map-action-container">
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Write a Post</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'}>Add Album</button>
+                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addPost}>Write a Post</button>
+                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addAlbum}>Add Album</button>
                      <button className={this.state.hover.divHover ? 'map-action-item-end-hover' : 'map-action-item-end'}>Mark Place</button>
                   </div>
                </div>
@@ -73,7 +88,8 @@ class MapAction extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       regionReducer: state.regionReducer,
-      placeReducer: state.placeReducer
+      placeReducer: state.placeReducer,
+      actionReducer: state.actionReducer
    }
 }
 

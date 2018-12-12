@@ -129,7 +129,32 @@ const loadRegionsWithUserLoggedIn = userUid => {
          }
       })
       .catch(err => {
-         throw new Error(err);
+         return err;
+      });
+}
+
+const addPost = newPost => {
+   const getObject = {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newPost)
+   };
+   let url = API_CONST.REGION_ADD_POST_URL;
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(url, getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error(responseData.statusText);
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         if (data.errorCode === 0) {
+            return data;
+         }
       })
       .catch(err => {
          return err;
@@ -141,5 +166,6 @@ export const regionService = {
    fetchRegionDetail,
    getRegionList,
    fetchRegionById,
-   loadRegionsWithUserLoggedIn
+   loadRegionsWithUserLoggedIn,
+   addPost
 }

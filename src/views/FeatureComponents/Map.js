@@ -71,6 +71,10 @@ class Map extends Component {
 			type: 'FETCH_SELECTED_PLACE',
 			selectedPlace: null
 		})
+		dispatch({
+			type: 'ADD_POST',
+			value: false
+		})
 	}
 	clickMapObj = e => {
 		// Ignore any click not on area
@@ -203,6 +207,7 @@ class Map extends Component {
 					});
 					console.log(places);
 					region.images = places
+					region.markedPlaces = markedPlaces
 					region.passZoomValuesToTarget = true
 					region.color = this.specifyColorForRegion(region.placeList.length, markedPlaces)
 					areas.push(region)
@@ -226,13 +231,11 @@ class Map extends Component {
 		let percent = (markedPlace * 100) / allPlaces
 		console.log(percent);
 		let color = constant.REGION_NORMAL_COLOR
-		if (percent <= 25) {
-			color = constant.REGION_MARKED_25_COLOR
-		} else if (percent > 25 && percent <= 50) {
-			color = constant.REGION_MARKED_50_COLOR
-		} else if (percent > 50 && percent <= 75) {
-			color = constant.REGION_MARKED_75_COLOR
-		} else if (percent > 75 && percent <= 100) {
+		if (percent > 0 && percent <= 30) {
+			color = constant.REGION_MARKED_30_COLOR
+		} else if (percent > 30 && percent <= 80) {
+			color = constant.REGION_MARKED_80_COLOR
+		} else if (percent > 80 && percent <= 100) {
 			color = constant.REGION_MARKED_100_COLOR
 		}
 		return color
@@ -296,7 +299,7 @@ class Map extends Component {
 				"selectedColor": "#5FA79E",
 				"selectable": true,
 				"outlineThickness": 0.5,
-				"color": "#B0C6D8"
+				"color": "#ECEDEF"
 
 				// "rollOverBrightness":10,
 				// "selectedBrightness": 20
@@ -631,7 +634,8 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		regionReducer: state.regionReducer,
 		pageReducer: state.pageReducer,
-		placeReducer: state.placeReducer
+		placeReducer: state.placeReducer,
+		actionReducer: state.actionReducer
 	}
 }
 

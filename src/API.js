@@ -26,6 +26,7 @@ const ADD_PLACE_URL = API_URL + '/places/create';
 const USER_REGION_LIST_URL = userUid => {
    return API_URL + '/regions/findAllByUser/' + userUid
 }
+const REGION_ADD_POST_URL = API_URL + '/userRegion/addPost'
 
 export const API_CONST = {
    API_URL,
@@ -40,5 +41,6 @@ export const API_CONST = {
    USER_LIST_URL,
    REGION_DETAIL_ID_URL,
    ADD_PLACE_URL,
-   USER_REGION_LIST_URL
+   USER_REGION_LIST_URL,
+   REGION_ADD_POST_URL
 };

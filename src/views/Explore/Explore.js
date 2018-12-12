@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
+import ActionForm from '../FeatureComponents/ActionForm';
+
 class Explore extends Component {
    constructor(props) {
       super(props);
@@ -44,14 +46,19 @@ class Explore extends Component {
       if (this.props.regionReducer.clickRegion) {
          dispatch({ type: 'CLICK_REGION' })
       }
+      dispatch({
+         type: 'ADD_POST',
+         value: false
+      })
    }
 
    renderPlacesListData = (places) => {
+      console.log(places);
       return places.map((place, index) => {
          if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
             return (
                <div className="explore-container-places">
-                  <i className="fa icon-check-custom icon-check-point"></i>
+                  <i className={place.placeUserDetail === null ? 'fa icon-check-custom icon-check-point' : 'fa icon-check-custom icon-check-point-active'}></i>
                   <div>
                      <p className="explore-place-label">{place.title}</p>
                      <label className="explore-place-label-mini">24 người đã check-in tại đây</label>
@@ -131,9 +138,64 @@ class Explore extends Component {
    render() {
       let content = <div></div>
       console.log(this.props.placeReducer.selectedPlace);
-      if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
+      if (localStorage[constant.TOKEN_VARIABLE_NAME]) {  // if user logged in
+         // in case Click to select region
+         if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace === null) {
+            if (this.props.actionReducer.addPost) {
+               content = (
+                  <div>
+                     <div className="explore-region-label">
+                        <label>{this.state.selectedRegionData.title.split(",")[0].toUpperCase()}</label>
+                     </div>
+                     <ActionForm type="region" />
+                  </div>
+               )
+            } else {
+               content = (
+                  <div>
+                     <div className="explore-region-label">
+                        <label>{this.state.selectedRegionData.title.split(",")[0].toUpperCase()}</label>
+                     </div>
+                     <div className="explore-content">
+                        {
+                           this.renderPlacesListData(this.state.selectedRegionData.placeList)
+                        }
+                     </div>
+                  </div>
+               )
+            }
+         }
+         // in case Click to select place
+         else if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace !== null) {
+            if (this.props.actionReducer.addPost) {
+               console.log(this.props.placeReducer.selectedPlace);
+               let selectedPlace = this.props.placeReducer.selectedPlace
+               content = (
+                  <div>
+                     <div className="explore-region-label">
+                        <label>{this.state.selectedRegionData.title.split(",")[0].toUpperCase()}</label>
+                     </div>
+                     <div className="explore-container-places" style={{ marginBottom: '28px' }}>
+                        <i className="fa icon-check-custom icon-check-point-active"></i>
+                        <div>
+                           <p className="explore-place-label">{selectedPlace.title}</p>
+                           <label className="explore-place-label-mini">24 người đã check-in tại đây</label>
+                        </div>
+                     </div>
+                     <ActionForm type="place" />
+                  </div>
+               )
+            } else {
+               content = (
+                  <div>
+                     lasdl
+                  </div>
+               )
+            }
+         }
 
       } else {
+         // in case Click to select region
          if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace === null) {
             content = (
                <div>
@@ -147,7 +209,9 @@ class Explore extends Component {
                   </div>
                </div>
             )
-         } else if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace !== null) {
+         }
+         // in case Click to select place
+         else if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace !== null) {
 
          }
       }
@@ -165,7 +229,8 @@ const mapStateToProps = (state, ownProps) => {
    return {
       regionReducer: state.regionReducer,
       placeReducer: state.placeReducer,
-      pageReducer: state.pageReducer
+      pageReducer: state.pageReducer,
+      actionReducer: state.actionReducer
    }
 }
 
