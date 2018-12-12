@@ -515,28 +515,26 @@ body {
   color: #BEBED0;
 }
 
-/* Style for scrollbar*/
+// /* Style for scrollbar*/
 ::-webkit-scrollbar {
-  width: -1px;
+  width: 20px;
+  height: 18px;
 }
-
-::-webkit-scrollbar-track {
-  box-shadow: none; 
-  border-radius: 20px;
-}
-
 ::-webkit-scrollbar-thumb {
-  background-color: #13223B; 
-  border-radius: 30px;
+  height: 6px;
+  border: 8px solid transparent;
   background-clip: padding-box;
-  border: 8px solid rgba(0, 0, 0, 0);
+  background-color: #13223B;
+  border-radius: 30px;
+  // -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, .68); 
-  border-radius: 30px;
+  height: 6px;
+  border: 7px solid transparent;
   background-clip: padding-box;
-  border: 8px solid rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, .68);
+  border-radius: 30px;
+  // -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
 ::-webkit-scrollbar-button {
   width: 0;
@@ -546,6 +544,38 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+
+// .main::-webkit-scrollbar {
+//   width: -1px;
+// }
+
+// .main::-webkit-scrollbar-track {
+//   box-shadow: none; 
+//   border-radius: 20px;
+// }
+
+// .main::-webkit-scrollbar-thumb {
+//   background-color: #13223B; 
+//   border-radius: 30px;
+//   background-clip: padding-box;
+//   border: 8px solid rgba(0, 0, 0, 0);
+// }
+
+// .main::-webkit-scrollbar-thumb:hover {
+//   background-color: rgba(255, 255, 255, .68); 
+//   border-radius: 30px;
+//   background-clip: padding-box;
+//   border: 8px solid rgba(0, 0, 0, 0);
+// }
+// .main::-webkit-scrollbar-button {
+//   width: 0;
+//   height: 0;
+//   display: none;
+// }
+// .main::-webkit-scrollbar-corner {
+//   background-color: transparent;
+// }
+
 /* Khang add new icons */
 
 .icon-tralvelmap-custom{
