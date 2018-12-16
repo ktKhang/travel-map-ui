@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { userService, showModal } from "../../services";
+import { userService, showModal } from "../../../services";
 import { Container, Row, Col } from 'react-grid-system';
 import { Button, Card, CardBody, Table } from 'reactstrap';
 
@@ -41,27 +41,43 @@ class User extends Component{
     }
 
     render() {
+        console.log('Useruid ----'+this.state.user.uid );
         return(
             <div className="animated fadeIn">
                 <Container fluid>
-                <Row>
-                    <Col lg={3}>
-                    <Button color="primary" onClick={() => this.editUser()}>
-                        <i className="fa fa-edit" />
-                        &nbsp;Edit User
-                    </Button>
-                    </Col>
-                </Row>
                 <br />
+                <p><b>THÔNG TIN CHI TIẾT VỀ USER</b></p>
                 <Row>
                     <Col lg={8}>
-                    <Card>
-                        <CardBody>
-                        <Table responsive striped hover>
-                            <tbody>{this.renderUserDetails()}</tbody>
-                        </Table>
-                        </CardBody>
-                    </Card>
+                        <Card>
+                            <CardBody>
+                                <Table responsive striped hover>
+                                    <tbody>{this.renderUserDetails()}</tbody>
+                                </Table>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col lg={4}>
+                        <Row>
+                            <b>Danh sách : </b>
+                            <a href={`#/admin/user/${this.state.user.uid}/albums`}>
+                                Albums
+                            </a>
+                        </Row>
+                        <br />
+                        <Row>
+                            <b>Danh sách : </b>
+                            <a href={`#/admin/user/${this.state.user.uid}/posts`}>
+                                Feelings
+                            </a>
+                        </Row>
+                        <br />
+                        <Row>
+                            <b>Danh sách : </b>
+                            <a href={`#/admin/user/${this.state.user.uid}/videos`}>
+                                Videos
+                            </a>
+                        </Row>
                     </Col>
                 </Row>
                 </Container>

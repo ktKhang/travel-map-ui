@@ -28,7 +28,9 @@ const USER_REGION_LIST_URL = userUid => {
 }
 const REGION_ADD_POST_URL = API_URL + '/userRegion/addPost'
 const PLACE_ADD_POST_URL = API_URL + '/placeUser/addPost'
-
+const POST_LIST_URL = userUid => {
+   return API_URL + '/users/findPostByUser/' + userUid;
+}
 export const API_CONST = {
    API_URL,
    LOGIN_URL,
@@ -44,5 +46,6 @@ export const API_CONST = {
    ADD_PLACE_URL,
    USER_REGION_LIST_URL,
    REGION_ADD_POST_URL,
-   PLACE_ADD_POST_URL
+   PLACE_ADD_POST_URL,
+   POST_LIST_URL
 };

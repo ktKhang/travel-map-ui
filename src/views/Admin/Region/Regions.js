@@ -20,10 +20,10 @@ class Regions extends Component {
             modal: false,
             isOpen: false,
             columns : [{
-                dataField: '',
-                text: 'No',
-                sort: false,
-                formatter: this.sortableIndex
+                dataField: 'id',
+                text: 'Id',
+                sort: true,
+                // formatter: this.sortableIndex
                 }, {
                 dataField: 'name',
                 text: 'Region',

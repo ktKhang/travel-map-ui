@@ -41,12 +41,12 @@ const DashboardAdmin = Loadable({
 });
 
 const Users = Loadable({
-  loader: () => import('./views/Admin/Users'),
+  loader: () => import('./views/Admin/User/Users'),
   loading: Loading
 });
 
 const User = Loadable({
-  loader: () => import('./views/Admin/User'),
+  loader: () => import('./views/Admin/User/User'),
   loading: Loading
 })
 
@@ -75,6 +75,21 @@ const NewPlace = Loadable({
   loading: Loading
 })
 
+const Albums = Loadable({
+  loader: () => import('./views/Admin/User/Albums'),
+  loading: Loading
+})
+
+const Videos = Loadable({
+  loader: () => import('./views/Admin/User/Videos'),
+  loading: Loading
+})
+
+const Posts = Loadable({
+  loader: () => import('./views/Admin/User/Posts'),
+  loading: Loading
+})
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
@@ -85,6 +100,9 @@ const routes = [
   { path: '/admin/dashboard', exact: true, name: 'Dashboard', component: DashboardAdmin },
   { path: '/admin/users', exact: true, name: 'Users', component: Users },
   { path: '/admin/user/:uid', exact: true, name: 'User Detail', component: User },
+  { path: '/admin/user/:userid/posts', exact: true, name: 'Posts', component: Posts },
+  { path: '/admin/user/:userid/videos', exact: true, name: 'Videos', component: Videos },
+  { path: '/admin/user/:userid/albums', exact: true, name: 'Albums', component: Albums },
   { path: '/admin/regions', exact: true, name: 'Regions', component: Regions },
   { path: '/admin/region/:uid', exact: true, name: 'Region Detail', component: Region },
   { path: '/admin/region/:regionid/places', exact: true, name: 'Places', component: Places },

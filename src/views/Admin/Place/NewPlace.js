@@ -26,7 +26,8 @@ class NewPlace extends Component {
             },
             appStyle: {
                 width: '61.3%',
-                height: '517px',
+                height: window.innerHeight -108,
+                minHeight: '518px',
              }
         };
     }
@@ -108,8 +109,8 @@ class NewPlace extends Component {
                             showModal.showSuccessMsg('Success');
                             // setTimeout(() => {
                                 setSubmitting(false);
-                                this.closeModal();
-                                this.props.history.push(`#`);
+                                // this.closeModal();
+                                this.props.history.push(`/admin/region/` + this.state.place.regionUid + `/places`);
                             // });
                         }
                     })
@@ -124,7 +125,6 @@ class NewPlace extends Component {
         console.log(this.props.addPlaceReducer.payload);
         console.log(this.props.addPlaceReducer.coordinate);
         console.log(this.props.addPlaceReducer.payload.id);
-
 
         return(
             <div>

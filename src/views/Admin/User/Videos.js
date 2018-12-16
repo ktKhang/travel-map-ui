@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Map from "./Map";
-class Dashboard extends Component {
+import Map from "../Map";
+class Videos extends Component {
    render() {
       return (
          <div style= {{height: window.innerHeight-108, minHeight: '518px'}}>
@@ -12,4 +12,4 @@ class Dashboard extends Component {
    }
 }
 
-export default Dashboard;
+export default Videos;

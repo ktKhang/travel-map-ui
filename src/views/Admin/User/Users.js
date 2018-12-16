@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import CommonModal from '../CustomModals/CommonModal'
-import {userService, showModal} from '../../services';
+import CommonModal from '../../CustomModals/CommonModal'
+import {userService, showModal} from '../../../services';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';

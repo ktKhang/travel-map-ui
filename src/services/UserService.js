@@ -27,6 +27,31 @@ const fetchUserDetail = userUid => {
       });
 }
 
+const loadPostList = userUid => {
+   var getObject = {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json'
+      }
+   };
+   let url = API_CONST.POST_LIST_URL(userUid);
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(url, getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error(responseData.statusText);
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         return data.data;
+      })
+      .catch(err => {
+         return err;
+      });
+}
+
 function loadUserList(){
    console.log("API load user");
    let getObject = {
@@ -85,4 +110,5 @@ export const userService = {
    fetchUserDetail,
    loadUserList,
    fetchUserDetailTest,
+   loadPostList
 }

@@ -34,7 +34,7 @@ class AdminLayout extends Component {
                   </div>
                   <AppSidebarFooter />
                </AppSidebar>
-               <main className="main" style={{ paddingTop: '55px', paddingBottom: '2%'}}>
+               <main className="main" style={{ paddingTop: '55px', paddingBottom: '2%', marginRight: '-2%'}}>
                   <div className="map-place">
                      <Switch>
                         {routes.map((route, idx) => {
