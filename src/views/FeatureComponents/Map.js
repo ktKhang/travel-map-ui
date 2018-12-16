@@ -190,6 +190,7 @@ class Map extends Component {
 				showModal.showErrorMsg("Get data fail!")
 			} else {
 				let regionList = data.data
+				console.log(regionList);
 				let areas = []
 				regionList.forEach(region => {
 					let places = []
@@ -205,11 +206,20 @@ class Map extends Component {
 						}
 						places.push(place)
 					});
-					console.log(places);
 					region.images = places
 					region.markedPlaces = markedPlaces
 					region.passZoomValuesToTarget = true
-					region.color = this.specifyColorForRegion(region.placeList.length, markedPlaces)
+					if (markedPlaces !== 0) {
+						region.color = this.specifyColorForRegion(region.placeList.length, markedPlaces)
+					} else if (region.regionUserDetail !== null) {
+						if (region.regionUserDetail.feelings.length !== 0 || region.regionUserDetail.albums.length !== 0) {
+							region.color = constant.REGION_MARKED_30_COLOR
+						} else {
+							region.color = constant.REGION_NORMAL_COLOR
+						}
+					} else {
+						region.color = constant.REGION_NORMAL_COLOR
+					}
 					areas.push(region)
 				});
 				let dataProvider = this.state.dataProvider
@@ -223,13 +233,16 @@ class Map extends Component {
 					type: 'FETCH_REGION_DATA',
 					regionData: MethodUtil.deepClone(this.state.dataProvider.areas)
 				})
+				dispatch({
+					type: 'RELOAD_MAP',
+					reload: false
+				})
 			}
 		})
 	}
 
 	specifyColorForRegion = (allPlaces, markedPlace) => {
 		let percent = (markedPlace * 100) / allPlaces
-		console.log(percent);
 		let color = constant.REGION_NORMAL_COLOR
 		if (percent > 0 && percent <= 30) {
 			color = constant.REGION_MARKED_30_COLOR
@@ -242,6 +255,7 @@ class Map extends Component {
 	}
 
 	componentDidMount() {
+		console.log('did mount===============');
 		this.drawMap();
 		if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
 			this.loadDataUserLoggedIn();
@@ -250,22 +264,28 @@ class Map extends Component {
 		}
 	}
 
-	// componentDidUpdate(previousProps, previousState) {
-	// 	console.log('UPDATEEEEEEEEEEEEE');
-	// 	console.log(this.props.reload);
-	// 	console.log(previousProps.reload);
-	// 	if (this.props.reload !== previousProps.reload) {
-	// 		console.log('changeeeee');
-	// 		console.log(this.props.regionReducer.regionData);
-	// 		let data = this.state.dataProvider
-	// 		data.areas = this.props.regionReducer.regionData
-	// 		this.setState({
-	// 			dataProvider: data
-	// 		})
-	// 		console.log(JSON.stringify(this.state.dataProvider));
-	// 		// console.log(this.state.chart);
-	// 	}
-	// }
+	componentDidUpdate(previousProps, previousState) {
+		console.log('UPDATEEEEEEEEEEEEE');
+		console.log(this.props.reload);
+		console.log(previousProps.reload);
+		if (this.props.reload !== previousProps.reload && this.props.reload === true) {
+			console.log('changeeeee');
+			this.forceUpdate(this.componentDidMount())
+			// console.log(this.props.regionReducer.regionData);
+			// let data = this.state.dataProvider
+			// data.areas = this.props.regionReducer.regionData
+			// this.setState({
+			// 	dataProvider: data
+			// })
+			// console.log(JSON.stringify(this.state.dataProvider));
+			// console.log(this.state.chart);
+			// this.componentDidMount()
+			// let { dispatch } = this.props
+			// dispatch({
+			// 	type: 'RELOAD_MAP'
+			// })
+		}
+	}
 
 	renderRedirect = () => {
 		if (this.state.redirect) {
@@ -278,6 +298,7 @@ class Map extends Component {
 	}
 
 	render() {
+		console.log('render===============');
 		const config = {
 			"type": "map",
 			"theme": "am4themes_animated",
@@ -299,7 +320,7 @@ class Map extends Component {
 				"selectedColor": "#5FA79E",
 				"selectable": true,
 				"outlineThickness": 0.5,
-				"color": "#ECEDEF"
+				"color": constant.REGION_NORMAL_COLOR
 
 				// "rollOverBrightness":10,
 				// "selectedBrightness": 20
@@ -320,7 +341,7 @@ class Map extends Component {
 				<img src={loading} alt="loading..." className="img-loading" style={{ height: '100px', position: 'absolute', top: '50%', left: '50%', margin: '-15% 0 0 -10%' }} />
 			</div>
 		)
-		if (this.state.dataProvider.areas.length !== 0) {
+		if (this.state.dataProvider.areas.length !== 0 && !this.props.reload) {
 			mapComponent = (
 				<div id="maps" style={this.props.style}>
 					<AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={config} />
@@ -329,10 +350,10 @@ class Map extends Component {
 				</div>
 			)
 		}
-
 		return (
 			mapComponent
 		);
+
 	}
 
 	// click = () => {

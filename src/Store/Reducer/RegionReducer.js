@@ -9,7 +9,7 @@ const initialState = {
 export const regionReducer = (state = initialState, action) => {
    switch (action.type) {
       case "RELOAD_MAP":
-         return { ...state, reloadMap: !state.reloadMap }
+         return { ...state, reloadMap: action.reload }
       case "CLICK_REGION":
          return { ...state, clickRegion: !state.clickRegion }
       case "FETCH_REGION_DATA":

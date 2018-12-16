@@ -187,8 +187,8 @@ class Explore extends Component {
                )
             } else {
                content = (
-                  <div>
-                     lasdl
+                  <div style={{ color: 'white' }}>
+                     this's a content of selected place
                   </div>
                )
             }

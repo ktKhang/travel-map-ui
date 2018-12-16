@@ -67,7 +67,7 @@ class DefaultLayout extends Component {
             </Switch>
             {/* </div> */}
             <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available' } : { width: '35%' }} reload={this.props.regionReducer.reloadMap} />
-
+            <div id="modalDiv"></div> {/* To inject CommonModal here*/}
           </main>
         </div>
         {/* <AppFooter>

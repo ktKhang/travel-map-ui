@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { decodeJWT } from '../../utils/DecodeJWT';
 import { constant } from '../../utils/Constant';
 import { connect } from 'react-redux';
-import { regionService, showModal } from '../../services';
+import { regionService, placeService, showModal } from '../../services';
+import { toastUtil } from '../../utils/ToastUtil';
 
 class ActionForm extends Component {
    constructor(props) {
@@ -36,9 +37,15 @@ class ActionForm extends Component {
          regionService.addPost(newPost).then(data => {
             console.log(data);
             if (data.errorCode !== 0) {
-               showModal.showErrorMsg("Submit error!")
+               toastUtil.showErrorMsg('Opp!! Have some error!');
             } else {
                console.log(data);
+               toastUtil.showToastMsg('Post feeling success! Please waiting for approved');
+               let { dispatch } = this.props
+               dispatch({
+                  type: 'RELOAD_MAP',
+                  reload: true
+               })
             }
             const { dispatch } = this.props
             dispatch({
@@ -50,19 +57,39 @@ class ActionForm extends Component {
          let newPost = {
             topic: this.state.topic,
             content: this.state.content,
-            userUid: userUid
+            userUid: userUid,
+            placeUid: this.props.placeReducer.selectedPlace.uid
          }
+         placeService.addPost(newPost).then(data => {
+            console.log(data);
+            if (data.errorCode !== 0) {
+               toastUtil.showErrorMsg('Opp!! Have some error!');
+            } else {
+               console.log(data);
+               toastUtil.showToastMsg('Post feeling success! Please waiting for approved');
+               let { dispatch } = this.props
+               dispatch({
+                  type: 'RELOAD_MAP',
+                  reload: true
+               })
+            }
+            const { dispatch } = this.props
+            dispatch({
+               type: 'ADD_POST',
+               value: false
+            })
+         })
 
       }
 
    }
 
    onCancel = () => {
-      const { dispatch } = this.props
-      dispatch({
-         type: 'ADD_POST',
-         value: false
-      })
+      // const { dispatch } = this.props
+      // dispatch({
+      //    type: 'ADD_POST',
+      //    value: false
+      // })
    }
 
    renderSubmitAction = () => {
