@@ -271,19 +271,6 @@ class Map extends Component {
 		if (this.props.reload !== previousProps.reload && this.props.reload === true) {
 			console.log('changeeeee');
 			this.forceUpdate(this.componentDidMount())
-			// console.log(this.props.regionReducer.regionData);
-			// let data = this.state.dataProvider
-			// data.areas = this.props.regionReducer.regionData
-			// this.setState({
-			// 	dataProvider: data
-			// })
-			// console.log(JSON.stringify(this.state.dataProvider));
-			// console.log(this.state.chart);
-			// this.componentDidMount()
-			// let { dispatch } = this.props
-			// dispatch({
-			// 	type: 'RELOAD_MAP'
-			// })
 		}
 	}
 

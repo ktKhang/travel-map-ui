@@ -85,11 +85,11 @@ class ActionForm extends Component {
    }
 
    onCancel = () => {
-      // const { dispatch } = this.props
-      // dispatch({
-      //    type: 'ADD_POST',
-      //    value: false
-      // })
+      const { dispatch } = this.props
+      dispatch({
+         type: 'ADD_POST',
+         value: false
+      })
    }
 
    renderSubmitAction = () => {
