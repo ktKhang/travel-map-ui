@@ -117,7 +117,8 @@ class Place extends Component{
                 .required('Place title is required')
                 .notOneOf(this.state.placeList, 'Place title already exists')
 		});
-	}
+    }
+
     
     updatePlaceData(){
         return (
