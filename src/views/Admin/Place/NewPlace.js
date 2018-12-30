@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import {placeService, showModal, regionService} from '../../../services';
-import { Container, Row, Col } from 'react-grid-system';
-import { Button, Card, CardBody, Table,	CardFooter,
+import { Col } from 'react-grid-system';
+import { Button, Card, CardBody, CardFooter,
 	CardHeader, FormGroup, Label, } from 'reactstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import Map from '../../Admin/Map';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import routes from '../../../routes';
-import { Types } from "../../../actions/types/Place";
 import ReactDOM from 'react-dom';
 class NewPlace extends Component {
     constructor(props){
@@ -21,7 +18,6 @@ class NewPlace extends Component {
                 title : '',
                 latitude : '',
                 longitude : '',
-                svgPath : '',
                 regionUid : ''
             },
             appStyle: {
@@ -95,11 +91,9 @@ class NewPlace extends Component {
                             title : place.title,
                             latitude : this.props.addPlaceReducer.coordinate.latitude,
                             longitude : this.props.addPlaceReducer.coordinate.longitude,
-                            svgPath : place.svgPath,
                             regionUid : data.data.uid
                         }
                     })
-                    console.log('1');
                     placeService.addNewPlace(this.state.place).then(data =>{
                         if(data && data.errorCode > 200){
                             showModal.showErrorMsg(data.message);
@@ -117,7 +111,6 @@ class NewPlace extends Component {
                 }
             })
         }
-        console.log('2');
     }
 
     render() {
@@ -138,7 +131,6 @@ class NewPlace extends Component {
                             title: this.state.place.title,
                             latitude: this.state.place.latitude,
                             longitude: this.state.place.longitude,
-                            svgPath: this.state.place.svgPath,
                             regionUid: this.props.addPlaceReducer.payload.id
                         }} 
                         validationSchema = {this.getValidationSchema}
@@ -175,18 +167,20 @@ class NewPlace extends Component {
                                                     <Field type="number" name="longitude" className={`form-control`} value = {this.props.addPlaceReducer.coordinate.longitude}/>
                                                     <ErrorMessage className="invalid-feedback" name="longitude" component="div" />
                                                 </FormGroup>
-                                                <FormGroup>
-                                                    <Label htmlFor="svgPath">Svg Path</Label>
-                                                    <Field type="text" name="svgPath" className={`form-control ${props.errors.svgPath && props.touched.svgPath && 'is-invalid'}`} />
-                                                    <ErrorMessage className="invalid-feedback" name="svgPath" component="div" />
-                                                </FormGroup>
                                             </CardBody>
                                             <CardFooter>
                                                 <Button type="submit" size="sm" color="primary"
                                                     disabled={props.isSubmitting} ><i className="fa fa-dot-circle-o"></i> {props.isSubmitting ? 'Submitting' : 'Submit'}
                                                 </Button>
-                                                <Button type="reset" size="sm" color="danger"
-                                                    onClick={() => this.cancelUpdate()}><i className="fa fa-ban"></i> Cancel</Button>
+                                                <Button
+                                                    type="reset"
+                                                    size="sm"
+                                                    color="danger"
+                                                    onClick={props.handleReset}
+                                                    disabled={!props.dirty || props.isSubmitting}
+                                                    >
+                                                    <i className="fa fa-ban" /> Cancel
+                                                    </Button>
                                             </CardFooter>
                                         </Card>
                                     </Form>

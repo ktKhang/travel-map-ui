@@ -23,7 +23,6 @@ class Regions extends Component {
                 dataField: 'id',
                 text: 'Id',
                 sort: true,
-                // formatter: this.sortableIndex
                 }, {
                 dataField: 'name',
                 text: 'Region',
@@ -37,47 +36,8 @@ class Regions extends Component {
                 dataField: 'createdDate',
                 text: 'Created Date',
                 sort: true
-                }, {
-                dataField: 'uid',
-                text: 'Action',
-                formatter: props => <this.Delete deleteFunc = {this.deleteRegion.bind(this, props)}></this.Delete>,
-                csvExport: false
-            }]
+                }]
         };
-    }
-
-	deleteRegion(regionUid) {
-		const isOpen = true;
-
-		ReactDOM.render(<CommonModal modal={this.state.modal}
-			isOpen={isOpen}
-			modalType="danger"
-			modalContent="Do you want to delete this record?"
-			modalHeader="Confirmation"
-			yesLabel="Yes"
-			noLabel="No"
-			yesFunc={this.clickYes.bind(this, regionUid)}
-			noFunc={this.clickNo}
-		/>
-			, document.getElementById('modalDiv'));
-    }
-    
-    // Delete 
-    Delete = (props) => {
-        return(
-        <div className="row">
-            <div className="col-xs-5 previous">
-            <button type="button" className="btn btn-danger btn-block active" 
-                onClick={props.deleteFunc}>
-                <span className="glyphicon glyphicon-chevron-left">Delete</span>
-                </button>
-            </div>
-        </div> 
-    )}
-
-    sortableIndex = (cell, row, rowIndex) => {
-        rowIndex ++;
-        return(<p>{rowIndex}</p>)
     }
 
     regionDetailFormatter = (cell, row) => {

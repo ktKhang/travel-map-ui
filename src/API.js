@@ -32,7 +32,9 @@ const POST_LIST_URL = userUid => {
    return API_URL + '/users/findPostByUser/' + userUid;
 }
 const LOGIN_ADMIN_URL = API_URL + '/auth/admin/login'
-
+const DELETE_USER_URL = userUid =>{
+   return API_URL + '/users/delete/' + userUid;
+}
 
 export const API_CONST = {
    API_URL,
@@ -51,5 +53,6 @@ export const API_CONST = {
    REGION_ADD_POST_URL,
    PLACE_ADD_POST_URL,
    POST_LIST_URL,
-   LOGIN_ADMIN_URL
+   LOGIN_ADMIN_URL,
+   DELETE_USER_URL
 };

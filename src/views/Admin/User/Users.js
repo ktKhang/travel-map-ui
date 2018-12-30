@@ -79,6 +79,27 @@ class Users extends Component {
         </div> 
     )}
 
+    clickYes(userUid) {
+        userService
+          .deleteUser(userUid)
+          .then(data => {
+            if (data && data.errorCode > 200) {
+              showModal.showErrorMsg(data.message);
+              return;
+            } else if (data && data.errorCode === 0) {
+                console.log('show data' + data);
+              showModal.showSuccessMsg("Delete Success.");
+              setTimeout(() => {
+                showModal.closeModal();
+                this.loadUserList();
+              }, 5000);
+            }
+          })
+          .catch(err => {
+            showModal.showErrorMsg(err.message);
+          });
+    }
+
     sortableIndex = (cell, row, rowIndex) => {
         rowIndex ++;
         return(<p>{rowIndex}</p>)
