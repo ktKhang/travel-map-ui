@@ -29,6 +29,7 @@ import LoginProfile from './LoginProfile';
 import SearchBox from '../../views/FeatureComponents/Search'
 import Map from '../../views/FeatureComponents/Map';
 import { connect } from 'react-redux';
+import { constant } from '../../utils/Constant';
 class DefaultLayout extends Component {
   Logo = () => {
     return (
@@ -63,7 +64,7 @@ class DefaultLayout extends Component {
                   : (null);
               },
               )}
-              <Redirect from="/" to="/about" />
+              <Redirect from={constant.ROUTE_HOME} to={constant.ROUTE_ABOUT} />
             </Switch>
             {/* </div> */}
             <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available' } : { width: '35%' }} reload={this.props.regionReducer.reloadMap} />

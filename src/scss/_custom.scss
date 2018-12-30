@@ -1,5 +1,7 @@
 // My custom styles
 
+button:focus { outline:0 !important; }
+
 .react-switch {
   vertical-align: middle;
   margin-right: 7px;
@@ -594,6 +596,14 @@ body {
   width: 14px;
   transition: .3s;
 }
+.icon-login-admin-custom{
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 54px;
+  width: 40px;
+  transition: .3s;
+}
 .icon-check-custom{
   background-position: center center;
   background-size: contain;
@@ -623,6 +633,12 @@ body {
 }
 .icon-check-point {
   background-image: url('../assets/icons/ic_check_point2.svg');
+}
+.icon-foot {
+  background-image: url('../assets/icons/icon-foot.svg');
+}
+.icon-back {
+  background-image: url('../assets/icons/ic-arrow-left.svg');
 }
 
 

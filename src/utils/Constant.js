@@ -3,6 +3,24 @@ const TOKEN_HEADER_KEY = 'Authorization';
 const ROLE_ADMIN = 'ADMIN';
 const ROLE_USER = 'USER';
 
+// route
+const ROUTE_HOME = '/';
+const ROUTE_SAVE = '/save';
+const ROUTE_EXPLORE = '/explore';
+const ROUTE_ABOUT = '/about';
+const ROUTE_ADVENTURE = '/adventure';
+const ROUTE_ADMIN_DASHBOARD = '/admin/dashboard';
+const ROUTE_ADMIN_USERS = '/admin/users';
+const ROUTE_ADMIN_USER_DETAIL = '/admin/user/:uid';
+const ROUTE_ADMIN_USER_POSTS = '/admin/user/:userid/posts';
+const ROUTE_ADMIN_USER_VIDEOS = '/admin/user/:userid/videos';
+const ROUTE_ADMIN_USER_ALBUMS = '/admin/user/:userid/albums';
+const ROUTE_ADMIN_REGIONS = '/admin/regions';
+const ROUTE_ADMIN_REGION_DETAIL = '/admin/region/:uid';
+const ROUTE_ADMIN_REGION_PLACES = '/admin/region/:regionid/places';
+const ROUTE_ADMIN_REGION_PLACE_DETAIL = '/admin/region/:regionid/place/:uid';
+const ROUTE_ADMIN_ADD_PLACE = '/admin/addPlace';
+
 // color
 const PLACE_NORMAL_COLOR = '#000000bd'
 const PLACE_SELECTED_COLOR = '#236292'
@@ -22,6 +40,24 @@ export const constant = {
    , TOKEN_HEADER_KEY
    , ROLE_ADMIN
    , ROLE_USER
+
+   , ROUTE_HOME
+   , ROUTE_SAVE
+   , ROUTE_EXPLORE
+   , ROUTE_ABOUT
+   , ROUTE_ADVENTURE
+   , ROUTE_ADMIN_DASHBOARD
+   , ROUTE_ADMIN_USERS
+   , ROUTE_ADMIN_USER_DETAIL
+   , ROUTE_ADMIN_USER_POSTS
+   , ROUTE_ADMIN_USER_VIDEOS
+   , ROUTE_ADMIN_USER_ALBUMS
+   , ROUTE_ADMIN_REGIONS
+   , ROUTE_ADMIN_REGION_DETAIL
+   , ROUTE_ADMIN_REGION_PLACES
+   , ROUTE_ADMIN_REGION_PLACE_DETAIL
+   , ROUTE_ADMIN_ADD_PLACE
+
    , PLACE_NORMAL_COLOR
    , PLACE_SELECTED_COLOR
    , PLACE_MARKED_COLOR

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { userService } from '../../services'
 import { Container } from 'reactstrap';
 // sidebar nav config
 import navigation from '../../_navAdmin';
@@ -18,7 +19,33 @@ import {
    AppSidebarNav,
 } from '@coreui/react';
 import Map from '../../views/Admin/Map';
+import { constant } from '../../utils/Constant';
+import { decodeJWT } from '../../utils/DecodeJWT';
 class AdminLayout extends Component {
+
+   componentDidMount() {
+      const token = window.localStorage.getItem(constant.TOKEN_VARIABLE_NAME);
+      if (token !== undefined && token !== null) {
+         const decodedToken = decodeJWT.decodeToken(token);
+         if (decodedToken.role !== constant.ROLE_ADMIN) {
+            this.props.history.push('/');
+         } else {
+            userService.fetchUserDetail(decodedToken.sub).then(data => {
+               if (data.errorCode !== 0) {
+                  localStorage.removeItem(constant.TOKEN_VARIABLE_NAME);
+                  this.props.history.push('/');
+               } else {
+                  if (data.data.role.roleName !== constant.ROLE_ADMIN) {
+                     this.props.history.push('/');
+                  }
+               }
+            })
+         }
+      } else {
+         this.props.history.push('/');
+      }
+   }
+
    render() {
       return (
          <div className="app">
@@ -34,24 +61,24 @@ class AdminLayout extends Component {
                   </div>
                   <AppSidebarFooter />
                </AppSidebar>
-               <main className="main" style={{ paddingTop: '55px', paddingBottom: '2%', marginRight: '-2%'}}>
+               <main className="main" style={{ paddingTop: '55px', paddingBottom: '2%', marginRight: '-2%' }}>
                   <div className="map-place">
                      <Switch>
                         {routes.map((route, idx) => {
                            return route.component ? (<Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
                               <route.component {...props} />
-                              )} />) : (null);
-                           },
+                           )} />) : (null);
+                        },
                         )}
-                     <Redirect from="/admin" to="/admin/dashboard" />
+                        <Redirect from="/admin" to="/admin/dashboard" />
                      </Switch>
                   </div>
                </main>
-             
+
             </div>
-            <AppFooter style={{marginTop: '-3.8%'}}>
-               <AdminFooter/>
-            </AppFooter>         
+            <AppFooter style={{ marginTop: '-3.8%' }}>
+               <AdminFooter />
+            </AppFooter>
          </div>
       );
    }
@@ -59,9 +86,9 @@ class AdminLayout extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
-     regionReducer: state.regionReducer,
-     pageReducer: state.pageReducer
+      regionReducer: state.regionReducer,
+      pageReducer: state.pageReducer
    }
 }
 
-export default  connect(mapStateToProps)(AdminLayout);
+export default connect(mapStateToProps)(AdminLayout);

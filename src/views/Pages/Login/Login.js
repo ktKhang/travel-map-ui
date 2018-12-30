@@ -1,119 +1,177 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import { loginService, showModal } from '../../../services'
+import { Link } from 'react-router-dom';
+import { loginService } from '../../../services'
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { constant } from '../../../utils/Constant';
+import { decodeJWT } from '../../../utils/DecodeJWT';
 
+const errMsg401 = 'Username and password combination is incorrect.';
+const errMsgRequired = 'Username and password are required.';
 class Login extends Component {
 
-  constructor(props){
-    super(props);
-    this.state={
-        user: {}
-    }
-    this.state.user = { // for testing only
-      userName: "",
-      password: ""
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.login = this.login.bind(this);
+	constructor(props) {
+		super(props);
+		this.state = {
+			errMessage: null,
+			showPassword: false,
+		}
+	}
 
-    this.nameRef = React.createRef();
+	handleChange(event) {
+		let currentUser = this.state.user;
+		currentUser[[event.target.id]] = event.target.value;
+		this.setState({
+			user: currentUser
+		});
+	}
 
-  }
+	login(values) {
+		if (values.userName.trim() === '' || values.password.trim() === '') {
+			this.setState({
+				errMessage: errMsgRequired
+			})
+		} else {
+			loginService.loginAdmin(values).then(data => {
+				if (data.errorCode !== 0) {
+					let errMsg = data.errorCode
+					if (data.errorCode === 401) {
+						errMsg = errMsg401
+					}
+					this.setState({
+						errMessage: errMsg
+					})
 
-  componentDidMount() {
-    console.log('Component DID MOUNT!')
-  }
+				} else {
+					localStorage[constant.TOKEN_VARIABLE_NAME] = data.data;
+					if (decodeJWT.decodeToken(data.data).role === constant.ROLE_ADMIN) {
+						this.props.history.push('/admin')
+					} else {
+						this.setState({
+							errMessage: errMsg401
+						})
+					}
+				}
+			})
+				.catch(err => {
+					console.error(err);
+					this.setState({ errMessage: err.message });
+				});
+		}
+	}
 
-  handleChange(event) {
-    let currentUser = this.state.user;
-    currentUser[[event.target.id]] = event.target.value;
-    this.setState({
-        user: currentUser
-    });
-  }
+	// goBack = () => {
+	// 	this.props.history.goBack();
+	// }
 
-  login() {
-    console.log(this.state.user);
-    loginService.login(this.state.user).then(data => {
-      if (data && data.errorCode > 200) {
-        showModal.showErrorMsg(data.message);
-        console.log(data.message);
-        return;
-      } else if (data && data.errorCode === 0) {
-        console.log('login succsess');
-        // showModal.showSuccessMsg("Success.");
-        let token = data.data.token;
-        console.log(token);
-        window.sessionStorage.setItem('EDC-token', token);
-        this.props.history.push(`/createCrf`);
-      }
-      console.log(data);
-    })
-      .catch(err => {
-        alert(err.message);
-      });
-  }
+	goBack = () => {
+		this.props.history.push(constant.ROUTE_HOME);
+	}
 
-  render() {
-    return (
-      <div className="app flex-row align-items-center">
-        <Container>
-          <Row className="justify-content-center">
-            <Col md="8">
-              <CardGroup>
-                <Card className="p-4">
-                  <CardBody>
-                    <Form>
-                      <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
-                      <InputGroup className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="icon-user"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input type="text" id="userName" placeholder="Username" autoComplete="userName" 
-                          value={this.state.user.userName} onChange={this.handleChange} />
-                      </InputGroup>
-                      <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="icon-lock"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input type="password" id="password" placeholder="Password" autoComplete="current-password" 
-                           value={this.state.user.password} onChange={this.handleChange} />
-                      </InputGroup>
-                      <Row>
-                        <Col xs="6">
-                          <Button type="submit" color="primary" className="px-4"
-                            onClick={this.login}>Login</Button>
-                        </Col>
-                        <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </CardBody>
-                </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
-                    </div>
-                  </CardBody>
-                </Card>
-              </CardGroup>
-            </Col>
-          </Row>
-        </Container>
-        <div id="modalDiv"></div> {/* To inject CommonModal here*/}
-      </div>
-    );
-  }
+	handleClickShowPassword = () => {
+		this.setState(state => ({ showPassword: !state.showPassword }));
+	};
+
+	getValidationSchema = () => {
+		return Yup.object().shape({
+			userName: Yup.string()
+				.required(),
+			password: Yup.string()
+				.required()
+		});
+	}
+
+	validate = values => {
+		this.setState({
+			errMessage: null
+		})
+	}
+	render() {
+		return (
+			<div className="app flex-row align-items-center login-background">
+				<div className="login-content">
+					<button className="login-button-icon" onClick={this.goBack}><i className="fa icon-login-admin-custom icon-foot"></i></button>
+					<label className="login-label">LOGIN ADMIN</label>
+					<div className="login-card">
+						<Formik
+							initialValues={{
+								userName: '',
+								password: '',
+							}}
+							validationSchema={this.getValidationSchema}
+							validate={this.validate}
+							onSubmit={(values, { setSubmitting }) => {
+								this.login(values, setSubmitting)
+							}}
+						>
+							{props => (
+								<div style={{ marginTop: '22px' }}>
+									{
+										this.state.errMessage !== null &&
+										<label className="login-err-message">{this.state.errMessage}</label>
+									}
+									<Form>
+										<div className="login-group">
+											<TextField
+												id="userName"
+												label="Username"
+												className="login-input"
+												type="text"
+												name="userName"
+												autoComplete="text"
+												margin="normal"
+												variant="outlined"
+												value={props.userName}
+												onChange={props.handleChange}
+												onBlur={props.handleBlur}
+												error={(props.errors.userName && props.touched.userName) ? true : false}
+											/>
+										</div>
+										<div className="login-group">
+											<TextField
+												id="password"
+												label="Password"
+												className="login-input"
+												type={this.state.showPassword ? 'text' : 'password'}
+												name="password"
+												autoComplete="text"
+												margin="normal"
+												variant="outlined"
+												value={props.password}
+												onChange={props.handleChange}
+												onBlur={props.handleBlur}
+												InputProps={{
+													endAdornment: (
+														<InputAdornment position="end">
+															<IconButton
+																aria-label="Toggle password visibility"
+																onClick={this.handleClickShowPassword}
+															>
+																{this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+															</IconButton>
+														</InputAdornment>
+													),
+												}}
+												error={(props.errors.password && props.touched.password) ? true : false}
+											/>
+										</div>
+										<button type="submit" className="login-admin-button">LOGIN</button>
+									</Form>
+									<Link to="/forgotPassword" className="login-forgot-pass">Forgot password?</Link>
+								</div>
+							)}
+						</Formik>
+					</div>
+					<button className="login-go-back" onClick={this.goBack}><i className="fa icon-check-custom icon-back"></i><span className="login-go-back-text">BACK TO HOME</span></button>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Login;

@@ -2,6 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable'
 import loading from './assets/icons/ic-loading.gif'
 import DefaultLayout from './containers/DefaultLayout';
+import { constant } from './utils/Constant';
 
 function Loading() {
   return (
@@ -92,22 +93,22 @@ const Posts = Loadable({
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home', component: DefaultLayout },
-  { path: '/save', exact: true, name: 'Save', component: Save },
-  { path: '/explore', exact: true, name: 'Explore', component: Explore },
-  { path: '/about', exact: true, name: 'AboutUs', component: AboutUs },
-  { path: '/adventure', exact: true, name: 'YourAdventure', component: YourAdventure },
-  { path: '/admin/dashboard', exact: true, name: 'Dashboard', component: DashboardAdmin },
-  { path: '/admin/users', exact: true, name: 'Users', component: Users },
-  { path: '/admin/user/:uid', exact: true, name: 'User Detail', component: User },
-  { path: '/admin/user/:userid/posts', exact: true, name: 'Posts', component: Posts },
-  { path: '/admin/user/:userid/videos', exact: true, name: 'Videos', component: Videos },
-  { path: '/admin/user/:userid/albums', exact: true, name: 'Albums', component: Albums },
-  { path: '/admin/regions', exact: true, name: 'Regions', component: Regions },
-  { path: '/admin/region/:uid', exact: true, name: 'Region Detail', component: Region },
-  { path: '/admin/region/:regionid/places', exact: true, name: 'Places', component: Places },
-  { path: '/admin/region/:regionid/place/:uid', exact: true, name: 'Place', component: Place },
-  { path: '/admin/addPlace', exact: true, name: 'New Place', component: NewPlace }
+  { path: constant.ROUTE_HOME, exact: true, name: 'Home', component: DefaultLayout },
+  { path: constant.ROUTE_SAVE, exact: true, name: 'Save', component: Save },
+  { path: constant.ROUTE_EXPLORE, exact: true, name: 'Explore', component: Explore },
+  { path: constant.ROUTE_ABOUT, exact: true, name: 'AboutUs', component: AboutUs },
+  { path: constant.ROUTE_ADVENTURE, exact: true, name: 'YourAdventure', component: YourAdventure },
+  { path: constant.ROUTE_ADMIN_DASHBOARD, exact: true, name: 'Dashboard', component: DashboardAdmin },
+  { path: constant.ROUTE_ADMIN_USERS, exact: true, name: 'Users', component: Users },
+  { path: constant.ROUTE_ADMIN_USER_DETAIL, exact: true, name: 'User Detail', component: User },
+  { path: constant.ROUTE_ADMIN_USER_POSTS, exact: true, name: 'Posts', component: Posts },
+  { path: constant.ROUTE_ADMIN_USER_VIDEOS, exact: true, name: 'Videos', component: Videos },
+  { path: constant.ROUTE_ADMIN_USER_ALBUMS, exact: true, name: 'Albums', component: Albums },
+  { path: constant.ROUTE_ADMIN_REGIONS, exact: true, name: 'Regions', component: Regions },
+  { path: constant.ROUTE_ADMIN_REGION_DETAIL, exact: true, name: 'Region Detail', component: Region },
+  { path: constant.ROUTE_ADMIN_REGION_PLACES, exact: true, name: 'Places', component: Places },
+  { path: constant.ROUTE_ADMIN_REGION_PLACE_DETAIL, exact: true, name: 'Place', component: Place },
+  { path: constant.ROUTE_ADMIN_ADD_PLACE, exact: true, name: 'New Place', component: NewPlace }
 ];
 
 export default routes;
