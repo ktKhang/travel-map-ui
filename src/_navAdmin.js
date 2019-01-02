@@ -24,7 +24,7 @@ export default {
       {
          name: 'USERS',
          url: '/admin/users',
-         icon: 'icon-tralvelmap-custom icon-travelmap-home',
+         icon: 'icon-tralvelmap-custom icon-travelmap-aboutus',
       }, {
          name: 'REGIONS',
          url: '/admin/regions',
@@ -32,7 +32,7 @@ export default {
       }, {
          name: 'ADD PLACE',
          url: '/admin/addPlace',
-         icon: 'icon-tralvelmap-custom icon-travelmap-home',
+         icon: 'icon-tralvelmap-custom icon-travelmap-adventure',
       }
    ],
 };

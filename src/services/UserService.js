@@ -106,6 +106,33 @@ function fetchUserDetailTest(uid){
       });
 }
 
+function getFeelingAtPlace(uid){
+   let getObject = {
+      method: 'GET',
+      headers:{
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(API_CONST.GET_FEELING_PLACE(uid), getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if(responseData.status >= 400){
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         if(data.errorCode === 0){
+            return data.data;
+         }
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
+
 function deleteUser(uid){
    let getObject = {
       method: 'GET',
@@ -137,5 +164,6 @@ export const userService = {
    loadUserList,
    fetchUserDetailTest,
    loadPostList,
-   deleteUser
+   deleteUser,
+   getFeelingAtPlace
 }
