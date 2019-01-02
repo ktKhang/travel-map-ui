@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
 import ActionForm from '../FeatureComponents/ActionForm';
+import { userService, showModal } from "../../services";
 
 class Explore extends Component {
    constructor(props) {
@@ -14,7 +15,8 @@ class Explore extends Component {
          },
          regionData: null,
          selectedRegion: null,
-         selectedRegionData: null
+         selectedRegionData: null,
+         feelingPlaces: null
       }
    }
    componentDidMount() {
@@ -50,6 +52,7 @@ class Explore extends Component {
          type: 'ADD_POST',
          value: false
       })
+      this.isCancelled = true;
    }
 
    renderPlacesListData = (places) => {
@@ -135,6 +138,43 @@ class Explore extends Component {
       })
    }
 
+   getFeelingAtPlace(placeUid) {
+      userService.getFeelingAtPlace(placeUid).then(data => {
+         if(data.errorMsg){
+             showModal.showErrorMsg(data.errorMsg);
+         }
+         else{
+            data.forEach(element => {
+                  element.createdDate = new Date(element.createdDate).toLocaleDateString();
+            });
+            !this.isCancelled && this.setState({
+               feelingPlaces: data,
+               errorMsg: null,
+             });
+         }
+     })
+   }
+   
+   renderFeelingAtPlace = (feelings) => {
+      if(feelings != null){
+         return feelings.map((feeling, index) => {
+            return (
+               <div>
+                     <p className="explore-region-label">{feeling.topic}</p>
+                     <label className="explore-place-label-mini">{feeling.content}</label>
+               </div>
+            )
+         })
+      }
+      else{
+         return(
+            <div style={{ color: 'white' }}>
+
+            </div>
+         );
+      }
+   }
+
    render() {
       let content = <div></div>
       console.log(this.props.placeReducer.selectedPlace);
@@ -169,7 +209,7 @@ class Explore extends Component {
          else if (this.state.selectedRegionData !== null && this.props.placeReducer.selectedPlace !== null) {
             if (this.props.actionReducer.addPost) {
                console.log(this.props.placeReducer.selectedPlace);
-               let selectedPlace = this.props.placeReducer.selectedPlace
+               let selectedPlace = this.props.placeReducer.selectedPlace;
                content = (
                   <div>
                      <div className="explore-region-label">
@@ -186,11 +226,14 @@ class Explore extends Component {
                   </div>
                )
             } else {
-               content = (
-                  <div style={{ color: 'white' }}>
-                     this's a content of selected place
-                  </div>
-               )
+               let selectedPlace = this.props.placeReducer.selectedPlace;
+                  content = (
+                     <div style={{ color: 'white' }}>
+                        <h3 className="explore-region-label"> {selectedPlace.title.split(",")[0].toUpperCase()} </h3>
+                        {this.getFeelingAtPlace(selectedPlace.uid)}
+                        {this.renderFeelingAtPlace(this.state.feelingPlaces)}
+                     </div>
+                  )
             }
          }
 
