@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// custom GGTab component
 import GGTab from '../../utils/GGTab';
-// childrent component
 import Intro from './Intro';
 import Contact from './Contact';
 import Feedback from './Feedback';

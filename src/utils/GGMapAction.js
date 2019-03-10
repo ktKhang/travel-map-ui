@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { constant } from '../../utils/Constant';
+import { constant } from './Constant';
 import { connect } from 'react-redux';
-class MapAction extends Component {
+class GGMapAction extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -93,4 +93,4 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps)(MapAction);
+export default connect(mapStateToProps)(GGMapAction);

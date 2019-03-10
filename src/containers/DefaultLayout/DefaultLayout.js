@@ -26,10 +26,10 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 import { Container, Row, Col } from 'react-grid-system';
 import LoginProfile from './LoginProfile';
-import SearchBox from '../../views/FeatureComponents/Search'
-import Map from '../../views/FeatureComponents/Map';
+import GGSearch from '../../utils/GGSearch'
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
+import GGMap from '../../utils/GGMap';
 class DefaultLayout extends Component {
   Logo = () => {
     return (
@@ -50,7 +50,7 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <this.Logo />
-            <SearchBox />
+            <GGSearch />
             <AppSidebarNav navConfig={navigation} {...this.props} />
             <LoginProfile />
           </AppSidebar>
@@ -67,7 +67,7 @@ class DefaultLayout extends Component {
               <Redirect from={constant.ROUTE_HOME} to={constant.ROUTE_ABOUT} />
             </Switch>
             {/* </div> */}
-            <Map style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available' } : { width: '35%' }} reload={this.props.regionReducer.reloadMap} />
+            <GGMap style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ? { width: '-webkit-fill-available', maxWidth: '-webkit-fill-available' } : { width: '35%' }} reload={this.props.regionReducer.reloadMap} />
             <div id="modalDiv"></div> {/* To inject CommonModal here*/}
           </main>
         </div>

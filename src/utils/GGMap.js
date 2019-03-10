@@ -3,15 +3,15 @@ import AmCharts from "@amcharts/amcharts3-react";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { Container, Row, Col } from 'react-grid-system';
-import { regionService, showModal } from '../../services'
-import MapAction from './MapAction';
-import loading from '../../assets/icons/ic-loading.gif'
+import { regionService, showModal } from '../services'
+import GGMapAction from './GGMapAction';
+import loading from '../assets/icons/ic-loading.gif'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { MethodUtil } from '../../utils/MethodUtil';
-import { constant } from '../../utils/Constant';
-import { decodeJWT } from '../../utils/DecodeJWT';
-class Map extends Component {
+import { MethodUtil } from './MethodUtil';
+import { constant } from './Constant';
+import { decodeJWT } from './DecodeJWT';
+class GGMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -332,7 +332,7 @@ class Map extends Component {
 			mapComponent = (
 				<div id="maps" style={this.props.style}>
 					<AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={config} />
-					<MapAction />
+					<GGMapAction />
 					{this.renderRedirect()}
 				</div>
 			)
@@ -647,4 +647,4 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps)(GGMap);

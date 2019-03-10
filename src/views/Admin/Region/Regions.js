@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import CommonModal from '../../CustomModals/CommonModal'
-import {regionService, showModal} from '../../../services';
+import { regionService, showModal } from '../../../services';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';
@@ -19,39 +18,39 @@ class Regions extends Component {
             errorMsg: null,
             modal: false,
             isOpen: false,
-            columns : [{
+            columns: [{
                 dataField: 'id',
                 text: 'Id',
                 sort: true,
-                }, {
+            }, {
                 dataField: 'name',
                 text: 'Region',
                 sort: true,
                 formatter: this.regionDetailFormatter
-                }, {
+            }, {
                 dataField: 'title',
                 text: 'Title',
                 sort: true
-                }, {
+            }, {
                 dataField: 'createdDate',
                 text: 'Created Date',
                 sort: true
-                }]
+            }]
         };
     }
 
     regionDetailFormatter = (cell, row) => {
         const regionLink = `#/admin/region/${row.uid}`;
         return (
-          <p><a href={regionLink}>{cell}</a></p>
+            <p><a href={regionLink}>{cell}</a></p>
         );
     }
 
-    loadRegionsList(){
+    loadRegionsList() {
         regionService.loadRegionList().then(data => {
-            if(data.errorMsg){
+            if (data.errorMsg) {
                 showModal.showErrorMsg(data.errorMsg);
-            }else{
+            } else {
                 data.forEach(element => {
                     element.createdDate = new Date(element.createdDate).toLocaleDateString();
                 });
@@ -61,10 +60,10 @@ class Regions extends Component {
                 })
             }
         })
-        .catch(err => {
-            this.setState({errorMsg: err.message});
-        });
-        
+            .catch(err => {
+                this.setState({ errorMsg: err.message });
+            });
+
     }
 
     componentDidMount() {
@@ -74,50 +73,50 @@ class Regions extends Component {
     componentWillUnmount() {
         this.isCancelled = true;
     }
-    
+
     render() {
         return (
-            <div className = "animated fadeIn" >
-            <ToolkitProvider 
-                keyField="id"
-                data={this.state.regionList}
-                columns={this.state.columns}
-                search>
-                {
-                    props => (
-                        <div>
-                            <Container fluid >
-                            <br/>
-                                <Card>
-                                    <CardHeader>
-                                        <Row>
-                                        <Col md={4}>
-                                            <i className="fa fa-align-justify"></i> Region <small className="text-muted">List</small>
-                                        </Col>
-                                        <br />
-                                        <Col md={4} offset={{ md: 4 }}>
-                                            <SearchBar {...props.searchProps} />
-                                        </Col>
-                                        </Row>
-                                    </CardHeader>
-                                    <CardBody>
-                                        <BootstrapTable keyField="id"
-                                        {...props.baseProps}
-                                        striped hover condensed
-                                        bordered={false}
-                                        pagination={paginationFactory()}
-                                        noDataIndication={this.state.errorMsg}
-                                        />
-                                    </CardBody>
-                                </Card>
-                            </Container>
-                        </div>
-                    )
-                }
-            </ToolkitProvider>
-        <div id="modalDiv"></div> {/* To inject CommonModal here*/}
-    </div >
-    )}
+            <div className="animated fadeIn" >
+                <ToolkitProvider
+                    keyField="id"
+                    data={this.state.regionList}
+                    columns={this.state.columns}
+                    search>
+                    {
+                        props => (
+                            <div>
+                                <Container fluid >
+                                    <br />
+                                    <Card>
+                                        <CardHeader>
+                                            <Row>
+                                                <Col md={4}>
+                                                    <i className="fa fa-align-justify"></i> Region <small className="text-muted">List</small>
+                                                </Col>
+                                                <br />
+                                                <Col md={4} offset={{ md: 4 }}>
+                                                    <SearchBar {...props.searchProps} />
+                                                </Col>
+                                            </Row>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <BootstrapTable keyField="id"
+                                                {...props.baseProps}
+                                                striped hover condensed
+                                                bordered={false}
+                                                pagination={paginationFactory()}
+                                                noDataIndication={this.state.errorMsg}
+                                            />
+                                        </CardBody>
+                                    </Card>
+                                </Container>
+                            </div>
+                        )
+                    }
+                </ToolkitProvider>
+            </div >
+        )
+    }
 }
 
 export default Regions;

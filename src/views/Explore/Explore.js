@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
-import ActionForm from '../FeatureComponents/ActionForm';
+import GGActionForm from '../../utils/GGActionForm';
 import { userService, showModal } from "../../services";
 
 class Explore extends Component {
@@ -182,7 +182,7 @@ class Explore extends Component {
                      <div className="explore-region-label">
                         <label>{this.state.selectedRegionData.title.split(",")[0].toUpperCase()}</label>
                      </div>
-                     <ActionForm type="region" />
+                     <GGActionForm type="region" />
                   </div>
                )
             } else {
@@ -217,7 +217,7 @@ class Explore extends Component {
                            <label className="explore-place-label-mini">24 người đã check-in tại đây</label>
                         </div>
                      </div>
-                     <ActionForm type="place" />
+                     <GGActionForm type="place" />
                   </div>
                )
             } else {
