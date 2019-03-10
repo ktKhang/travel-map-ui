@@ -5,15 +5,6 @@ import { constant } from '../../utils/Constant';
 import { loginService, showModal } from '../../services'
 import { decodeJWT } from '../../utils/DecodeJWT';
 class YourAdventure extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         appStyle: {
-            height: window.innerHeight,
-            overflow: 'auto'
-         }
-      }
-   }
 
    handleResponse = response => {
       let userDetail = {};
@@ -59,7 +50,7 @@ class YourAdventure extends Component {
       }
       return (
          <div className="map-content">
-            <div className="app-content" style={this.state.appStyle}>
+            <div className="user-app-content">
                {adventureContent}
             </div>
          </div>

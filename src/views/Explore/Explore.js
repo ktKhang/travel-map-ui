@@ -8,11 +8,6 @@ class Explore extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         appStyle: {
-            width: '340px',
-            height: window.innerHeight,
-            overflow: 'auto'
-         },
          regionData: null,
          selectedRegion: null,
          selectedRegionData: null,
@@ -140,34 +135,34 @@ class Explore extends Component {
 
    getFeelingAtPlace(placeUid) {
       userService.getFeelingAtPlace(placeUid).then(data => {
-         if(data.errorMsg){
-             showModal.showErrorMsg(data.errorMsg);
+         if (data.errorMsg) {
+            showModal.showErrorMsg(data.errorMsg);
          }
-         else{
+         else {
             data.forEach(element => {
-                  element.createdDate = new Date(element.createdDate).toLocaleDateString();
+               element.createdDate = new Date(element.createdDate).toLocaleDateString();
             });
             !this.isCancelled && this.setState({
                feelingPlaces: data,
                errorMsg: null,
-             });
+            });
          }
-     })
+      })
    }
-   
+
    renderFeelingAtPlace = (feelings) => {
-      if(feelings != null){
+      if (feelings != null) {
          return feelings.map((feeling, index) => {
             return (
                <div>
-                     <p className="explore-region-label">{feeling.topic}</p>
-                     <label className="explore-place-label-mini">{feeling.content}</label>
+                  <p className="explore-region-label">{feeling.topic}</p>
+                  <label className="explore-place-label-mini">{feeling.content}</label>
                </div>
             )
          })
       }
-      else{
-         return(
+      else {
+         return (
             <div style={{ color: 'white' }}>
 
             </div>
@@ -227,13 +222,13 @@ class Explore extends Component {
                )
             } else {
                let selectedPlace = this.props.placeReducer.selectedPlace;
-                  content = (
-                     <div style={{ color: 'white' }}>
-                        <h3 className="explore-region-label"> {selectedPlace.title.split(",")[0].toUpperCase()} </h3>
-                        {this.getFeelingAtPlace(selectedPlace.uid)}
-                        {this.renderFeelingAtPlace(this.state.feelingPlaces)}
-                     </div>
-                  )
+               content = (
+                  <div style={{ color: 'white' }}>
+                     <h3 className="explore-region-label"> {selectedPlace.title.split(",")[0].toUpperCase()} </h3>
+                     {this.getFeelingAtPlace(selectedPlace.uid)}
+                     {this.renderFeelingAtPlace(this.state.feelingPlaces)}
+                  </div>
+               )
             }
          }
 
@@ -260,7 +255,7 @@ class Explore extends Component {
       }
       return (
          <div className="map-content" style={{ width: 'fit-content' }}>
-            <div className="app-content" style={this.state.appStyle}>
+            <div className="user-app-content-explore">
                {content}
             </div>
 
