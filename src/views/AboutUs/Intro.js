@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// lib for grid
 import { Row, Col } from 'react-grid-system';
 import markPlaceImg from '../../assets/img/mark-place.svg'
 import picSharingImg from '../../assets/img/picture-sharing.svg'

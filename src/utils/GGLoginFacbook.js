@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // lib FacebookLogin
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
-class FBLogin extends Component {
+class GGLoginFacebook extends Component {
 
    responseFacebook = response => {
       this.props.onResponse(response);
@@ -24,4 +24,4 @@ class FBLogin extends Component {
    }
 }
 
-export default FBLogin;
+export default GGLoginFacebook;

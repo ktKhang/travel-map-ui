@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { decodeJWT } from '../../utils/DecodeJWT';
-import { constant } from '../../utils/Constant';
+import { decodeJWT } from './DecodeJWT';
+import { constant } from './Constant';
 import { connect } from 'react-redux';
-import { regionService, placeService, showModal } from '../../services';
-import { toastUtil } from '../../utils/ToastUtil';
+import { regionService, placeService, showModal } from '../services';
+import { toastUtil } from './ToastUtil';
 
-class ActionForm extends Component {
+class GGActionForm extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -132,4 +132,4 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps)(ActionForm);
+export default connect(mapStateToProps)(GGActionForm);

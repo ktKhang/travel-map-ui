@@ -18,7 +18,6 @@ import {
    AppSidebarHeader,
    AppSidebarNav,
 } from '@coreui/react';
-import Map from '../../views/Admin/Map';
 import { constant } from '../../utils/Constant';
 import { decodeJWT } from '../../utils/DecodeJWT';
 class AdminLayout extends Component {

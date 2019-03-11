@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
-// custom GGTab component
 import GGTab from '../../utils/GGTab';
-// childrent component
 import Intro from './Intro';
 import Contact from './Contact';
 import Feedback from './Feedback';
 
 
 class AboutUs extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         appStyle: {
-            height: window.innerHeight,
-            overflow: 'auto'
-         },
-      }
-   }
 
    render() {
       return (
          <div className="map-content">
-            <div className="app-content" style={this.state.appStyle}>
+            <div className="user-app-content">
                <GGTab
                   tabNav={['Intro', 'Contact', 'Feedback']}
                >

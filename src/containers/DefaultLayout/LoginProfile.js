@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { loginService, userService, showModal } from '../../services'
 import { decodeJWT } from '../../utils/DecodeJWT';
 import { constant } from '../../utils/Constant';
-import FBLogin from '../../views/FeatureComponents/FBLogin';
-
+import GGLoginFacebook from '../../utils/GGLoginFacbook';
 class LoginProfile extends Component {
     constructor(props) {
         super(props);
@@ -94,7 +93,7 @@ class LoginProfile extends Component {
             profileContent = (
                 <div className="profile-name">
                     <label className="profile-label2">Login with&nbsp;<span className="login-profile-fb-label">facebook</span></label>
-                    <FBLogin
+                    <GGLoginFacebook
                         onResponse={this.handleResponse.bind(this)}
                     />
                 </div>
