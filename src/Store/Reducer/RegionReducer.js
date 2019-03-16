@@ -1,4 +1,4 @@
-import { MethodUtil } from '../../utils/MethodUtil';
+import { ggCommon } from '../../utils/GGCommon';
 
 const initialState = {
    clickRegion: false,
@@ -13,7 +13,7 @@ export const regionReducer = (state = initialState, action) => {
       case "CLICK_REGION":
          return { ...state, clickRegion: !state.clickRegion }
       case "FETCH_REGION_DATA":
-         return { ...state, regionData: MethodUtil.deepClone(action.regionData) }
+         return { ...state, regionData: ggCommon.deepClone(action.regionData) }
       case "FETCH_SELECTED_REGION":
          return { ...state, selectedRegion: action.selectedRegion }
       default:

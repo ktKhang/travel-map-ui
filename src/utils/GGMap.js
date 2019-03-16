@@ -8,9 +8,9 @@ import GGMapAction from './GGMapAction';
 import loading from '../assets/icons/ic-loading.gif'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { MethodUtil } from './MethodUtil';
 import { constant } from './Constant';
 import { decodeJWT } from './DecodeJWT';
+import { ggCommon } from './GGCommon';
 class GGMap extends Component {
 	constructor(props) {
 		super(props);
@@ -176,7 +176,7 @@ class GGMap extends Component {
 				let { dispatch } = this.props
 				dispatch({
 					type: 'FETCH_REGION_DATA',
-					regionData: MethodUtil.deepClone(this.state.dataProvider.areas)
+					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
 			}
 		})
@@ -231,7 +231,7 @@ class GGMap extends Component {
 				let { dispatch } = this.props
 				dispatch({
 					type: 'FETCH_REGION_DATA',
-					regionData: MethodUtil.deepClone(this.state.dataProvider.areas)
+					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
 				dispatch({
 					type: 'RELOAD_MAP',

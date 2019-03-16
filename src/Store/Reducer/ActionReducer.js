@@ -1,5 +1,3 @@
-import { MethodUtil } from '../../utils/MethodUtil';
-
 const initialState = {
    addPost: false,
    addAlbum: false,

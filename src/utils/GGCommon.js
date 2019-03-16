@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
 /**
- * This file should be moved to EDCCommon.js file
+ * Deep clone list object
+ * @param {*} listObj 
  */
 const deepClone = (listObj) => {
    var output, value, key;
@@ -18,10 +19,20 @@ const deepClone = (listObj) => {
    return output;
 }
 
+/**
+ * Remove 1 element from array
+ * @param {*} array 
+ * @param {*} element 
+ */
 const removeObj = (array, element) => {
    return array.filter(e => !_.isEqual(e, element));
 }
 
+/**
+ * Sort list object
+ * @param {*} property 
+ * @param {*} type 
+ */
 const sortListObj = (property, type) => {
 
    return (x, y) => {
@@ -34,6 +45,11 @@ const sortListObj = (property, type) => {
 
 };
 
+/**
+ * Check is an array contain element
+ * @param {*} array 
+ * @param {*} element 
+ */
 const checkIncludes = (array, element) => {
    let checked = array.find(e => _.isEqual(e, element));
    if (checked) {

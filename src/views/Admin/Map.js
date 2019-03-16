@@ -7,11 +7,11 @@ import { regionService, showModal } from '../../services'
 import loading from '../../assets/icons/ic-loading.gif'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { MethodUtil } from '../../utils/MethodUtil';
 import { constant } from '../../utils/Constant';
 import { decodeJWT } from '../../utils/DecodeJWT';
 import { Types } from "../../actions/types/Place";
 import { addPlace, fetchCoordinate } from "../../actions/PlaceAction";
+import { ggCommon } from '../../utils/GGCommon';
 class Map extends Component {
 	constructor(props) {
 		super(props);
@@ -54,19 +54,19 @@ class Map extends Component {
 			],
 			chart: {}
 		};
-    }
-    
-    fetchCoordinate = e => {
-        console.log('Huy add New Place');
-        console.log(e.str);
-        let { dispatch } = this.props;
-        dispatch(fetchCoordinate(e));
+	}
 
-    }
+	fetchCoordinate = e => {
+		console.log('Huy add New Place');
+		console.log(e.str);
+		let { dispatch } = this.props;
+		dispatch(fetchCoordinate(e));
+
+	}
 
 
 	clickHomeBtn = e => {
-        let { dispatch } = this.props
+		let { dispatch } = this.props
 		if (this.props.regionReducer.clickRegion) {
 			dispatch({ type: 'CLICK_REGION' })
 		}
@@ -100,7 +100,7 @@ class Map extends Component {
 
 			if (!this.props.regionReducer.clickRegion) {
 				setTimeout(() => {
-                    dispatch(addPlace(e.mapObject));
+					dispatch(addPlace(e.mapObject));
 					dispatch({ type: 'CLICK_REGION' })
 				}, 500)
 			}
@@ -154,24 +154,24 @@ class Map extends Component {
 	}
 
 	loadData = () => {
-        regionService.getRegionList().then(data => {
-            if (data.errorCode !== 0) {
-                showModal.showErrorMsg("Get data fail!")
-            } else {
-                let regionList = data.data
-                let areas = []
-                regionList.forEach(region => {
-                    let places = []
-                    region.placeList.forEach(place => {
-                        place.scale = 0.5
-                        place.color = "#723C1A"
-                        places.push(place)
-                    });
-                    region.images = places
-                    region.passZoomValuesToTarget = true
-                    areas.push(region)
-                });
-                let dataProvider = this.state.dataProvider
+		regionService.getRegionList().then(data => {
+			if (data.errorCode !== 0) {
+				showModal.showErrorMsg("Get data fail!")
+			} else {
+				let regionList = data.data
+				let areas = []
+				regionList.forEach(region => {
+					let places = []
+					region.placeList.forEach(place => {
+						place.scale = 0.5
+						place.color = "#723C1A"
+						places.push(place)
+					});
+					region.images = places
+					region.passZoomValuesToTarget = true
+					areas.push(region)
+				});
+				let dataProvider = this.state.dataProvider
 				dataProvider.areas = areas
 				this.setState({
 					dataProvider: dataProvider
@@ -180,10 +180,10 @@ class Map extends Component {
 				let { dispatch } = this.props
 				dispatch({
 					type: 'FETCH_REGION_DATA',
-					regionData: MethodUtil.deepClone(this.state.dataProvider.areas)
+					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
-            }
-        })
+			}
+		})
 	}
 
 	loadDataUserLoggedIn = () => {
@@ -224,7 +224,7 @@ class Map extends Component {
 				let { dispatch } = this.props
 				dispatch({
 					type: 'FETCH_REGION_DATA',
-					regionData: MethodUtil.deepClone(this.state.dataProvider.areas)
+					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
 			}
 		})
@@ -252,8 +252,8 @@ class Map extends Component {
 		// 	this.loadDataUserLoggedIn();
 		// } else {
 		// 	this.loadData();
-        // }
-        this.loadData();
+		// }
+		this.loadData();
 	}
 
 	// componentDidUpdate(previousProps, previousState) {
@@ -638,8 +638,8 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		regionReducer: state.regionReducer,
 		pageReducer: state.pageReducer,
-        placeReducer: state.placeReducer,
-        addPlace: state.addPlace,
+		placeReducer: state.placeReducer,
+		addPlace: state.addPlace,
 	}
 }
 
