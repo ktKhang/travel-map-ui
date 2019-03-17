@@ -67,15 +67,12 @@ class Map extends Component {
 
 	clickHomeBtn = e => {
 		let { dispatch } = this.props
-		if (this.props.regionReducer.clickRegion) {
-			dispatch({ type: 'CLICK_REGION' })
-		}
 		dispatch({
-			type: 'FETCH_SELECTED_REGION',
+			type: constant.SET_SELECTED_REGION,
 			selectedRegion: null
 		})
 		dispatch({
-			type: 'FETCH_SELECTED_PLACE',
+			type: constant.SET_SELECTED_PLACE,
 			selectedPlace: null
 		})
 	}
@@ -94,23 +91,9 @@ class Map extends Component {
 
 			let { dispatch } = this.props
 			dispatch({
-				type: 'FETCH_SELECTED_REGION',
+				type: constant.SET_SELECTED_REGION,
 				selectedRegion: area.id
 			})
-
-			if (!this.props.regionReducer.clickRegion) {
-				setTimeout(() => {
-					dispatch(addPlace(e.mapObject));
-					dispatch({ type: 'CLICK_REGION' })
-				}, 500)
-			}
-			if (!this.props.pageReducer.isExplore) {
-				setTimeout(() => {
-					this.setState({
-						redirect: true
-					})
-				}, 500)
-			}
 		}
 	}
 
@@ -127,7 +110,7 @@ class Map extends Component {
 			})
 			const { dispatch } = this.props
 			dispatch({
-				type: 'FETCH_SELECTED_PLACE',
+				type: constant.SET_SELECTED_PLACE,
 				selectedPlace: null
 			})
 
@@ -147,7 +130,7 @@ class Map extends Component {
 			let currentPlace = e.mapObject
 			const { dispatch } = this.props
 			dispatch({
-				type: 'FETCH_SELECTED_PLACE',
+				type: constant.SET_SELECTED_PLACE,
 				selectedPlace: currentPlace
 			})
 		}
@@ -179,7 +162,7 @@ class Map extends Component {
 				// console.log(this.state.dataProvider.areas);
 				let { dispatch } = this.props
 				dispatch({
-					type: 'FETCH_REGION_DATA',
+					type: constant.SET_REGION_DATA,
 					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
 			}
@@ -223,7 +206,7 @@ class Map extends Component {
 				console.log(this.state.dataProvider.areas);
 				let { dispatch } = this.props
 				dispatch({
-					type: 'FETCH_REGION_DATA',
+					type: constant.SET_REGION_DATA,
 					regionData: ggCommon.deepClone(this.state.dataProvider.areas)
 				})
 			}
@@ -637,7 +620,6 @@ class Map extends Component {
 const mapStateToProps = (state, ownProps) => {
 	return {
 		regionReducer: state.regionReducer,
-		pageReducer: state.pageReducer,
 		placeReducer: state.placeReducer,
 		addPlace: state.addPlace,
 	}
