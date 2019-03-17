@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { decodeJWT } from './DecodeJWT';
 import { constant } from './Constant';
-import { connect } from 'react-redux';
 import { regionService, placeService, showModal } from '../services';
 import { toastUtil } from './ToastUtil';
+import { ggMapCommon } from './GGMap v2.0/common';
+import { ggCommon } from './GGCommon';
 
 class GGActionForm extends Component {
    constructor(props) {
@@ -12,15 +13,11 @@ class GGActionForm extends Component {
          topic: '',
          content: ''
       }
-      this.onSubmit = this.onSubmit.bind(this)
-      this.onFieldChange = this.onFieldChange.bind(this)
    }
 
    onFieldChange = (event) => {
-      console.log(event.target.id);
-      console.log(event.target.value);
       this.setState({
-         [event.target.id]: event.target.value
+         [event.target.id]: event.target.value,
       })
    }
 
@@ -32,68 +29,47 @@ class GGActionForm extends Component {
             topic: this.state.topic,
             content: this.state.content,
             userUid: userUid,
-            regionId: this.props.regionReducer.selectedRegion
+            regionId: ggMapCommon.getSelectedRegion().id,
          }
          regionService.addPost(newPost).then(data => {
-            console.log(data);
-            if (data.errorCode !== 0) {
-               toastUtil.showErrorMsg('Opp!! Have some error!');
-            } else {
-               console.log(data);
+            if (data.errorCode === 0) {
                toastUtil.showToastMsg('Post feeling success! Please waiting for approved');
-               let { dispatch } = this.props
-               dispatch({
-                  type: 'RELOAD_MAP',
-                  reload: true
-               })
+               ggMapCommon.setReloadMap();
             }
-            const { dispatch } = this.props
-            dispatch({
-               type: 'ADD_POST',
-               value: false
-            })
+            ggCommon.cancelAddPost();
          })
+            .catch(err => {
+               toastUtil.showErrorMsg(constant.ERROR_SERVER_BAD_RESPONSE);
+            });
+
       } else if (this.props.type === 'place') {
          let newPost = {
             topic: this.state.topic,
             content: this.state.content,
             userUid: userUid,
-            placeUid: this.props.placeReducer.selectedPlace.uid
+            placeUid: ggMapCommon.getSelectedPlace().uid,
          }
          placeService.addPost(newPost).then(data => {
-            console.log(data);
-            if (data.errorCode !== 0) {
-               toastUtil.showErrorMsg('Opp!! Have some error!');
-            } else {
-               console.log(data);
+            if (data.errorCode === 0) {
                toastUtil.showToastMsg('Post feeling success! Please waiting for approved');
-               let { dispatch } = this.props
-               dispatch({
-                  type: 'RELOAD_MAP',
-                  reload: true
-               })
+               ggMapCommon.setReloadMap();
             }
-            const { dispatch } = this.props
-            dispatch({
-               type: 'ADD_POST',
-               value: false
-            })
+            ggCommon.cancelAddPost();
          })
+            .catch(err => {
+               toastUtil.showErrorMsg(constant.ERROR_SERVER_BAD_RESPONSE);
+            });
 
       }
 
    }
 
    onCancel = () => {
-      const { dispatch } = this.props
-      dispatch({
-         type: 'ADD_POST',
-         value: false
-      })
+      ggCommon.cancelAddPost();
    }
 
    renderSubmitAction = () => {
-      let content
+      let content = null;
       if (this.state.topic.trim() === '' || this.state.content.trim() === '') {
          content = <button className="btn-action-submit" disabled>POST</button>
       } else (
@@ -124,12 +100,4 @@ class GGActionForm extends Component {
    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-   return {
-      regionReducer: state.regionReducer,
-      placeReducer: state.placeReducer,
-      actionReducer: state.actionReducer
-   }
-}
-
-export default connect(mapStateToProps)(GGActionForm);
+export default GGActionForm;

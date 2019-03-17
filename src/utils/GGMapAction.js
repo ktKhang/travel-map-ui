@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { constant } from './Constant';
 import { connect } from 'react-redux';
+import { ggCommon } from './GGCommon';
 class GGMapAction extends Component {
    constructor(props) {
       super(props);
@@ -8,88 +9,92 @@ class GGMapAction extends Component {
          hover: {
             divHover: false,
          }
-
       }
    }
 
    onHover = () => {
-      let hover = this.state.hover
-      hover.divHover = true
-      this.setState({
-         hover: hover
-      })
+      if (localStorage[constant.TOKEN_VARIABLE_NAME]
+         && (this.props.selectedRegion !== null || this.props.selectedPlace !== null)) {
+         let hover = this.state.hover;
+         hover.divHover = true;
+         this.setState({
+            hover: hover
+         })
+      }
    }
    onMouseLeave = () => {
-      let hover = this.state.hover
-      hover.divHover = false
-      this.setState({
-         hover: hover
-      })
+      if (localStorage[constant.TOKEN_VARIABLE_NAME]
+         && (this.props.selectedRegion !== null || this.props.selectedPlace !== null)) {
+         let hover = this.state.hover;
+         hover.divHover = false;
+         this.setState({
+            hover: hover,
+         })
+      }
    }
 
    addPost = () => {
-      const { dispatch } = this.props
-      dispatch({
-         type: 'ADD_POST',
-         value: true
-      })
+      if (this.props.selectedRegion !== null || this.props.selectedPlace !== null) {
+         ggCommon.setAddPost();
+      }
    }
 
    addAlbum = () => {
-      const { dispatch } = this.props
-      dispatch({
-         type: 'ADD_ALBUM',
-         value: true
-      })
+      if (this.props.selectedRegion !== null || this.props.selectedPlace !== null) {
+         ggCommon.setAddAlbum();
+      }
+   }
+
+   checkIsDisabled = (action) => {
+      let disabled = true;
+      if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
+         disabled = false;
+      }
+      return disabled;
+   }
+
+   getClassNameForItem = (action) => {
+      let className = 'map-action-item';
+      if (action === 'addVideo') {
+         className = 'map-action-item-end';
+      }
+      if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
+         if (this.state.hover.divHover) {
+            className = 'map-action-item-hover';
+            if (action === 'addVideo') {
+               className = 'map-action-item-end-hover';
+            }
+         }
+      }
+      return className;
+   }
+
+   componentWillUnmount() {
+      ggCommon.cancelAddPost();
+      ggCommon.cancelAddAlbum();
    }
 
    render() {
-      let actionBtnGroup = (
-         <div className="map-action-content">
-            <div className="map-action-container">
-               <button className="map-action-item" disabled>Add Post</button>
-               <button className="map-action-item" disabled>Add Album</button>
-               <button className="map-action-item-end" disabled>Mark Place</button>
-            </div>
-         </div>
-      )
-      if (localStorage[constant.TOKEN_VARIABLE_NAME]) {
-         if (this.props.regionReducer.clickRegion && this.props.placeReducer.selectedPlace === null) {
-            actionBtnGroup = (
-               <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
-                  <div className="map-action-container">
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addPost}>Write a Post</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addAlbum}>Add Album</button>
-                     <button className="map-action-item-end" disabled>Mark Place</button>
-                  </div>
-               </div>
-            )
-         } else if (this.props.placeReducer.selectedPlace !== null) {
-            actionBtnGroup = (
-               <div onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave} className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}>
-                  <div className="map-action-container">
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addPost}>Write a Post</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-hover' : 'map-action-item'} onClick={this.addAlbum}>Add Album</button>
-                     <button className={this.state.hover.divHover ? 'map-action-item-end-hover' : 'map-action-item-end'}>Mark Place</button>
-                  </div>
-               </div>
-            )
-         }
-
-      }
       return (
          <div className="map-action">
-
-            {actionBtnGroup}
+            <div className={this.state.hover.divHover ? 'map-action-content-hover' : 'map-action-content'}
+               onMouseEnter={this.onHover} onMouseLeave={this.onMouseLeave}>
+               <div className="map-action-container">
+                  <button className={this.getClassNameForItem()} disabled={this.checkIsDisabled()}
+                     onClick={() => this.addPost()}>Add Post</button>
+                  <button className={this.getClassNameForItem()} disabled={this.checkIsDisabled()}
+                     onClick={() => this.addAlbum()}>Add Album</button>
+                  <button className={this.getClassNameForItem('addVideo')} disabled={this.checkIsDisabled()}>Add Video</button>
+               </div>
+            </div>
          </div>
       );
    }
 }
 const mapStateToProps = (state, ownProps) => {
    return {
-      regionReducer: state.regionReducer,
-      placeReducer: state.placeReducer,
-      actionReducer: state.actionReducer
+      selectedRegion: state.regionReducer.selectedRegion,
+      selectedPlace: state.placeReducer.selectedPlace,
    }
 }
 
