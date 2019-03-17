@@ -1,14 +1,12 @@
 import { Types } from "../../actions/types/Place";
+import { constant } from "../../utils/Constant";
 
 const initialState = {
-   clickPlace: false,
    selectedPlace: null
 }
 export const placeReducer = (state = initialState, action) => {
    switch (action.type) {
-      case "CLICK_PLACE":
-         return { ...state, clickPlace: !state.clickPlace }
-      case "FETCH_SELECTED_PLACE":
+      case constant.SET_SELECTED_PLACE:
          return { ...state, selectedPlace: action.selectedPlace }
       default:
          return state
@@ -21,8 +19,8 @@ const initialStatePlace = {
 };
 
 export const addPlaceReducer = (state = initialStatePlace, action) => {
-   switch(action.type){
-      case Types.ADD_PLACE: 
+   switch (action.type) {
+      case Types.ADD_PLACE:
          return {
             ...state,
             payload: action.payload

@@ -1,21 +1,26 @@
 import { ggCommon } from '../../utils/GGCommon';
+import { constant } from '../../utils/Constant';
 
 const initialState = {
-   clickRegion: false,
    regionData: null,
    selectedRegion: null,
    reloadMap: false
 }
 export const regionReducer = (state = initialState, action) => {
    switch (action.type) {
-      case "RELOAD_MAP":
+      case constant.RELOAD_MAP:
          return { ...state, reloadMap: action.reload }
-      case "CLICK_REGION":
-         return { ...state, clickRegion: !state.clickRegion }
-      case "FETCH_REGION_DATA":
+      case constant.SET_REGION_DATA:
          return { ...state, regionData: ggCommon.deepClone(action.regionData) }
-      case "FETCH_SELECTED_REGION":
-         return { ...state, selectedRegion: action.selectedRegion }
+      case constant.SET_SELECTED_REGION:
+         let newRegionToSet = null;
+         if (action.selectedRegion !== null && action.selectedRegion !== void 0) {
+            let selectedData = state.regionData.find(region => region.id === action.selectedRegion);
+            if (selectedData) {
+               newRegionToSet = selectedData;
+            }
+         }
+         return { ...state, selectedRegion: newRegionToSet }
       default:
          return state
    }
