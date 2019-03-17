@@ -86,7 +86,6 @@ class AdminLayout extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       regionReducer: state.regionReducer,
-      pageReducer: state.pageReducer
    }
 }
 

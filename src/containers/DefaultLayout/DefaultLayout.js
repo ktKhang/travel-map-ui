@@ -29,7 +29,8 @@ import LoginProfile from './LoginProfile';
 import GGSearch from '../../utils/GGSearch'
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
-import GGMap from '../../utils/GGMap';
+// import GGMap from '../../utils/GGMap';
+import GGMap from '../../utils/GGMap v2.0/GGMap';
 class DefaultLayout extends Component {
 	Logo = () => {
 		return (
@@ -54,7 +55,7 @@ class DefaultLayout extends Component {
 						<AppSidebarNav navConfig={navigation} {...this.props} />
 						<LoginProfile />
 					</AppSidebar>
-					<main className="main" style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ?
+					<main className="main" style={(window.location.hash === constant.HASH_EXPLORE) ?
 						{ flexDirection: 'row-reverse' } : { flexDirection: 'initial' }}
 					>
 						<Switch>
@@ -67,7 +68,7 @@ class DefaultLayout extends Component {
 							)}
 							<Redirect from={constant.ROUTE_HOME} to={constant.ROUTE_ABOUT} />
 						</Switch>
-						<GGMap style={(this.props.regionReducer.clickRegion === true || this.props.pageReducer.isExplore === true) ?
+						<GGMap style={(window.location.hash === constant.HASH_EXPLORE) ?
 							{ width: '100%', maxWidth: '100%' } : { width: '35%' }}
 							reload={this.props.regionReducer.reloadMap}
 						/>
@@ -85,7 +86,6 @@ class DefaultLayout extends Component {
 const mapStateToProps = (state, ownProps) => {
 	return {
 		regionReducer: state.regionReducer,
-		pageReducer: state.pageReducer
 	}
 }
 
