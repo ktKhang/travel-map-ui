@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import store from '../Store/Store';
+import { constant } from './Constant';
 
 /**
  * Deep clone list object
@@ -10,10 +12,10 @@ const deepClone = (listObj) => {
    for (key in listObj) {
       value = listObj[key];
       if (output[key] === (typeof value === "object")) {
-         output[key] = deepClone(value)
+         output[key] = deepClone(value);
 
       } else {
-         output[key] = value
+         output[key] = value;
       }
    }
    return output;
@@ -59,9 +61,60 @@ const checkIncludes = (array, element) => {
    }
 }
 
+/**
+ * store regionData to Store
+ * @param {*} regionData 
+ */
+const setRegionData = (regionData) => {
+   store.dispatch({
+      type: constant.SET_REGION_DATA,
+      regionData: regionData,
+   })
+}
+
+/**
+ * For Post actions
+ */
+
+const setAddPost = () => {
+   store.dispatch({
+      type: constant.ADD_POST,
+      value: true,
+   })
+}
+
+const cancelAddPost = () => {
+   store.dispatch({
+      type: constant.ADD_POST,
+      value: false,
+   })
+}
+
+/**
+ * For Album actions
+ */
+const setAddAlbum = () => {
+   store.dispatch({
+      type: constant.ADD_ALBUM,
+      value: true,
+   })
+}
+
+const cancelAddAlbum = () => {
+   store.dispatch({
+      type: constant.ADD_ALBUM,
+      value: false,
+   })
+}
+
 export const ggCommon = {
    deepClone,
    removeObj,
    sortListObj,
    checkIncludes,
+   setRegionData,
+   setAddPost,
+   cancelAddPost,
+   setAddAlbum,
+   cancelAddAlbum,
 }
