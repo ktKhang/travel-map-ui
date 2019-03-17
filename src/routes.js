@@ -3,14 +3,13 @@ import Loadable from 'react-loadable'
 import loading from './assets/icons/ic-loading.gif'
 import DefaultLayout from './containers/DefaultLayout';
 import { constant } from './utils/Constant';
+import GGLoading from './utils/GGLoading';
 
 function Loading() {
   return (
     <div className="map-content">
       <div className="app-content" style={{ height: '-webkit-fill-available', overflow: 'auto' }}>
-        <div className="img-loading-content">
-          <img src={loading} alt="loading..." className="img-loading" />
-        </div>
+        <GGLoading />
       </div>
     </div>
   );
