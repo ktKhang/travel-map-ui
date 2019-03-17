@@ -10,20 +10,21 @@ const getRegionList = () => {
       }
    };
    let url = API_CONST.REGION_LIST_URL;
-   tokenUtil.updateOrCreateHeader(getObject);
+   // tokenUtil.updateOrCreateHeader(getObject);
    return fetch(url, getObject)
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
-            throw new Error(responseData.statusText);
+            throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
          return data;
       })
       .catch(err => {
-         return err;
+         throw new Error(err);
       });
 }
 const loadRegionList = () => {
@@ -119,17 +120,16 @@ const loadRegionsWithUserLoggedIn = userUid => {
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
-            throw new Error(responseData.statusText);
+            throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if (data.errorCode === 0) {
-            return data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
-         return err;
+         throw new Error(err);
       });
 }
 
@@ -147,17 +147,16 @@ const addPost = newPost => {
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
-            throw new Error(responseData.statusText);
+            throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if (data.errorCode === 0) {
-            return data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
-         return err;
+         throw new Error(err);
       });
 }
 
