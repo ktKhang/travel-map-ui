@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import loading from '../../assets/icons/ic-loading.gif'
+import GGLoading from '../../utils/GGLoading';
 
 class Save extends Component {
 
@@ -8,9 +9,7 @@ class Save extends Component {
       return (
          <div className="map-content">
             <div className="user-app-content">
-               <div className="img-loading-content">
-                  <img src={loading} alt="loading..." className="img-loading" />
-               </div>
+               <GGLoading />
             </div>
          </div>
       );
