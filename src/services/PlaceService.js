@@ -148,17 +148,16 @@ const addPost = newPost => {
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
-            throw new Error(responseData.statusText);
+            throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if (data.errorCode === 0) {
-            return data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
-         return err;
+         throw new Error(err);
       });
 }
 
