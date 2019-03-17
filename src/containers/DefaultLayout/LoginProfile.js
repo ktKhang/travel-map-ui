@@ -13,33 +13,7 @@ class LoginProfile extends Component {
                 email: '',
                 avatar: '',
             },
-            errorMsg: null
         }
-    }
-
-    handleResponse = response => {
-        let userDetail = this.state.userDetail;
-        userDetail.userID = response.userID;
-        userDetail.userName = response.name;
-        userDetail.email = response.email;
-        userDetail.avatar = response.picture.data.url;
-
-        loginService.login(this.state.userDetail).then(data => {
-            if (data.errorCode !== 0) {
-                showModal.showErrorMsg(data.message);
-            } else {
-                localStorage[constant.TOKEN_VARIABLE_NAME] = data.data;
-                if (decodeJWT.decodeToken(data.data).role === constant.ROLE_ADMIN) {
-
-                } else {
-                    window.location.reload();
-                }
-            }
-        })
-            .catch(err => {
-                console.error(err);
-                this.setState({ errorMsg: err.message });
-            });
     }
 
     logout = () => {
@@ -93,9 +67,7 @@ class LoginProfile extends Component {
             profileContent = (
                 <div className="profile-name">
                     <label className="profile-label2">Login with&nbsp;<span className="login-profile-fb-label">facebook</span></label>
-                    <GGLoginFacebook
-                        onResponse={this.handleResponse.bind(this)}
-                    />
+                    <GGLoginFacebook />
                 </div>
             )
         }
