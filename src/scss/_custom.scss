@@ -908,15 +908,20 @@ body {
   margin-top: 30px;
 }
 .img-loading-content{
-  text-align: center;
     width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     height: fit-content;
-    position: absolute;
-    top: 45%;
-    left: 45%;
+    vertical-align: middle;
 }
 .img-loading{
   height: 100px;
+}
+.loading-container{
+	width: 100%;
+	align-items: center;
+	display: flex;
+	height: 100%;
 }
 
 // Khang add fonts
