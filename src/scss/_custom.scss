@@ -661,6 +661,9 @@ body {
 .icon-pre-page-false{
   background-image: url('../assets/icons/pre-page-icon-disabled.svg');
 }
+.ic-delete{
+  background-image: url('../assets/icons/ic-delete.svg');
+}
 
 
 /* Khang custom map*/
@@ -945,6 +948,7 @@ body {
 	height: 100%;
 }
 
+// For CommonModal
 .modal-big-header{
   margin-top: 8px;
   font-size: 18px;
@@ -959,6 +963,22 @@ body {
 .common-modal{
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.modal-confirmation-header{
+  background-color: #0e223d !important;
+  min-height: 86px;
+}
+
+.modal-confirmation-header .close{
+  display: none;
+}
+
+.border-modal-legend .modal-content {
+   border: none;
+}
+.modal-title{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 // Khang add fonts

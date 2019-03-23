@@ -45,7 +45,7 @@ class Users extends Component {
 			modal={false}
 			isOpen={true}
 			actionLabel="OK"
-			modalHeader={<i className={`fa icon-modal-header ic-${headerIcon}`}></i>}
+			modalHeader={<i className={`fa icon-modal-header ic-${headerIcon.toLowerCase()}`}></i>}
 			modalContent={modalContent}
 			noLabel="CANCEL"
 			noFunc={() => ggCommon.closeModal()}
@@ -91,6 +91,7 @@ class Users extends Component {
 		})
 	}
 
+	// Do all actions here
 	onClickAction = (action, row) => {
 		if (action === 'DELETE') {
 			this.openDeleteUserModal(row, action);
