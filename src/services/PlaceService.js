@@ -128,6 +128,7 @@ const addNewPlace = place => {
          return responseData.json();
       })
       .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
          return data;
       })
       .catch(err => {

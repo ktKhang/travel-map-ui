@@ -20,6 +20,7 @@ import PlaceMapModel from '../../Models/PlaceMapModel';
  * + onClickRegion --function : event click on map region
  * + onClickPlace --function : event click on map place
  * + onClickHomeBtn --function : event click on map home button
+ * + onShiftClickMapObj --function : event shift-click on map object
  */
 class GGMap extends Component {
    constructor(props) {
@@ -41,10 +42,7 @@ class GGMap extends Component {
             method: (e) => this.clickMapObj(e),
          }, {
             event: "writeDevInfo",
-            method: function (e) {
-               console.log(e);
-               alert(e.str);
-            }
+            method: (e) => this.writeDevInfo(e),
          }, {
             event: "mouseDownMapObject",
             method: (e) => this.mouseDownMapObj(e)
@@ -68,6 +66,16 @@ class GGMap extends Component {
          ],
          chart: {}
       };
+   }
+
+   /**
+    * handling with shift-click on map object
+    */
+   writeDevInfo = (event) => {
+      console.log(event);
+      if (this.props.onShiftClickMapObj) {
+         this.props.onShiftClickMapObj(event);
+      }
    }
 
    /**
@@ -124,7 +132,6 @@ class GGMap extends Component {
             this.setState({
                selectedPlace: event.mapObject,
             })
-            console.log(event.mapObject);
             if (this.props.onClickPlace) {
                this.props.onClickPlace(event.mapObject);
             }
@@ -136,6 +143,10 @@ class GGMap extends Component {
     * Handle click on home button
     */
    clickHomeBtn = (event) => {
+      this.setState({
+         selectedRegion: null,
+         selectedPlace: null,
+      })
       ggMapCommon.resetSelectedRegion();
       ggMapCommon.resetSelectedPlace();
       if (this.props.onClickHomeBtn) {
