@@ -25,7 +25,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    // background: #1E344D;
+    background: #1E344D;
     display: inline-block;
     float: left;
   }
@@ -151,4 +151,151 @@
   margin-right: auto;
   display: grid;
   width: fit-content;
+}
+
+// style for GGTable
+.table-card{
+  margin-left: 14px;
+  margin-right: 14px;
+  margin-top: 24px;
+}
+
+.card-header-table{
+  background: #ffffff;
+}
+
+.action-row.table-action {
+  height: 54px;
+  border-top: 0px;
+}
+
+.table-first-item{
+  margin-left: 20px;
+  margin-bottom: 0px;
+  width: fit-content;
+}
+
+tr.row-class-light-table {
+  border-bottom: 1px solid #E4E4E4;
+  height: 54px;
+  font-size: 16px;
+  font-family: 'SVN-Poppins';
+}
+
+tr.row-class-light-table td {
+  padding-bottom: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.table-label{
+  margin-left: 22px;
+}
+
+.row-class-light-table .btn-action-item {
+  margin-top: 6px;
+}
+
+.header-table {
+  border-top-style: hidden;
+  background: #EDF2F6;
+  height: 54px;
+  font-size: 14px;
+  font-family: 'SVN-Poppins-Medium';
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table thead th {
+  vertical-align: top;
+  border-bottom: 1px solid #c8ced3;
+}
+
+.btn-action {
+  color: #979797;
+  background: transparent;
+  border: none;
+  vertical-align: middle;
+  height: 100%;
+  cursor: pointer;
+}
+.btn-action-collapse {
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  vertical-align: middle;
+  height: 100%;
+  padding-right: 18px;
+  padding-left: 30px;
+}
+
+.action-content {
+  width: max-content;
+  right: 0px;
+  position: absolute;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+  z-index: 1;
+  background: #EDF2F6;
+  color: #13223B;
+  border-radius: 48px 2px 2px 48px;
+  -webkit-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.28);
+  box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.28);
+  height: 54px;
+}
+
+.action-row {
+  position: relative;
+  height: 54px;
+  text-align: right;
+  display: grid;
+  border: 0px;
+  border-bottom:0px; 
+}
+
+button.btn-action:focus {
+  outline: none;
+}
+
+.action-item {
+  text-align: center;
+  float: left;
+  display: inline-grid;
+  width: max-content;
+  margin-left: 22px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 18px;
+}
+
+.action-item-label{
+  margin-bottom: 0px;
+  width: max-content;
+  cursor: pointer;
+}
+
+.btn-action-item {
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  vertical-align: middle;
+  height: 100%;
+  cursor: pointer;
+}
+
+.table-header-label{
+  margin-top: 8px;
+  margin-left: 10px;
+  color: #444444;
+  font-size: 16px;
+  font-family: 'SVN-Poppins-Medium';
+}
+
+.react-bootstrap-table-pagination{
+  margin-left: 22px;
+  margin-right: 22px;
 }

@@ -11,7 +11,7 @@ const showToastMsg = (msg, processTime) => {
       processTime = 3000
    }
    ReactDOM.render(<GGToast message={msg} processTime={processTime} />
-      , document.getElementById('modalDiv'));
+      , document.getElementById('toastDiv'));
 
 }
 
@@ -20,7 +20,7 @@ const showErrorMsg = (msg, processTime) => {
       msg = 'Error.';
    }
    ReactDOM.render(<GGToast message={msg} type={constant.TOAST_TYPE_ERROR} />
-      , document.getElementById('modalDiv'));
+      , document.getElementById('toastDiv'));
 
 }
 const showSuccessMsg = (msg, processTime) => {
@@ -28,7 +28,7 @@ const showSuccessMsg = (msg, processTime) => {
       msg = 'Success.';
    }
    ReactDOM.render(<GGToast message={msg} type={constant.TOAST_TYPE_SUCCESS} />
-      , document.getElementById('modalDiv'));
+      , document.getElementById('toastDiv'));
 
 }
 

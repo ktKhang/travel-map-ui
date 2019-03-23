@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import store from '../Store/Store';
 import { constant } from './Constant';
+import ReactDOM from 'react-dom';
 
 /**
  * Deep clone list object
@@ -62,6 +63,13 @@ const checkIncludes = (array, element) => {
 }
 
 /**
+ * close common modal
+ */
+const closeModal = () => {
+   ReactDOM.unmountComponentAtNode(document.getElementById('modalDiv'));
+}
+
+/**
  * store regionData to Store
  * @param {*} regionData 
  */
@@ -117,4 +125,5 @@ export const ggCommon = {
    cancelAddPost,
    setAddAlbum,
    cancelAddAlbum,
+   closeModal,
 }

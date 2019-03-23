@@ -612,6 +612,21 @@ body {
   width: 24px;
   transition: .3s;
 }
+.icon-action-custom{
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+   height: 12px;
+   width: 22px;
+  transition: all 0.75s 0.25s;
+  transform: rotate(0);
+}
+.icon-modal-header{
+  background-size: contain;
+  width: 45px;
+  height: 45px;
+  // margin-left: 10px;
+}
 
 .nav-link .icon-travelmap-home {
   background-image: url('../assets/icons/home-icon.svg');
@@ -639,6 +654,12 @@ body {
 }
 .icon-back {
   background-image: url('../assets/icons/ic-arrow-left.svg');
+}
+.icon-next-page-true{
+  background-image: url('../assets/icons/next-page-icon.svg');
+}
+.icon-pre-page-false{
+  background-image: url('../assets/icons/pre-page-icon-disabled.svg');
 }
 
 
@@ -922,6 +943,22 @@ body {
 	align-items: center;
 	display: flex;
 	height: 100%;
+}
+
+.modal-big-header{
+  margin-top: 8px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  margin-left: 6px;
+  font-family: 'SVN-Poppins-SemiBold';
+}
+.common-modal-content{
+  margin-left: 6px;
+  // fon
+}
+.common-modal{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 // Khang add fonts

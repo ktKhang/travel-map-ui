@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-class CommonModal extends Component {
 
+class CommonModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,10 +14,11 @@ class CommonModal extends Component {
 			isOpen: props.isOpen,
 			modalContent: props.modalContent != null ? props.modalContent : "Want to delete this record?",
 			modalHeader: props.modalHeader != null ? props.modalHeader : " Deletion Confirmation",
-			yesLabel: props.yesLabel != null ? props.yesLabel : null,
-			noLabel: props.noLabel != null ? props.noLabel : "No",
-			yesFunc: props.yesFunc,
-			noFunc: this.props.noFunc
+			noFunc: this.props.noFunc,
+			noLabel: this.props.noLabel,
+			callBackFunction: this.props.callBackFunction,
+			actionLabel: this.props.actionLabel,
+			modalHeaderClass: "edc-confirmation-header"
 		}
 
 		this.toggleModal = this.toggleModal.bind(this);
@@ -27,17 +28,17 @@ class CommonModal extends Component {
 	dangerClass = {
 		className: "modal-danger"
 		, buttonPrimaryClassName: "danger"
-		, buttonSecondaryClassName: "secondary"
+		, buttonSecondaryClassName: "confirmation-btn-default"
 	};
 	infoClass = {
 		className: "modal-info"
 		, buttonPrimaryClassName: "primary"
-		, buttonSecondaryClassName: "secondary"
+		, buttonSecondaryClassName: "confirmation-btn-default"
 	};
 	warningClass = {
 		className: "modal-warning"
 		, buttonPrimaryClassName: "warning"
-		, buttonSecondaryClassName: "secondary"
+		, buttonSecondaryClassName: "confirmation-btn-default"
 	};
 
 	toggleModal() {
@@ -50,22 +51,34 @@ class CommonModal extends Component {
 		this.toggleModal();
 	}
 
+	hanldeKeyPress = (event) => {
+		let code = event.keyCode || event.which;
+		if (code === 13) {    // 13 is the enter keycode
+			this.state.callBackFunction()
+		}
+	}
+
 	render() {
-		console.log('render....');
-		return (<Modal isOpen={this.state.isOpen} toggle={this.toggleModal}
-			className={this.state.modalClass.className}>
-			<ModalHeader toggle={this.toggleModal}>{this.state.modalHeader}</ModalHeader>
-			<ModalBody>
-				{this.state.modalContent}
-			</ModalBody>
-			<ModalFooter>
-				{this.state.yesLabel != null &&
-					<Button color={this.state.modalClass.buttonPrimaryClassName} onClick={this.state.yesFunc}>{this.state.yesLabel}</Button>
-				}
-				<Button color={this.state.modalClass.buttonSecondaryClassName} onClick={this.clickNoFunc}>{this.state.noLabel}</Button>
-			</ModalFooter>
-		</Modal>)
+		return (
+			<Modal isOpen={this.state.isOpen} toggle={!this.props.preventClose ? this.toggleModal : null} onKeyPress={this.hanldeKeyPress}
+				className={this.props.className + ` ` + this.state.modalClass.className + ` edc-confirmation-modal border-modal-legend`}>
+				<ModalHeader toggle={this.toggleModal} className={this.state.modalHeaderClass}>{this.state.modalHeader}</ModalHeader>
+				<ModalBody>
+					{this.state.modalContent}
+				</ModalBody>
+				<ModalFooter>
+					{this.state.noFunc != null &&
+						<Button color={this.state.modalClass.buttonSecondaryClassName} onClick={this.state.noFunc}>{this.state.noLabel}</Button>
+					}
+
+					{this.state.callBackFunction != null &&
+						<Button color={this.state.modalClass.buttonSecondaryClassName} onClick={this.state.callBackFunction}>{this.state.actionLabel}</Button>
+					}
+				</ModalFooter>
+			</Modal>
+		)
 	}
 
 }
+
 export default CommonModal;

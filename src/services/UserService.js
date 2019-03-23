@@ -52,11 +52,11 @@ const loadPostList = userUid => {
       });
 }
 
-function loadUserList(){
+function loadUserList() {
    console.log("API load user");
    let getObject = {
       method: 'GET',
-      headers:{
+      headers: {
          'Content-Type': 'application/json',
       }
    };
@@ -66,24 +66,23 @@ function loadUserList(){
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
-               throw new Error("Bad response from server");
+            throw new Error("Bad response from server");
          }
          return responseData.json(); // This is a MUST, do not remove.
       })
       .then(data => {
-         if (data.errorCode === 0) {
-               return data.data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
          throw new Error(err);
       });
 }
 
-function fetchUserDetailTest(uid){
+function fetchUserDetailTest(uid) {
    let getObject = {
       method: 'GET',
-      headers:{
+      headers: {
          'Content-Type': 'application/json',
       }
    }
@@ -91,13 +90,13 @@ function fetchUserDetailTest(uid){
    return fetch(API_CONST.USER_DETAIL_URL(uid), getObject)
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
-         if(responseData.status >= 400){
+         if (responseData.status >= 400) {
             throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if(data.errorCode === 0){
+         if (data.errorCode === 0) {
             return data.data;
          }
       })
@@ -106,10 +105,10 @@ function fetchUserDetailTest(uid){
       });
 }
 
-function getFeelingAtPlace(uid){
+function getFeelingAtPlace(uid) {
    let getObject = {
       method: 'GET',
-      headers:{
+      headers: {
          'Content-Type': 'application/json',
       }
    }
@@ -117,13 +116,13 @@ function getFeelingAtPlace(uid){
    return fetch(API_CONST.GET_FEELING_PLACE(uid), getObject)
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
-         if(responseData.status >= 400){
+         if (responseData.status >= 400) {
             throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if(data.errorCode === 0){
+         if (data.errorCode === 0) {
             return data.data;
          }
       })
@@ -133,10 +132,10 @@ function getFeelingAtPlace(uid){
 }
 
 
-function deleteUser(uid){
+function deleteUser(uid) {
    let getObject = {
-      method: 'GET',
-      headers:{
+      method: 'DELETE',
+      headers: {
          'Content-Type': 'application/json',
       }
    }
@@ -144,15 +143,14 @@ function deleteUser(uid){
    return fetch(API_CONST.DELETE_USER_URL(uid), getObject)
       .then(responseData => {
          tokenUtil.checkAuthorizedStatus(responseData);
-         if(responseData.status >= 400){
+         if (responseData.status >= 400) {
             throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if(data.errorCode === 0){
-            return data.data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
          throw new Error(err);

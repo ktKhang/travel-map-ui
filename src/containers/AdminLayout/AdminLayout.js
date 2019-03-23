@@ -72,6 +72,8 @@ class AdminLayout extends Component {
                         <Redirect from="/admin" to="/admin/dashboard" />
                      </Switch>
                   </div>
+                  <div id="modalDiv"></div>
+                  <div id="toastDiv"></div>
                </main>
 
             </div>

@@ -101,6 +101,7 @@ class DefaultLayout extends Component {
 							onClickHomeBtn={this.hanldeClickHomeBtn}
 						/>
 						<div id="modalDiv"></div> {/* To inject CommonModal here*/}
+						<div id="toastDiv"></div>
 					</main>
 				</div>
 			</div>
