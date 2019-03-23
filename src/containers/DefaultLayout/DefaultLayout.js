@@ -31,6 +31,9 @@ import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
 // import GGMap from '../../utils/GGMap';
 import GGMap from '../../utils/GGMap v2.0/GGMap';
+import { ggMapCommon } from '../../utils/GGMap v2.0/common';
+import PlaceMapModel from '../../Models/PlaceMapModel';
+import { ggCommon } from '../../utils/GGCommon';
 class DefaultLayout extends Component {
 	Logo = () => {
 		return (
@@ -38,6 +41,28 @@ class DefaultLayout extends Component {
 				<img className="logo" src={logo} width="100" height="50" alt="gogo.vn" />
 			</div>
 		)
+	}
+
+	hangleClickOnRegion = (selectedObj) => {
+		console.log(selectedObj)
+		// set to selectedRegion
+		ggMapCommon.setSelectedRegion(selectedObj.id);
+
+		if (window.location.hash !== constant.HASH_EXPLORE) {
+			setTimeout(() => {
+				window.location = '#explore'
+			}, 500);
+		}
+	}
+
+	handleClickOnPlace = (selectedObj) => {
+		let currentPlace = new PlaceMapModel(selectedObj);
+		ggMapCommon.setSelectedPlace(currentPlace);
+	}
+
+	hanldeClickHomeBtn = (event) => {
+		ggCommon.cancelAddPost();
+		ggCommon.cancelAddAlbum();
 	}
 
 	render() {
@@ -68,16 +93,16 @@ class DefaultLayout extends Component {
 							)}
 							<Redirect from={constant.ROUTE_HOME} to={constant.ROUTE_ABOUT} />
 						</Switch>
-						<GGMap style={(window.location.hash === constant.HASH_EXPLORE) ?
-							{ width: '100%', maxWidth: '100%' } : { width: '35%' }}
+						<GGMap
+							className={(window.location.hash === constant.HASH_EXPLORE) ? 'map-explore' : 'map-general'}
 							reload={this.props.regionReducer.reloadMap}
+							onClickRegion={this.hangleClickOnRegion}
+							onClickPlace={this.handleClickOnPlace}
+							onClickHomeBtn={this.hanldeClickHomeBtn}
 						/>
 						<div id="modalDiv"></div> {/* To inject CommonModal here*/}
 					</main>
 				</div>
-				{/* <AppFooter>
-          <DefaultFooter />
-        </AppFooter> */}
 			</div>
 		);
 	}

@@ -13,6 +13,14 @@ import GGMapAction from '../GGMapAction';
 import { ggMapCommon } from './common';
 import PlaceMapModel from '../../Models/PlaceMapModel';
 
+/**
+ * GGMap common component. With props(optional):
+ * + className --string : custom className
+ * + reload --boolean : reload map data
+ * + onClickRegion --function : event click on map region
+ * + onClickPlace --function : event click on map place
+ * + onClickHomeBtn --function : event click on map home button
+ */
 class GGMap extends Component {
    constructor(props) {
       super(props);
@@ -75,13 +83,8 @@ class GGMap extends Component {
          event.chart.returnInitialColor(area);
          area.showAsSelected = false;
 
-         // set to selectedRegion
-         ggMapCommon.setSelectedRegion(area.id);
-
-         if (window.location.hash !== constant.HASH_EXPLORE) {
-            setTimeout(() => {
-               window.location = '#explore'
-            }, 500);
+         if (this.props.onClickRegion) {
+            this.props.onClickRegion(area);
          }
       }
    }
@@ -103,18 +106,21 @@ class GGMap extends Component {
       }
       if (event.mapObject.objectType === "MapImage") {
          let currentRegion = ggMapCommon.getSelectedRegion();
-         event.chart.dataProvider.areas.find(area => area.id === currentRegion.id).images.forEach((imgObj) => {
-            // imgObj.color = constant.PLACE_NORMAL_COLOR
-            imgObj.scale = 0.5;
-            imgObj.validate();
-         })
-         // e.mapObject.color = constant.PLACE_SELECTED_COLOR
-         event.mapObject.scale = 1;
-         event.mapObject.validate();
+         if (currentRegion) {
+            event.chart.dataProvider.areas.find(area => area.id === currentRegion.id).images.forEach((imgObj) => {
+               // imgObj.color = constant.PLACE_NORMAL_COLOR
+               imgObj.scale = 0.5;
+               imgObj.validate();
+            })
+            // e.mapObject.color = constant.PLACE_SELECTED_COLOR
+            event.mapObject.scale = 1;
+            event.mapObject.validate();
 
-         console.log(event.mapObject);
-         let currentPlace = new PlaceMapModel(event.mapObject);
-         ggMapCommon.setSelectedPlace(currentPlace);
+            console.log(event.mapObject);
+            if (this.props.onClickPlace) {
+               this.props.onClickPlace(event.mapObject);
+            }
+         }
       }
    }
 
@@ -124,8 +130,9 @@ class GGMap extends Component {
    clickHomeBtn = (event) => {
       ggMapCommon.resetSelectedRegion();
       ggMapCommon.resetSelectedPlace();
-      ggCommon.cancelAddPost();
-      ggCommon.cancelAddAlbum();
+      if (this.props.onClickHomeBtn) {
+         this.props.onClickHomeBtn(event);
+      }
    }
 
    /**
@@ -250,7 +257,7 @@ class GGMap extends Component {
       );
       if (this.state.dataProvider.areas.length !== 0 && !this.props.reload) {
          mapComponent = (
-            <div id="maps" style={this.props.style}>
+            <div className={this.props.className} id="maps" >
                <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={config} />
                {
                   window.location.hash === constant.HASH_EXPLORE &&
