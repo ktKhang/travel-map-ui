@@ -23,7 +23,7 @@ class GGTable extends Component {
             text: ''
          }],
          tableLoading: false,
-         noDataMsg: 'No data',
+         noDataMsg: 'No data displayed',
       }
    }
 

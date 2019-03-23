@@ -62,18 +62,19 @@ function findPlaceByRegion(regionUid) {
          'Content-Type': 'application/json',
       }
    }
+   tokenUtil.updateOrCreateHeader(getObject);
 
    return fetch(API_CONST.PLACE_FIND_BY_REGION_URL(regionUid), getObject)
       .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
          if (responseData.status >= 400) {
             throw new Error('Bad response from server');
          }
          return responseData.json();
       })
       .then(data => {
-         if (data.errorCode === 0) {
-            return data.data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
          throw new Error(err);

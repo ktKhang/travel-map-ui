@@ -42,12 +42,11 @@ const loadRegionList = () => {
          if (responseData.status >= 400) {
             throw new Error("Bad response from server");
          }
-         return responseData.json(); // This is a MUST, do not remove.
+         return responseData.json();
       })
       .then(data => {
-         if (data.errorCode === 0) {
-            return data.data;
-         }
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
       })
       .catch(err => {
          throw new Error(err);

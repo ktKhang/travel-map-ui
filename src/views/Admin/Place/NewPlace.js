@@ -38,14 +38,12 @@ class NewPlace extends Component {
         const regionUid = this.props.match.params.regionid;
 
         placeService.findPlaceByRegion(regionUid).then(data => {
-            if (data.errorMsg) {
-                showModal.showErrorMsg(data.errorMsg);
-            } else {
-                data.forEach(element => {
+            if (data && data.errorCode === 0) {
+                data.data.forEach(element => {
                     element.createdDate = new Date(element.createdDate).toLocaleDateString();
                 });
-                !this.isCancelled && this.setState({
-                    placeList: data,
+                this.setState({
+                    placeList: data.data,
                     errorMsg: null,
                 })
             }

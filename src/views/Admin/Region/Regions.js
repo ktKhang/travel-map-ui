@@ -6,117 +6,143 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { toastUtil } from '../../../utils/ToastUtil';
+import GGTable from '../../../utils/GGTable';
+import GGTableAction from '../../../utils/GGTableAction';
 
 const { SearchBar } = Search;
-
+const actionsList = [{ label: 'VIEW', value: 'view' }];
 class Regions extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            regionList: [],
-            errorMsg: null,
-            modal: false,
-            isOpen: false,
-            columns: [{
-                dataField: 'id',
-                text: 'Id',
-                sort: true,
-            }, {
-                dataField: 'name',
-                text: 'Region',
-                sort: true,
-                formatter: this.regionDetailFormatter
-            }, {
-                dataField: 'title',
-                text: 'Title',
-                sort: true
-            }, {
-                dataField: 'createdDate',
-                text: 'Created Date',
-                sort: true
-            }]
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			regionList: [],
+			columns: [{
+				dataField: '',
+				text: ''
+			}],
+		};
+	}
 
-    regionDetailFormatter = (cell, row) => {
-        const regionLink = `#/admin/region/${row.uid}`;
-        return (
-            <p><a href={regionLink}>{cell}</a></p>
-        );
-    }
+	regionDetailFormatter = (cell, row) => {
+		const regionLink = `#/admin/region/${row.uid}`;
+		return (
+			<p className='table-first-item'><a href={regionLink}>{cell}</a></p>
+		);
+	}
 
-    loadRegionsList() {
-        regionService.loadRegionList().then(data => {
-            if (data.errorMsg) {
-                showModal.showErrorMsg(data.errorMsg);
-            } else {
-                data.forEach(element => {
-                    element.createdDate = new Date(element.createdDate).toLocaleDateString();
-                });
-                !this.isCancelled && this.setState({
-                    regionList: data,
-                    errorMsg: null,
-                })
-            }
-        })
-            .catch(err => {
-                this.setState({ errorMsg: err.message });
-            });
+	actionColumnFormatter = (cell, row, rowIndex) => {
+		return (
+			<GGTableAction
+				actions={actionsList}
+				row={row}
+				doAction={this.onClickAction}
+			/>
+		)
+	}
 
-    }
+	// Do all actions here
+	onClickAction = (action, row) => {
+		if (action === 'view') {
+			this.viewRegionDetail(row.uid)
+		}
+	}
 
-    componentDidMount() {
-        this.loadRegionsList();
-    }
+	viewRegionDetail = (regionUid) => {
+		this.props.history.push(`/admin/region/${regionUid}`);
+	}
 
-    componentWillUnmount() {
-        this.isCancelled = true;
-    }
+	loadRegionsList() {
+		regionService.loadRegionList().then(data => {
+			if (data && data.errorCode === 0) {
+				data.data.map(element => {
+					element.createdDate = new Date(element.createdDate).toLocaleDateString();
+				});
+				this.setState({
+					regionList: data.data,
+				});
+				this.prepareData();
+			}
+		})
+			.catch(err => {
+				toastUtil.showErrorMsg(err.message);
+			});
+	}
 
-    render() {
-        return (
-            <div className="animated fadeIn" >
-                <ToolkitProvider
-                    keyField="id"
-                    data={this.state.regionList}
-                    columns={this.state.columns}
-                    search>
-                    {
-                        props => (
-                            <div>
-                                <Container fluid >
-                                    <br />
-                                    <Card>
-                                        <CardHeader>
-                                            <Row>
-                                                <Col md={4}>
-                                                    <i className="fa fa-align-justify"></i> Region <small className="text-muted">List</small>
-                                                </Col>
-                                                <br />
-                                                <Col md={4} offset={{ md: 4 }}>
-                                                    <SearchBar {...props.searchProps} />
-                                                </Col>
-                                            </Row>
-                                        </CardHeader>
-                                        <CardBody>
-                                            <BootstrapTable keyField="id"
-                                                {...props.baseProps}
-                                                striped hover condensed
-                                                bordered={false}
-                                                pagination={paginationFactory()}
-                                                noDataIndication={this.state.errorMsg}
-                                            />
-                                        </CardBody>
-                                    </Card>
-                                </Container>
-                            </div>
-                        )
-                    }
-                </ToolkitProvider>
-            </div >
-        )
-    }
+	prepareData = () => {
+		let data = this.state.regionList;
+		let columns = [{
+			dataField: 'name',
+			text: 'Region',
+			sort: true,
+			formatter: this.regionDetailFormatter,
+			headerStyle: {
+				textAlign: 'left',
+				paddingLeft: '32px',
+				cursor: 'pointer'
+			}
+		}, {
+			dataField: 'title',
+			text: 'Title',
+			sort: false,
+			classes: 'style-classes',
+			headerClasses: 'style-classes',
+		}, {
+			dataField: 'createdDate',
+			text: 'Created Date',
+			sort: true,
+			classes: 'style-classes',
+			headerClasses: 'style-classes',
+		}, {
+			dataField: '',
+			text: 'Action',
+			formatter: this.actionColumnFormatter,
+			headerAlign: 'right',
+			align: 'right',
+			headerStyle: {
+				paddingRight: '26px',
+			},
+			style: (cell, row, rowIndex, colIndex) => {
+				if (rowIndex === 0) {
+					return {
+						borderTop: '0px'
+					}
+				}
+			},
+			classes: 'action-row table-action',
+			csvExport: false
+		}];
+
+		this.setState({
+			regionList: data,
+			columns: columns,
+		})
+	}
+
+	componentDidMount() {
+		this.loadRegionsList();
+	}
+
+	componentWillUnmount() {
+		this.isCancelled = true;
+	}
+
+	render() {
+		return (
+			<div className="animated fadeIn" >
+				<Container fluid>
+					<Card className="table-card">
+						<GGTable
+							headerLabel="REGIONS LIST"
+							data={this.state.regionList}
+							columns={this.state.columns}
+						/>
+					</Card>
+				</Container>
+			</div >
+		)
+	}
 }
 
 export default Regions;
