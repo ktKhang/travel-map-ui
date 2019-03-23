@@ -6,7 +6,6 @@ import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import Map from "../Map";
 import { CommonModal } from '../../../utils/CustomModals';
 const { SearchBar } = Search;
 class Posts extends Component {

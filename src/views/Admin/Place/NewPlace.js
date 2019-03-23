@@ -7,13 +7,8 @@ import {
 } from 'reactstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { connect } from 'react-redux';
-import Map from '../../Admin/Map';
-import ReactDOM from 'react-dom';
 import GGMap from "../../../utils/GGMap v2.0/GGMap";
 import { ggMapCommon } from "../../../utils/GGMap v2.0/common";
-import PlaceMapModel from "../../../Models/PlaceMapModel";
-import { constant } from "../../../utils/Constant";
 import { toastUtil } from "../../../utils/ToastUtil";
 class NewPlace extends Component {
 	constructor(props) {
