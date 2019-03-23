@@ -26,6 +26,8 @@ class GGMap extends Component {
       super(props);
       this.state = {
          redirect: false,
+         selectedRegion: null,
+         selectedPlace: null,
          dataProvider: {
             map: "vietnamLow",
             getAreasFromMap: true,
@@ -83,6 +85,9 @@ class GGMap extends Component {
          event.chart.returnInitialColor(area);
          area.showAsSelected = false;
 
+         this.setState({
+            selectedRegion: area,
+         })
          if (this.props.onClickRegion) {
             this.props.onClickRegion(area);
          }
@@ -105,9 +110,9 @@ class GGMap extends Component {
 
       }
       if (event.mapObject.objectType === "MapImage") {
-         let currentRegion = ggMapCommon.getSelectedRegion();
-         if (currentRegion) {
-            event.chart.dataProvider.areas.find(area => area.id === currentRegion.id).images.forEach((imgObj) => {
+         let currentRegion = this.state.selectedRegion;
+         if (currentRegion !== null && currentRegion !== void 0) {
+            event.chart.dataProvider.areas.find(area => area.id === currentRegion.id).images.map((imgObj) => {
                // imgObj.color = constant.PLACE_NORMAL_COLOR
                imgObj.scale = 0.5;
                imgObj.validate();
@@ -116,6 +121,9 @@ class GGMap extends Component {
             event.mapObject.scale = 1;
             event.mapObject.validate();
 
+            this.setState({
+               selectedPlace: event.mapObject,
+            })
             console.log(event.mapObject);
             if (this.props.onClickPlace) {
                this.props.onClickPlace(event.mapObject);
@@ -251,13 +259,13 @@ class GGMap extends Component {
          "mouseWheelZoomEnabled": true
       };
       let mapComponent = (
-         <div id="maps" style={this.props.style}>
+         <div id="maps" className={this.props.className}>
             <GGLoading />
          </div>
       );
       if (this.state.dataProvider.areas.length !== 0 && !this.props.reload) {
          mapComponent = (
-            <div className={this.props.className} id="maps" >
+            <div id="maps" className={this.props.className} >
                <AmCharts.React className="mapdiv" style={{ width: "100%", height: "100%", visibility: 'visible' }} options={config} />
                {
                   window.location.hash === constant.HASH_EXPLORE &&
