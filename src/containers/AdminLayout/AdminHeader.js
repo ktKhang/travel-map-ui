@@ -11,8 +11,6 @@ const propTypes = {
    children: PropTypes.node,
 };
 
-const defaultProps = {};
-
 class AdminHeader extends Component {
 
    logout = () => {
@@ -21,10 +19,6 @@ class AdminHeader extends Component {
    }
 
    render() {
-
-      // eslint-disable-next-line
-      const { children, ...attributes } = this.props;
-
       return (
          <React.Fragment>
             <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -32,11 +26,10 @@ class AdminHeader extends Component {
                full={{ src: logo, width: 89, height: 30, alt: 'LOGO' }}
                minimized={{ src: logo, width: 89, height: 30, alt: 'LOGO' }}
             />
-
             <Nav className="ml-auto" navbar>
                <AppHeaderDropdown direction="down">
                   <DropdownToggle nav>
-                     <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                     <img src={'assets/img/avatars/huy.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </DropdownToggle>
                   <DropdownMenu right style={{ right: 'auto' }}>
                      <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
@@ -51,6 +44,5 @@ class AdminHeader extends Component {
 }
 
 AdminHeader.propTypes = propTypes;
-AdminHeader.defaultProps = defaultProps;
 
 export default withRouter(AdminHeader);

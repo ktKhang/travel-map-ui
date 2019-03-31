@@ -36,7 +36,7 @@ class GGLoginFacebook extends Component {
    render() {
       return (
          <FacebookLogin
-            appId="284174652429987"
+            appId="738293439691315"
             autoLoad={false}
             fields="name,email,picture"
             callback={this.onResponse}

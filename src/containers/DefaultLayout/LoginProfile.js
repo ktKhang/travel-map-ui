@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loginService, userService, showModal } from '../../services'
+import { userService } from '../../services'
 import { decodeJWT } from '../../utils/DecodeJWT';
 import { constant } from '../../utils/Constant';
 import GGLoginFacebook from '../../utils/GGLoginFacbook';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { decodeJWT } from './DecodeJWT';
 import { constant } from './Constant';
-import { regionService, placeService, showModal } from '../services';
+import { regionService, placeService } from '../services';
 import { toastUtil } from './ToastUtil';
 import { ggMapCommon } from './GGMap v2.0/common';
 import { ggCommon } from './GGCommon';

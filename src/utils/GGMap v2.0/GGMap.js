@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import { ggCommon } from '../GGCommon';
 import { tokenUtil } from '../token';
 import { decodeJWT } from '../DecodeJWT';
@@ -11,7 +10,6 @@ import GGLoading from '../GGLoading';
 import AmCharts from "@amcharts/amcharts3-react";
 import GGMapAction from '../GGMapAction';
 import { ggMapCommon } from './common';
-import PlaceMapModel from '../../Models/PlaceMapModel';
 
 /**
  * GGMap common component. With props(optional):

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import adventureImg from '../../assets/img/adventure.svg'
 import { constant } from '../../utils/Constant';
-import { loginService, showModal } from '../../services'
-import { decodeJWT } from '../../utils/DecodeJWT';
 import GGLoginFacebook from '../../utils/GGLoginFacbook';
 class YourAdventure extends Component {
 
