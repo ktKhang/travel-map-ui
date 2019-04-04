@@ -55,6 +55,7 @@ const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
 // Google API
 const GG_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+const GG_GEOCODE_API = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 export const constant = {
    TOKEN_VARIABLE_NAME,
@@ -103,5 +104,6 @@ export const constant = {
 
    API_KEY,
    PROXY_URL,
-   GG_API
+   GG_API,
+   GG_GEOCODE_API
 }

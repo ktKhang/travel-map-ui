@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { constant } from './Constant';
 import Geocode from 'react-geocode';
 import './../scss/style.css'
+import { constants } from 'os';
 
 class GGSearch extends Component {
 
@@ -84,7 +85,7 @@ class GGSearch extends Component {
             else {
                child.push(React.createElement("li",
                   { className: this.state.liStyle },
-                  "NO Result Found"));
+                  "No Result Found"));
             }
             let collection = React.createElement("ul", { className: 'style-unordered-list' },
                child
@@ -114,13 +115,13 @@ class GGSearch extends Component {
 
             var obj = "latlng=" + location.coords.latitude + "," + location.coords.longitude;
 
-            let _fire = fetch(this.state.proxyUrl + 'https://maps.googleapis.com/maps/api/geocode/json?' + obj + '&key=' + this.props.apiKey
+            let _fire = fetch(this.state.proxyUrl + constant.GG_GEOCODE_API + obj + '&key=' + this.props.apiKey
             )
             return _fire.then((resp) => {
-            return resp.json().then((res) => {
-               this._returnData(res.results[0].formatted_address)
-               this.setState({ collectionShow: false })
-            })
+               return resp.json().then((res) => {
+                  this._returnData(res.results[0].formatted_address)
+                  this.setState({ collectionShow: false })
+               })
             }).catch(error => {
             this.setState({ proxyUrl: constant.PROXY_URL })
 
@@ -138,17 +139,13 @@ class GGSearch extends Component {
    arrangeValue(item) {
       this.getInfo(item)
       this.setState({ place: item })
-      // this.state.returnData.place = item;
-      // this.state.returnData.coordinates = ""
       if (this.props.onChange) {
         this.props.onChange(this.state.returnData)
       }
    }
    
    async _returnData(place) {
-      this.setState({ place: place })
-      // let location = {}
-      // location = await this.getCoordinates(place)
+      this.setState({ place: place });
       this.state.returnData.place = place;
   
       // Set apiKey for Geocode
@@ -156,15 +153,15 @@ class GGSearch extends Component {
 
       Geocode.fromAddress(place).then(
          response => {
-         const { lat, lng } = response.results[0].geometry.location;
-         console.log("Coordinates :" + place);
-         console.log('Lat: ' + lat);
-         console.log('Long: ' + lng);
+            const { lat, lng } = response.results[0].geometry.location;
+            console.log("Coordinates :" + place);
+            console.log('Lat: ' + lat);
+            console.log('Long: ' + lng);
          },
          error => {
-         console.error(error);
+            console.error(error);
          }
-     );
+      );
       if (this.props.onChange) {
       this.props.onChange(this.state.returnData)
       }
@@ -184,9 +181,9 @@ class GGSearch extends Component {
            }
            ),
            this.state.collectionShow ?
-             React.createElement("div", { className: "google-covert" },
+               React.createElement("div", { className: "google-covert" },
                this.state.currentLocation, this.state.collection
-             )
+            )
              : null
          )
        )
