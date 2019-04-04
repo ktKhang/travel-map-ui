@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { regionService, showModal } from '../../../services';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import { Container, Row, Col } from 'react-grid-system';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import { regionService } from '../../../services';
+import { Card} from 'reactstrap';
+import { Container } from 'react-grid-system';
 import { toastUtil } from '../../../utils/ToastUtil';
 import GGTable from '../../../utils/GGTable';
 import GGTableAction from '../../../utils/GGTableAction';
 
-const { SearchBar } = Search;
 const actionsList = [{ label: 'VIEW', value: 'view' }];
 class Regions extends Component {
 
@@ -65,9 +60,9 @@ class Regions extends Component {
 				this.prepareData();
 			}
 		})
-			.catch(err => {
-				toastUtil.showErrorMsg(err.message);
-			});
+		.catch(err => {
+			toastUtil.showErrorMsg(err.message);
+		});
 	}
 
 	prepareData = () => {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { userService, showModal } from '../../../services';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
-import { Container, Row, Col } from 'react-grid-system';
+import { userService } from '../../../services';
+import { Card } from 'reactstrap';
+import { Container } from 'react-grid-system';
 import { CommonModal } from '../../../utils/CustomModals';
 import { toastUtil } from '../../../utils/ToastUtil';
 import GGTable from '../../../utils/GGTable';

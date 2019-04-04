@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ShareMap from "./ShareMap";
 import GGMap from '../../utils/GGMap v2.0/GGMap';
 class Dashboard extends Component {
    render() {

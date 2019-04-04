@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { userService, showModal } from '../../../services';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import { Container, Row, Col } from 'react-grid-system';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';

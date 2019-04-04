@@ -47,6 +47,15 @@ const ADD_POST = 'ADD_POST';
 const ADD_ALBUM = 'ADD_ALBUM';
 const RELOAD_MAP = 'RELOAD_MAP';
 
+// API Key
+const API_KEY = "AIzaSyCHvJsTg4ij3Nl7ral9QcYSxy4UeJxSrzw";
+
+// proxyUrl
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+
+// Google API
+const GG_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+
 export const constant = {
    TOKEN_VARIABLE_NAME,
    TOKEN_HEADER_KEY,
@@ -91,4 +100,8 @@ export const constant = {
    ADD_POST,
    ADD_ALBUM,
    RELOAD_MAP,
+
+   API_KEY,
+   PROXY_URL,
+   GG_API
 }

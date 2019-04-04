@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { constant } from '../../utils/Constant';
 import GGActionForm from '../../utils/GGActionForm';
-import { userService, showModal } from "../../services";
 import { ggCommon } from '../../utils/GGCommon';
 
 class Explore extends Component {

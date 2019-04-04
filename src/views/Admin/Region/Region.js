@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {regionService, showModal} from '../../../services';
 import { Container, Row, Col } from 'react-grid-system';
-import { Button, Card, CardBody, Table } from 'reactstrap';
+import { Card, CardBody, Table } from 'reactstrap';
 
 class Region extends Component{
     constructor(props){

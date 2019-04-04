@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { placeService, showModal, regionService } from '../../../services';
+import { placeService } from '../../../services';
 import { Col } from 'react-grid-system';
 import {
 	Button, Card, CardBody, CardFooter,

@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { placeService, showModal } from '../../../services';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
-import { Container, Row, Col } from 'react-grid-system';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import { placeService } from '../../../services';
+import { Card } from 'reactstrap';
+import { Container } from 'react-grid-system';
 import { CommonModal } from '../../../utils/CustomModals';
 import { toastUtil } from '../../../utils/ToastUtil';
 import GGTableAction from '../../../utils/GGTableAction';
 import GGTable from '../../../utils/GGTable';
 import { ggCommon } from '../../../utils/GGCommon';
 
-const { SearchBar } = Search;
 const actionsList = [{ label: 'VIEW', value: 'view' }, { label: 'DELETE', value: 'delete' }];
 class Places extends Component {
 
