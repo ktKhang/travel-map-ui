@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { constant } from './Constant';
 import Geocode from 'react-geocode';
-import './../scss/style.css'
-import { constants } from 'os';
+import './../scss/search.css';
 
 class GGSearch extends Component {
 

@@ -8,8 +8,8 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
-import { Container, Row, Col } from 'react-grid-system';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
+import { Row, Col } from 'react-grid-system';
+import { CardHeader } from 'reactstrap';
 
 const { SearchBar } = Search;
 
