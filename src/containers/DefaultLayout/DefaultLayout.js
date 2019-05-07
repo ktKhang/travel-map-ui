@@ -56,7 +56,7 @@ class DefaultLayout extends Component {
 				<div className="app-body">
 					<AppSidebar fixed display="lg">
 						<this.Logo />
-						<GGSearch apiKey={constant.API_KEY} language={'en'} country={'country:vn'} onChange={(e) => { this.setState({ place: e }) }} />
+						<GGSearch apiKey={constant.API_KEY} language={'vn'} country={'country:vn'} onChange={(e) => { this.setState({ place: e }) }} />
 						<AppSidebarNav navConfig={navigation} {...this.props} />
 						<LoginProfile />
 					</AppSidebar>

@@ -57,6 +57,13 @@ const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const GG_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
 const GG_GEOCODE_API = "https://maps.googleapis.com/maps/api/geocode/json?"
 
+// Rating
+const ONE_START = "Không thích";
+const TWO_START = "Tạm được";
+const THREE_START = "Bình thường";
+const FOUR_START = "Rất đẹp";
+const FIVE_START = "Tuyệt vời";
+
 export const constant = {
    TOKEN_VARIABLE_NAME,
    TOKEN_HEADER_KEY,
@@ -105,5 +112,11 @@ export const constant = {
    API_KEY,
    PROXY_URL,
    GG_API,
-   GG_GEOCODE_API
+   GG_GEOCODE_API,
+
+   ONE_START,
+   TWO_START,
+   THREE_START,
+   FOUR_START,
+   FIVE_START
 }
