@@ -39,6 +39,8 @@ class NewPlace extends Component {
 			place.regionUid = regionUid;
 			place.latitude = this.state.latitude;
 			place.longitude = this.state.longitude;
+			place.rating = 0;
+			console.log(place);
 			if (regionUid != null) {
 				placeService.addNewPlace(place).then(data => {
 					if (data && data.errorCode === 0) {
@@ -97,6 +99,8 @@ class NewPlace extends Component {
 						<Formik initialValues={{
 							name: '',
 							title: '',
+							description: '',
+							mapSrc: '',
 						}}
 							validationSchema={this.getValidationSchema}
 							onSubmit={(values, { setSubmitting }) => {
@@ -121,6 +125,22 @@ class NewPlace extends Component {
 													<Label htmlFor="title">Place Title</Label>
 													<Field type="text" name="title" className={`form-control ${props.errors.title && props.touched.title && 'is-invalid'}`} />
 													<ErrorMessage className="invalid-feedback" name="title" component="div" />
+												</FormGroup>
+												<FormGroup>
+													<Label htmlFor="description">Description</Label>
+													{/* <Field type="textarea" name="description" className={`form-control ${props.errors.description && props.touched.description && 'is-invalid'}`} /> */}
+													<textarea name="description" className={`form-control ${props.errors.description && props.touched.description && 'is-invalid'}`}
+														onChange={props.handleChange}
+														onBlur={props.handleBlur}
+														value={props.values.description}
+														rows={6.5}
+													></textarea>
+													<ErrorMessage className="invalid-feedback" name="description" component="div" />
+												</FormGroup>
+												<FormGroup>
+													<Label htmlFor="mapSrc">Map location</Label>
+													<Field type="text" name="mapSrc" className={`form-control ${props.errors.mapSrc && props.touched.mapSrc && 'is-invalid'}`} />
+													<ErrorMessage className="invalid-feedback" name="mapSrc" component="div" />
 												</FormGroup>
 												<FormGroup>
 													<Label htmlFor="latitude">Latitude</Label>
