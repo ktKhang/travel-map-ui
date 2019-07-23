@@ -7,6 +7,9 @@ import { Container, Row, Col } from 'react-grid-system';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { CommonModal } from '../../../utils/CustomModals';
+import { ggCommon } from '../../../utils/GGCommon';
+import { toastUtil } from '../../../utils/ToastUtil';
+
 const { SearchBar } = Search;
 class Posts extends Component {
     constructor(props) {
@@ -46,20 +49,40 @@ class Posts extends Component {
         };
     }
 
-    deletePost(postUid) {
-        const isOpen = true;
+    showActionModal = async ({modalHeader, modalContent, callBackFunction }) => {
+		await ggCommon.closeModal();
+		ReactDOM.render(<CommonModal
+			modal={false}
+			isOpen={true}
+			actionLabel="OK"
+			modalHeader={modalHeader}
+			modalContent={modalContent}
+			noLabel="CANCEL"
+			noFunc={() => ggCommon.closeModal()}
+			callBackFunction={callBackFunction}
+		/>,
+			document.getElementById('modalDiv'));
+	}
 
-        ReactDOM.render(<CommonModal modal={this.state.modal}
-            isOpen={isOpen}
-            modalType="danger"
-            modalContent="Do you want to delete this record?"
-            modalHeader="Confirmation"
-            yesLabel="Yes"
-            noLabel="No"
-            yesFunc={this.clickYes.bind(this, postUid)}
-            noFunc={this.clickNo}
-        />
-            , document.getElementById('modalDiv'));
+    deletePost(postUid) {
+        let modalContent = (
+			<div className="common-modal">
+				<label className="modal-big-header">Are you sure?</label>
+				<p className="common-modal-content">After click OK, this post will be removed.</p>
+			</div>
+        );
+        let modalHeader = (
+            <div>
+                <b style={{ color: "red" }}>REMOVE</b>
+            </div>
+        );
+        this.showActionModal({
+            modalHeader: modalHeader,
+			modalContent: modalContent,
+			callBackFunction: () => {
+				this.clickYes(postUid)
+			}
+		})
     }
 
     // Delete 
@@ -75,6 +98,24 @@ class Posts extends Component {
             </div>
         )
     }
+
+    clickYes = (postUid) => {
+		userService.deleteFeeling(postUid)
+			.then(data => {
+				if (data && data.errorCode > 200) {
+					toastUtil.showErrorMsg(data.message);
+					ggCommon.closeModal();
+				} else if (data && data.errorCode === 0) {
+					toastUtil.showToastMsg("Delete Successfully.");
+					ggCommon.closeModal();
+					this.loadPostList();
+				}
+			})
+			.catch(err => {
+				toastUtil.showErrorMsg(err.message);
+				ggCommon.closeModal();
+			});
+	}
 
     sortableIndex = (cell, row, rowIndex) => {
         rowIndex++;
@@ -138,15 +179,16 @@ class Posts extends Component {
                                                 </Col>
                                             </Row>
                                         </CardHeader>
-                                        <CardBody>
-                                            <BootstrapTable keyField="id"
-                                                {...props.baseProps}
-                                                striped hover condensed
-                                                bordered={false}
-                                                pagination={paginationFactory()}
-                                                noDataIndication={this.state.errorMsg}
-                                            />
-                                        </CardBody>
+                                        <BootstrapTable
+                                            keyField="id"
+                                            {...props.baseProps}
+                                            striped hover condensed
+                                            bordered={false}
+                                            pagination={paginationFactory()}
+                                            noDataIndication={this.state.errorMsg}
+                                            rowClasses="row-class-light-table"
+                                            headerClasses="header-table"
+                                        />
                                     </Card>
                                 </Container>
                             </div>

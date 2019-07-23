@@ -41,7 +41,6 @@ class User extends Component {
 	}
 
 	render() {
-		console.log('Useruid ----' + this.state.user.uid);
 		return (
 			<div className="animated fadeIn">
 				<Container fluid>
@@ -69,13 +68,6 @@ class User extends Component {
 								<b>Danh sách : </b>
 								<a href={`#/admin/user/${this.state.user.uid}/posts`}>
 									Feelings
-                            </a>
-							</Row>
-							<br />
-							<Row>
-								<b>Danh sách : </b>
-								<a href={`#/admin/user/${this.state.user.uid}/videos`}>
-									Videos
                             </a>
 							</Row>
 						</Col>

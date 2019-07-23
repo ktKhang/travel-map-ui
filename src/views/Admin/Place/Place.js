@@ -127,6 +127,7 @@ class Place extends Component {
                         uid: this.state.place.uid,
                         name: this.state.place.name,
                         title: this.state.place.title,
+                        description: this.state.place.description,
                         latitude: this.state.place.latitude,
                         longitude: this.state.place.longitude,
                         placeStatus: this.state.place.placeStatus,
@@ -158,6 +159,11 @@ class Place extends Component {
                                             <Label htmlFor="title">Place Title</Label>
                                             <Field type="text" name="title" className={`form-control ${props.errors.title && props.touched.title && 'is-invalid'}`} />
                                             <ErrorMessage className="invalid-feedback" name="title" component="div" />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label htmlFor="title">Description</Label>
+                                            <Field type="text" name="description" className={`form-control`} />
+                                            <ErrorMessage className="invalid-feedback" name="description" component="div" />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="latitude">Latitude</Label>
@@ -255,22 +261,26 @@ class Place extends Component {
             <td>{this.state.place.title}</td>
         </tr>,
         <tr key="2">
+            <td>Description</td>
+            <td>{this.state.place.description}</td>
+        </tr>,
+        <tr key="3">
             <td>Latitude</td>
             <td>{this.state.place.latitude}</td>
         </tr>,
-        <tr key="3">
+        <tr key="4">
             <td>Longitude</td>
             <td>{this.state.place.longitude}</td>
         </tr>,
-        <tr key="4">
+        <tr key="5">
             <td>Status</td>
             <td>{this.state.place.placeStatus}</td>
         </tr>,
-        <tr key="5">
+        <tr key="6">
             <td>Svg Path</td>
             <td>{this.state.place.svgPath}</td>
         </tr>,
-        <tr key="6">
+        <tr key="7">
             <td>Created Date</td>
             <td>{new Date(this.state.place.createdDate).toLocaleDateString()}</td>
         </tr>,

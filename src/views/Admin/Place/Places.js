@@ -47,7 +47,7 @@ class Places extends Component {
 	}
 
 	viewPlaceDetail = (placeUid) => {
-		this.props.history.push(`/admin/region//${this.props.match.params.regionid}/place/${placeUid}`);
+		this.props.history.push(`/admin/region/${this.props.match.params.regionid}/place/${placeUid}`);
 	}
 
 	placeStatusFormatter = (cell, row, rowIndex) => {
@@ -83,9 +83,22 @@ class Places extends Component {
 	}
 
 	clickYes = (place) => {
-		console.log(place);
-		// invoke api delete place here
-		ggCommon.closeModal();
+		let placeUid = place.uid;
+		placeService.deletePlace(placeUid)
+			.then(data => {
+				if (data && data.errorCode > 200) {
+					toastUtil.showErrorMsg(data.message);
+					ggCommon.closeModal();
+				} else if (data && data.errorCode === 0) {
+					toastUtil.showToastMsg("Delete Successfully.");
+					ggCommon.closeModal();
+					this.loadPlacesList();
+				}
+			})
+			.catch(err => {
+				toastUtil.showErrorMsg(err.message);
+				ggCommon.closeModal();
+			});
 	}
 
 	// Do all actions here
@@ -175,7 +188,6 @@ class Places extends Component {
 	}
 
 	componentDidMount() {
-		console.log('start load data');
 		this.loadPlacesList();
 	}
 

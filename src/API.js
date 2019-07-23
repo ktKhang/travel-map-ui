@@ -39,6 +39,22 @@ const GET_FEELING_PLACE = placeUid => {
    return API_URL + '/feelings/findFeeling/' + placeUid;
 }
 
+const DELETE_FEELING_URL = postUid => {
+   return API_URL + '/feelings/deleteFeeling/' + postUid;
+}
+
+const ALBUM_LIST_URL = userUid => {
+   return API_URL + '/users/getAlbums/' + userUid;
+}
+
+const DELETE_ALBUM_URL = albumUid => {
+   return API_URL + '/albums/deleteAlbum/' + albumUid;
+}
+
+const DELETE_PLACE_URL = placeUid => {
+   return API_URL + '/places/deletePlace/' + placeUid;
+}
+
 export const API_CONST = {
    API_URL,
    LOGIN_URL,
@@ -58,5 +74,9 @@ export const API_CONST = {
    POST_LIST_URL,
    LOGIN_ADMIN_URL,
    DELETE_USER_URL,
-   GET_FEELING_PLACE
+   GET_FEELING_PLACE,
+   DELETE_FEELING_URL,
+   ALBUM_LIST_URL,
+   DELETE_ALBUM_URL,
+   DELETE_PLACE_URL
 };

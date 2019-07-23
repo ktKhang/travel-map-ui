@@ -157,11 +157,89 @@ function deleteUser(uid) {
       });
 }
 
+function deleteFeeling(uid) {
+   let getObject = {
+      method: 'DELETE',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(API_CONST.DELETE_FEELING_URL(uid), getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
+const loadALbumList = userUid => {
+   var getObject = {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json'
+      }
+   };
+   let url = API_CONST.ALBUM_LIST_URL(userUid);
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(url, getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error(responseData.statusText);
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         return data.data;
+      })
+      .catch(err => {
+         return err;
+      });
+}
+
+function deleteAlbum(uid) {
+   let getObject = {
+      method: 'DELETE',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(API_CONST.DELETE_ALBUM_URL(uid), getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
 export const userService = {
    fetchUserDetail,
    loadUserList,
    fetchUserDetailTest,
    loadPostList,
    deleteUser,
-   getFeelingAtPlace
+   getFeelingAtPlace,
+   deleteFeeling,
+   loadALbumList,
+   deleteAlbum
 }

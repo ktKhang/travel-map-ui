@@ -164,11 +164,38 @@ const addPost = newPost => {
 }
 
 
+function deletePlace(uid) {
+   let getObject = {
+      method: 'DELETE',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(API_CONST.DELETE_PLACE_URL(uid), getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
+
 export const placeService = {
    loadPlaceList,
    fetchPlaceDetail,
    findPlaceByRegion,
    updatePlace,
    addNewPlace,
-   addPost
+   addPost,
+   deletePlace
 }
