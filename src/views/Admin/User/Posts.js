@@ -9,6 +9,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { CommonModal } from '../../../utils/CustomModals';
 import { ggCommon } from '../../../utils/GGCommon';
 import { toastUtil } from '../../../utils/ToastUtil';
+import ReactHtmlParser from 'react-html-parser';
 
 const { SearchBar } = Search;
 class Posts extends Component {
@@ -31,6 +32,7 @@ class Posts extends Component {
             }, {
                 dataField: 'content',
                 text: 'Content',
+                formatter: props => ReactHtmlParser(props),
                 sort: true
             }, {
                 dataField: 'feelingStatus',
@@ -163,7 +165,7 @@ class Posts extends Component {
                     search>
                     {
                         props => (
-                            <div>
+                            <div style={{width: '98.5%'}}>
                                 <Container fluid >
 
                                     <br />
