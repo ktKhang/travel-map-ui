@@ -30,6 +30,10 @@ export default {
          url: '/admin/regions',
          icon: 'icon-tralvelmap-custom icon-travelmap-home',
       }, {
+         name: 'POSTS',
+         url: '/admin/postList',
+         icon: 'icon-tralvelmap-custom icon-travelmap-home',
+      }, {
          name: 'ADD PLACE',
          url: '/admin/addPlace',
          icon: 'icon-tralvelmap-custom icon-travelmap-adventure',

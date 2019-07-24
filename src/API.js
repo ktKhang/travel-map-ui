@@ -32,7 +32,7 @@ const POST_LIST_URL = userUid => {
    return API_URL + '/users/findPostByUser/' + userUid;
 }
 const LOGIN_ADMIN_URL = API_URL + '/auth/admin/login'
-const DELETE_USER_URL = userUid =>{
+const DELETE_USER_URL = userUid => {
    return API_URL + '/users/delete/' + userUid;
 }
 const GET_FEELING_PLACE = placeUid => {
@@ -54,6 +54,12 @@ const DELETE_ALBUM_URL = albumUid => {
 const DELETE_PLACE_URL = placeUid => {
    return API_URL + '/places/deletePlace/' + placeUid;
 }
+
+const DELETE_POST = uid => {
+   return API_URL + '/feelings/deleteFeeling/' + uid;
+}
+
+const GET_ALL_POST = API_URL + '/feelings/getAll';
 
 export const API_CONST = {
    API_URL,
@@ -78,5 +84,7 @@ export const API_CONST = {
    DELETE_FEELING_URL,
    ALBUM_LIST_URL,
    DELETE_ALBUM_URL,
-   DELETE_PLACE_URL
+   DELETE_PLACE_URL,
+   GET_ALL_POST,
+   DELETE_POST,
 };

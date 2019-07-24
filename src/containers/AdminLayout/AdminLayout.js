@@ -55,7 +55,7 @@ class AdminLayout extends Component {
                <AppSidebar fixed display="lg">
                   <AppSidebarHeader />
                   <AppSidebarForm />
-                  <div style={{ position: 'relative', display: 'initial', height: '500px', marginTop: '-110px' }}>
+                  <div style={{ position: 'relative', display: 'initial', height: '560px', marginTop: '-110px' }}>
                      <AppSidebarNav navConfig={navigation} {...this.props} />
                   </div>
                   <AppSidebarFooter />

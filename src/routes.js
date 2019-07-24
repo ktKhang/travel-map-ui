@@ -90,6 +90,11 @@ const Posts = Loadable({
   loading: Loading
 })
 
+const PostList = Loadable({
+  loader: () => import('./views/Admin/PostList'),
+  loading: Loading
+})
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: constant.ROUTE_HOME, exact: true, name: 'Home', component: DefaultLayout },
@@ -107,7 +112,8 @@ const routes = [
   { path: constant.ROUTE_ADMIN_REGION_DETAIL, exact: true, name: 'Region Detail', component: Region },
   { path: constant.ROUTE_ADMIN_REGION_PLACES, exact: true, name: 'Places', component: Places },
   { path: constant.ROUTE_ADMIN_REGION_PLACE_DETAIL, exact: true, name: 'Place', component: Place },
-  { path: constant.ROUTE_ADMIN_ADD_PLACE, exact: true, name: 'New Place', component: NewPlace }
+  { path: constant.ROUTE_ADMIN_ADD_PLACE, exact: true, name: 'New Place', component: NewPlace },
+  { path: constant.ROUTE_ADMIN_POST_LIST, exact: true, name: 'Post List', component: PostList }
 ];
 
 export default routes;

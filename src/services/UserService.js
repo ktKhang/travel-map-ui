@@ -232,6 +232,56 @@ function deleteAlbum(uid) {
       });
 }
 
+const getAllPost = () => {
+   let getObject = {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(getObject);
+   return fetch(API_CONST.GET_ALL_POST, getObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
+const removePost = (uid) => {
+   let deleteObject = {
+      method: 'DELETE',
+      headers: {
+         'Content-Type': 'application/json',
+      }
+   }
+   tokenUtil.updateOrCreateHeader(deleteObject);
+   return fetch(API_CONST.DELETE_POST(uid), deleteObject)
+      .then(responseData => {
+         tokenUtil.checkAuthorizedStatus(responseData);
+         if (responseData.status >= 400) {
+            throw new Error('Bad response from server');
+         }
+         return responseData.json();
+      })
+      .then(data => {
+         tokenUtil.checkResponseErrorCode(data);
+         return data;
+      })
+      .catch(err => {
+         throw new Error(err);
+      });
+}
+
 export const userService = {
    fetchUserDetail,
    loadUserList,
@@ -241,5 +291,7 @@ export const userService = {
    getFeelingAtPlace,
    deleteFeeling,
    loadALbumList,
-   deleteAlbum
+   deleteAlbum,
+   getAllPost,
+   removePost,
 }

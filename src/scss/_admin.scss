@@ -299,3 +299,37 @@ button.btn-action:focus {
   margin-left: 22px;
   margin-right: 22px;
 }
+
+.post-1{
+  display: grid;
+  text-align: left;
+  margin-left: 12px;
+  font-size: 15px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.post-1-label{
+  // font-family: 'SVN-Poppins-Medium';
+}
+
+.post-1-label-2{
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.btn-khang{
+  height: 36px !important;
+  text-align: center !important;
+  font-size: 13px !important;
+  line-height: 15px !important;
+  width: 120px !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.post-content-khang{
+  padding-top: 24px;
+  padding-bottom: 24px;
+  line-height: 22px;
+}

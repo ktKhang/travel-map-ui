@@ -20,6 +20,7 @@ const ROUTE_ADMIN_REGION_DETAIL = '/admin/region/:uid';
 const ROUTE_ADMIN_REGION_PLACES = '/admin/region/:regionid/places';
 const ROUTE_ADMIN_REGION_PLACE_DETAIL = '/admin/region/:regionid/place/:uid';
 const ROUTE_ADMIN_ADD_PLACE = '/admin/addPlace';
+const ROUTE_ADMIN_POST_LIST = '/admin/postList';
 const HASH_EXPLORE = '#/explore';
 
 // color
@@ -54,7 +55,7 @@ const API_KEY = "AIzaSyCHvJsTg4ij3Nl7ral9QcYSxy4UeJxSrzw";
 const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
 // Google API
-const GG_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+const GG_API = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
 const GG_GEOCODE_API = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 // Rating
@@ -85,6 +86,7 @@ export const constant = {
    ROUTE_ADMIN_REGION_DETAIL,
    ROUTE_ADMIN_REGION_PLACES,
    ROUTE_ADMIN_REGION_PLACE_DETAIL,
+   ROUTE_ADMIN_POST_LIST,
    ROUTE_ADMIN_ADD_PLACE,
    HASH_EXPLORE,
 
